@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,6 +36,7 @@ public class Campus implements Serializable {
 	private String campusNaam;
 
 	@ManyToMany(mappedBy = "campussen")
+//	@ManyToMany(mappedBy = "campussen", fetch = FetchType.EAGER)
 	private final Set<Docent> docenten = new HashSet<>();
 
 	public Campus(String campusNaam) {

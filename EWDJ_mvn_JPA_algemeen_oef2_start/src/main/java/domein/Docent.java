@@ -8,6 +8,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -52,6 +53,7 @@ public class Docent implements Serializable {
 	@Setter
 	private Werkruimte werkruimte;
 	@ManyToMany
+//	@ManyToMany(fetch = FetchType.EAGER)
 	private final Set<Campus> campussen = new HashSet<>();
 
 	public Docent(int docentNr, String voornaam, String familienaam, BigDecimal wedde) {
