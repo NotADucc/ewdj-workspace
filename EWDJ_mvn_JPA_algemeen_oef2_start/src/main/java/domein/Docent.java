@@ -30,7 +30,13 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "docentNr")
 @ToString(exclude = "id")
 @Getter
-@NamedQueries({ @NamedQuery(name = "Docent.findAll", query = "SELECT d FROM Docent d") })
+@NamedQueries({ @NamedQuery(name = "Docent.findAll", query = "SELECT d FROM Docent d"),
+		@NamedQuery(name = "Docent.docentenInTweeCampussen", query = """
+					SELECT d
+					FROM Docent d
+					WHERE :campusA MEMBER OF d.campussen
+						AND :campusB MEMBER OF d.campussen
+				"""), })
 public class Docent implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -32,6 +33,14 @@ public class Werkruimte implements Serializable{
 	private int aantalComputers;
 	@OneToMany
 	private Set<Docent> docenten = new HashSet<>();
+	public void updateDocenten(List<Docent> doc) {
+		doc.forEach(x -> {
+			if (this.docenten.contains(x))
+				this.docenten.remove(x);
+			
+			this.docenten.add(x);
+		});
+	}
 	
 	public Werkruimte(String lokaalcode, String naam, int aantalStoelen, int aantalComputers) {
 		setLokaalcode(lokaalcode);

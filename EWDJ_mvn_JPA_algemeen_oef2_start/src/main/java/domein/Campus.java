@@ -22,7 +22,12 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "campusNaam")
-@NamedQueries({ @NamedQuery(name = "Campus.findAll", query = "SELECT c FROM Campus c") })
+@NamedQueries({ @NamedQuery(name = "Campus.findAll", query = "SELECT c FROM Campus c"),
+		@NamedQuery(name = "Campus.findByName", query = """
+					SELECT c
+					FROM Campus c
+					WHERE c.campusNaam = :naam
+				"""), })
 public class Campus implements Serializable {
 
 	private static final long serialVersionUID = 1L;
