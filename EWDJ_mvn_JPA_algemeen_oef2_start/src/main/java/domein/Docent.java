@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -26,21 +28,26 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "docentNr")
 @ToString(exclude = "id")
+@Getter
+@NamedQueries({
+@NamedQuery(name = "Docent.findAll", query = "SELECT d FROM Docent d")
+})
 public class Docent implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter(AccessLevel.NONE)
 	private long id;
 	@Column(name = "PERSONEELSNR")
-	@Getter
+//	@Getter
 	private int docentNr;
-	@Getter
+//	@Getter
 	private String voornaam;
-	@Getter
+//	@Getter
 	private String familienaam;
-	@Getter
+//	@Getter
 	@Setter
 	private BigDecimal wedde;
 	@ManyToOne

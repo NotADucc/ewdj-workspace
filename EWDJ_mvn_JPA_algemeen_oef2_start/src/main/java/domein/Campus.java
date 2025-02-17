@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,6 +21,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "campusNaam")
+@NamedQueries({ @NamedQuery(name = "Campus.findAll", query = "SELECT c FROM Campus c") })
 public class Campus implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +33,7 @@ public class Campus implements Serializable {
 	@Getter
 	@Setter
 	private String campusNaam;
+
 	@ManyToMany(mappedBy = "campussen")
 	private final Set<Docent> docenten = new HashSet<>();
 
