@@ -18,36 +18,35 @@ import repository.GenericDao;
 
 @ExtendWith(MockitoExtension.class)
 public class DomeinTest {
-	
+
 	@Mock
-    private GenericDao<Winkel> winkelRepo;
+	private GenericDao<Winkel> winkelRepo;
 	@Mock
-    private BierDao  bierRepo;
-    @InjectMocks
-    private Retail retail;
-    
-    //In Eclipse niet nodig, in STS wel:
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+	private BierDao bierRepo;
+	@InjectMocks
+	private Retail retail;
 
-    @Test
-    public void voegBierBijWinkel() {
-       final String BIERNAAM = "Duvel", WINKELNAAM = "Station";
+	// In Eclipse niet nodig, in STS wel:
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-       Winkel eenWinkel = new Winkel(WINKELNAAM);   
-       Bier eenBier = new Bier(BIERNAAM, "Blond", 8.5, 9.9, "Moortgat");
+	@Test
+	public void voegBierBijWinkel() {
+		final String BIERNAAM = "Duvel", WINKELNAAM = "Station";
 
-       when(winkelRepo.findAll()).thenReturn(Arrays.asList(eenWinkel));
-       when(bierRepo.getBierByName(BIERNAAM)).thenReturn(eenBier);
-       
-       assertFalse(eenWinkel.getBierSet().contains(eenBier));
-       retail.voegBierBijWinkel(BIERNAAM, WINKELNAAM);
-       assertTrue(eenWinkel.getBierSet().contains(eenBier));
-       verify(winkelRepo).findAll();
-       verify(bierRepo).getBierByName(BIERNAAM); 
-    }
+		Winkel eenWinkel = new Winkel(WINKELNAAM);
+		Bier eenBier = new Bier(BIERNAAM, "Blond", 8.5, 9.9, "Moortgat");
 
+		when(winkelRepo.findAll()).thenReturn(Arrays.asList(eenWinkel));
+		when(bierRepo.getBierByName(BIERNAAM)).thenReturn(eenBier);
+
+		assertFalse(eenWinkel.getBierSet().contains(eenBier));
+		retail.voegBierBijWinkel(BIERNAAM, WINKELNAAM);
+		assertTrue(eenWinkel.getBierSet().contains(eenBier));
+		verify(winkelRepo).findAll();
+		verify(bierRepo).getBierByName(BIERNAAM);
+	}
 
 }

@@ -3,15 +3,28 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vervoermiddel implements TebetalenTaks {
     
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Getter @Setter private String nummerplaat;
 	
+	@OneToMany(mappedBy = "vervoermiddel", cascade = CascadeType.ALL)
     private final List<Onderhoudsbeurt> onderhoudsbeurten = new ArrayList<>();
 
     public Vervoermiddel(String nummerplaat) {
