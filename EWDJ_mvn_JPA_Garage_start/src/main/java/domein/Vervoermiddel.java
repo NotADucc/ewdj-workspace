@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -11,10 +12,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = "nummerplaat")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vervoermiddel implements TebetalenTaks {
     
@@ -32,8 +38,7 @@ public abstract class Vervoermiddel implements TebetalenTaks {
     }
     
     public List<Onderhoudsbeurt> getOnderhoudsbeurten() {
-        //TODO
-        return null;
+        return Collections.unmodifiableList(onderhoudsbeurten);
     }
     
     public void addOnderhoudsbeurt(Onderhoudsbeurt ob){

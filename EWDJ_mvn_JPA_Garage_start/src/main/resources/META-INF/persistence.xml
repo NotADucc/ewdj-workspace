@@ -5,7 +5,10 @@
              version="3.0">
    <persistence-unit name="EWDJ_JPA_GaragePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-
+		<class>domein.Vervoermiddel</class>
+		<class>domein.Onderhoudsbeurt</class>
+		<class>domein.Auto</class>
+		<class>domein.LichteVracht</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/garage?serverTimezone=UTC"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

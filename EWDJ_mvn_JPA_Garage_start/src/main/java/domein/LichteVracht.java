@@ -2,11 +2,13 @@ package domein;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter 
 @Entity
+@NoArgsConstructor
 public class LichteVracht extends Vervoermiddel {
     
 	private double massa;

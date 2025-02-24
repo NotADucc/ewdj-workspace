@@ -36,27 +36,45 @@ public class GarageBeheerder {
     }
 
     public List<Auto> geefAutosZonderOnderhoudsbeurtJPA() {
-        return null;
+        return em.createNamedQuery("Auto.alleAutosZonderOnderhoud", Auto.class)
+				.getResultList();
     }
 
     public List<Auto> geefAutosMetOnderhoudsbeurtJPA() {
-        return null;
+        return em.createNamedQuery("Auto.alleAutosMetOnderhoud", Auto.class)
+				.getResultList();
     }
 
     public List<Onderhoudsbeurt> geefOnderhoudsbeurtenOpDatumJPA(LocalDate dat) {
-        return null;
+        return em.createNamedQuery("Onderhoudsbeurt.opDatum", Onderhoudsbeurt.class)
+				.setParameter("datum", dat)
+				.getResultList();
     }
 
     public void addVervoermiddel(Vervoermiddel v) {
-        vervoerMap.put(v.getNummerplaat(), v);
-        //TODO
-        
+    	vervoerMap.put(v.getNummerplaat(), v);
+    	
+    	save(v);
+//    	em.getTransaction().begin();
+//      em.persist(v);
+//    	em.getTransaction().commit();
     }
 
     public void addOnderhoudsbeurt(String nrplaat, LocalDate begin, LocalDate einde) {
         Vervoermiddel v = vervoerMap.get(nrplaat);
         Onderhoudsbeurt o = new Onderhoudsbeurt(begin, einde, v);
-        //TODO
+    	
+        v.addOnderhoudsbeurt(o);
+        save(o);
+//      em.getTransaction().begin();
+//      em.persist(o);
+//    	em.getTransaction().commit();
         
+    }
+    
+    public <T> void save(T item) {
+    	em.getTransaction().begin();
+        em.persist(item);
+    	em.getTransaction().commit();
     }
 }
