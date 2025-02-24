@@ -36,6 +36,13 @@ import lombok.ToString;
 					FROM Docent d
 					WHERE :campusA MEMBER OF d.campussen
 						AND :campusB MEMBER OF d.campussen
+				"""), @NamedQuery(name = "Docent.docentenInTweeCampussen2", query = """
+					SELECT d
+					FROM Docent d
+					JOIN d.campussen c
+					WHERE LOWER(c.campusNaam) IN(LOWER(:campusNaam1), LOWER(:campusNaam2))
+					GROUP BY d.id
+					HAVING COUNT(DISTINCT c.campusID) = 2
 				"""), })
 public class Docent implements Serializable {
 
