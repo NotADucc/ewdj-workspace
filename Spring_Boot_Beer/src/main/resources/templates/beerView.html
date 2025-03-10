@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert Color</title>
+</head>
+<body>
+	<h2 th:text="|Got beer color ${selectedColor}|"></h2>
+	<ul th:each="beer: ${beerList}">
+		<li th:text="${beer}"></li>
+	</ul>
+</body>
+</html>

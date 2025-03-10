@@ -1,0 +1,91 @@
+2025-03-10T10:39:41.222+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:39:41.223+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:39:41.358+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:39:41.360+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:39:41.360+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:39:41.374+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:39:41.375+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 148 ms
+2025-03-10T10:39:41.446+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:39:41.454+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:39:41.457+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.279 seconds (process running for 2095.136)
+2025-03-10T10:39:41.458+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:41:34.792+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-10T10:41:34.792+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-10T10:41:34.793+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-10T10:41:37.508+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-4] c.s.HelloController                      : post hello, Name submitted: rqfe
+2025-03-10T10:41:37.508+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-4] c.s.HelloController                      : An INFO Message
+2025-03-10T10:41:37.508+01:00  WARN 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-4] c.s.HelloController                      : A WARN Message
+2025-03-10T10:41:37.508+01:00 ERROR 5252 --- [Spring_Boot_FirstExample] [http-nio-8080-exec-4] c.s.HelloController                      : An ERROR Message
+2025-03-10T10:46:44.374+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2025-03-10T10:46:44.378+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [Thread-64] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:46:44.396+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-10T10:46:44.475+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:46:44.476+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:46:44.632+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:46:44.634+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:46:44.634+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:46:44.653+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:46:44.653+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 175 ms
+2025-03-10T10:46:44.739+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:46:44.748+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:46:44.751+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.298 seconds (process running for 2518.429)
+2025-03-10T10:46:44.752+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:46:46.152+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 10 class path changes (0 additions, 0 deletions, 10 modifications)
+2025-03-10T10:46:46.155+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [Thread-68] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:46:46.175+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-10T10:46:46.260+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:46:46.261+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:46:46.385+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:46:46.386+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:46:46.386+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:46:46.402+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:46:46.402+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 140 ms
+2025-03-10T10:46:46.453+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:46:46.464+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:46:46.470+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.229 seconds (process running for 2520.148)
+2025-03-10T10:46:46.471+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:49:28.020+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2025-03-10T10:49:28.023+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [Thread-72] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:49:28.042+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-10T10:49:28.114+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:49:28.114+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:49:28.240+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:49:28.241+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:49:28.241+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:49:28.255+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:49:28.255+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 139 ms
+2025-03-10T10:49:28.299+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:49:28.310+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:49:28.313+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.218 seconds (process running for 2681.992)
+2025-03-10T10:49:28.314+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:49:35.827+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2025-03-10T10:49:35.830+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [Thread-76] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:49:35.850+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-10T10:49:35.937+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:49:35.937+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:49:36.056+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:49:36.057+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:49:36.057+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:49:36.070+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:49:36.070+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 131 ms
+2025-03-10T10:49:36.120+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:49:36.131+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:49:36.134+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.214 seconds (process running for 2689.812)
+2025-03-10T10:49:36.135+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:56:00.125+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 11 class path changes (4 additions, 4 deletions, 3 modifications)
+2025-03-10T10:56:00.126+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [Thread-80] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:56:00.137+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-10T10:56:00.210+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Starting SpringBootFirstExampleApplication using Java 21.0.6 with PID 5252 (D:\Workspace_EWD\Spring_Boot_FirstExample\target\classes started by Bobba in D:\Workspace_EWD\Spring_Boot_FirstExample)
+2025-03-10T10:56:00.210+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-10T10:56:00.359+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-10T10:56:00.361+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-10T10:56:00.362+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10T10:56:00.375+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-03-10T10:56:00.376+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 164 ms
+2025-03-10T10:56:00.449+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-10T10:56:00.458+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-10T10:56:00.463+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] c.s.SpringBootFirstExampleApplication    : Started SpringBootFirstExampleApplication in 0.277 seconds (process running for 3074.142)
+2025-03-10T10:56:00.465+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-03-10T10:56:41.973+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [RMI TCP Connection(107)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-03-10T10:56:41.973+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [RMI TCP Connection(107)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-10T10:56:41.979+01:00  INFO 5252 --- [Spring_Boot_FirstExample] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
