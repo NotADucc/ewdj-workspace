@@ -24,14 +24,14 @@ class BeerControllerTest {
 	private ExpertBean expertBean;
 
 	@Test
-	void testHelloGet() throws Exception {
+	void testBeerGet() throws Exception {
 		mockMvc.perform(get("/beer")).andExpect(status().isOk()).andExpect(view().name("formView"))
 				.andExpect(model().attributeExists("colorsList"))
 				.andExpect(model().attributeExists("beerCommand"));
 	}
 
 	@Test
-	void testHelloPost() throws Exception {
+	void testBeerPost() throws Exception {
 		var expResult = List.of("Hoegaarden", "Brugs Witbier");
 		var color = "light";
 		
