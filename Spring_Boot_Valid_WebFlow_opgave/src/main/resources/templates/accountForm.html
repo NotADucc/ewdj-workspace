@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Example Spring Web Flow</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<h1>Example Spring Web Flow</h1>
+
+	<form th:action="@{/account}" th:object="${account}" method="post">
+
+		<p>
+			<label>Balance:</label> <input type="text" th:field="*{balance}" size="20">
+		</p>
+
+		<p>
+			<label>Percent:</label> <input type="text" th:field="*{percent}" size="20"> 
+		</p>
+
+		<p>
+			<label>Email:</label> <input type="text" th:field="*{email}" size="20"> 
+		</p>
+
+		<p>
+			<button type="submit">OK</button>
+		</p>
+
+	</form>
+
+</body>
+</html>
