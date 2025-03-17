@@ -11,17 +11,27 @@
 	<form th:action="@{/account}" th:object="${account}" method="post">
 
 		<p>
-			<label>Balance:</label> <input type="text" th:field="*{balance}" size="20">
+			<label>Balance:</label> <input type="text" th:field="*{balance}"
+				size="20"> <span th:if="${#fields.hasErrors('balance')}"
+				th:errorclass="error" th:errors="*{balance}"></span>
 		</p>
 
 		<p>
-			<label>Percent:</label> <input type="text" th:field="*{percent}" size="20"> 
+			<label>Percent:</label> <input type="text" th:field="*{percent}"
+				size="20"> <span th:if="${#fields.hasErrors('percent')}"
+				th:errorclass="error" th:errors="*{percent}"></span>
 		</p>
 
 		<p>
-			<label>Email:</label> <input type="text" th:field="*{email}" size="20"> 
+			<label>Email:</label> <input type="text" th:field="*{email}"
+				size="20"> <span th:if="${#fields.hasErrors('email')}"
+				th:errorclass="error" th:errors="*{email}"></span>
 		</p>
-
+		<div th:if="${#fields.hasErrors()}" class="error">
+			<ul>
+				<li th:each="err: ${#fields.allErrors()}" th:text="${err}" />
+			</ul>
+		</div>
 		<p>
 			<button type="submit">OK</button>
 		</p>

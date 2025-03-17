@@ -16,8 +16,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    //@Autowired
-    //private Validator registrationValidator;
+    @Autowired
+    private Validator registrationValidator;
     
     @GetMapping
     public String showHomePage(Model model) {
@@ -29,7 +29,7 @@ public class RegistrationController {
     public String processRegistration(@Valid Registration registration, 
     		 BindingResult result, Model model) {
     	
-    	//registrationValidator.validate(registration, result);
+    	registrationValidator.validate(registration, result);
 
         if (result.hasErrors()) {
             return "registrationForm";
