@@ -26,21 +26,19 @@ class BeerControllerTest {
 	@Test
 	void testBeerGet() throws Exception {
 		mockMvc.perform(get("/beer")).andExpect(status().isOk()).andExpect(view().name("formView"))
-				.andExpect(model().attributeExists("colorsList"))
-				.andExpect(model().attributeExists("beerCommand"));
+				.andExpect(model().attributeExists("colorsList", "beerCommand"));
 	}
 
 	@Test
 	void testBeerPost() throws Exception {
-		var expResult = List.of("Hoegaarden", "Brugs Witbier");
+		var expResult = List.of("Bier");
 		var color = "light";
-		
+
 		when(expertBean.getExpert(color)).thenReturn(expResult);
 
 		mockMvc.perform(post("/beer").flashAttr("beerCommand", new BeerCommand(color)))
 				.andExpect(status().isOk()).andExpect(view().name("beerView"))
-				.andExpect(model().attributeExists("selectedColor"))
-				.andExpect(model().attributeExists("beerList"))
+				.andExpect(model().attributeExists("selectedColor", "beerList"))
 				.andExpect(model().attribute("selectedColor", color))
 				.andExpect(model().attribute("beerList", expResult));
 	}
