@@ -7,45 +7,43 @@ import jakarta.validation.constraints.NotBlank;
 
 public class Registration {
 
-    @Pattern(regexp = "^[a-zA-Z]+", 
-             message = "Username must be alphanumeric with no spaces")
-    //@Pattern(regexp = "^[a-zA-Z]+", message="{validation.userName.Pattern.message}")
-    //@ValidUserName
-    private String userName;
-    
-    @NotBlank
-    @Size(min = 4, max = 20)
-    //@Size(min=4, max=20, message="{validation.Size.message}")
-    private String password;
-    
-    
-    @NotBlank
-    private String confirmPassword;
-   
-    
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	// @Pattern(regexp = "^[a-zA-Z]+", message = "Username must be alphanumeric with
+	// no spaces")
+	@Pattern(regexp = "^[a-zA-Z]+", message = "{validation.userName.Pattern.message}")
+	// @ValidUserName
+	private String userName;
 
-    public String getUserName() {
-        return userName;
-    }
+	@NotBlank
+	// @Size(min = 4, max = 20)
+	@Size(min = 4, max = 20, message = "{validation.Size.message}")
+	private String password;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@NotBlank
+	private String confirmPassword;
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public void setConfirmPassword(String confirmPassword) {
+	public String getUserName() {
+		return userName;
+	}
 
-        this.confirmPassword = confirmPassword;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
 
 }

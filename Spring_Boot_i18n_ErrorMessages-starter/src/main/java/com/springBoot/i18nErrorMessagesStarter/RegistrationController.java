@@ -17,24 +17,28 @@ import domain.Registration;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    @GetMapping
-    public String showRegistration(Model model) {
-        Registration registration = new Registration();
-        model.addAttribute("registration", registration);
-        return "registrationForm";
-    }
+	@GetMapping
+	public String showRegistration(Model model) {
+		Registration registration = new Registration();
+		model.addAttribute("registration", registration);
+		return "registrationForm";
+	}
 
-    @PostMapping
-    public String processRegistration(@Valid Registration registration,
-            BindingResult result, Model model, Locale locale) {
-    
-        if (result.hasErrors()) {     	
-            return "registrationForm";
-        }
+	@PostMapping
+	public String processRegistration(
+			@Valid Registration registration,
+			BindingResult result,
+			Model model,
+			Locale locale
+	) {
 
-        registration.setConfirmPassword(null);
-        registration.setPassword(null);
+		if (result.hasErrors()) {
+			return "registrationForm";
+		}
 
-        return "registrationSuccess";
-    }
+		registration.setConfirmPassword(null);
+		registration.setPassword(null);
+
+		return "registrationSuccess";
+	}
 }

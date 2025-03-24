@@ -19,8 +19,11 @@ public class RegistrationValidator implements Validator {
 			return;
 
 		if (!(registration.getPassword()).equals(registration.getConfirmPassword())) {
-			errors.rejectValue("password", "matchingPassword.registration.password",
-					"Password and Confirm Password Not match.");
+			errors.rejectValue(
+					"password",
+					"matchingPassword.registration.password",
+					"Password and Confirm Password Not match."
+			);
 		}
 	}
 }

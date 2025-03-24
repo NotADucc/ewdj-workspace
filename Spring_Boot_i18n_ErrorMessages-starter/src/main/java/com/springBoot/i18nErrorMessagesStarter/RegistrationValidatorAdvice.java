@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 @ControllerAdvice(assignableTypes = RegistrationController.class)
 public class RegistrationValidatorAdvice {
-	
+
 	@Autowired
 	private Validator registrationValidator;
-	
+
 	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.addValidators(registrationValidator);
-    }
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(registrationValidator);
+	}
 }

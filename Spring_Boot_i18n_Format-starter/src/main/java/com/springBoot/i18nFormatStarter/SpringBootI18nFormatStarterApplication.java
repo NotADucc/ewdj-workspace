@@ -22,11 +22,11 @@ public class SpringBootI18nFormatStarterApplication implements WebMvcConfigurer{
 		registry.addRedirectViewController("/", "/welcome");
 	}
 
-	/*
+	
 	@Bean
 	LocaleResolver localeResolver() {
 	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.GERMAN);
+	    slr.setDefaultLocale(Locale.ENGLISH);
 	    return slr;
-	}*/
+	}
 }
