@@ -10,19 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/error")
-public class NotFoundController implements ErrorController{
+public class NotFoundController implements ErrorController {
 
 	@GetMapping
 	public String handleError(HttpServletRequest request) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
-			
-			if(statusCode == 404) {
+
+			if (statusCode == 404) {
 				return "error/notFound";
 			}
 		}
 		return "redirect:/welcome";
 	}
-	
+
 }

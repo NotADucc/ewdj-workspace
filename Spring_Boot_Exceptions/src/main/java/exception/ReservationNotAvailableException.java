@@ -8,9 +8,12 @@ import java.time.LocalDate;
 public class ReservationNotAvailableException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Getter private final String courtName;
-	@Getter private final LocalDate date;
-	@Getter private final int hour;
+
+	@Getter
+	private final String courtName;
+	@Getter
+	private final LocalDate date;
+	@Getter
+	private final int hour;
 
 }

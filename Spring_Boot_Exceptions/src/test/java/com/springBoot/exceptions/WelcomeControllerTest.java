@@ -28,45 +28,41 @@ class WelcomeControllerTest {
 
 	@MockitoBean
 	private WelcomeService mockService;
-	
+
 	@Test
 	void testGetRequest() throws Exception {
-		mockMvc.perform(get("/welcome"))
-		.andExpect(view().name("welcome"))
-		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("today"))
-		.andExpect(model().attributeExists("handlingTime"));
+		mockMvc.perform(get("/welcome")).andExpect(view().name("welcome"))
+				.andExpect(status().isOk()).andExpect(model().attributeExists("today"))
+				.andExpect(model().attributeExists("handlingTime"));
 	}
-	
+
 	@Test
 	void testReservationNotAvailableException() throws Exception {
-		doThrow(new ReservationNotAvailableException("test", LocalDate.of(34, 10, 10), 1)).when(mockService).example();
-		mockMvc.perform(get("/welcome"))
-		.andExpect(view().name("error/reservationNotAvailable"));
+		doThrow(new ReservationNotAvailableException("test", LocalDate.of(34, 10, 10), 1))
+				.when(mockService).example();
+		mockMvc.perform(get("/welcome")).andExpect(view().name("error/reservationNotAvailable"));
 	}
-	
+
 	@Test
 	void testNumberFormatException() throws Exception {
 		doThrow(new NumberFormatException()).when(mockService).example();
-		mockMvc.perform(get("/welcome"))
-		.andExpect(view().name("error/generic_error"))
-		.andExpect(model().attributeDoesNotExist("errCode"))
-		.andExpect(model().attributeDoesNotExist("errMsg"));
+		mockMvc.perform(get("/welcome")).andExpect(view().name("error/generic_error"))
+				.andExpect(model().attributeDoesNotExist("errCode"))
+				.andExpect(model().attributeDoesNotExist("errMsg"));
 	}
-	
+
 	@Test
 	void testCustomGenericException() throws Exception {
-		doThrow(new CustomGenericException("TEST", "This is custom test message")).when(mockService).example();
-		mockMvc.perform(get("/welcome"))
-		.andExpect(view().name("error/generic_error"))
-		.andExpect(model().attributeExists("errCode"))
-		.andExpect(model().attributeExists("errMsg"));
+		doThrow(new CustomGenericException("TEST", "This is custom test message")).when(mockService)
+				.example();
+		mockMvc.perform(get("/welcome")).andExpect(view().name("error/generic_error"))
+				.andExpect(model().attributeExists("errCode"))
+				.andExpect(model().attributeExists("errMsg"));
 	}
-	
+
 	@Test
 	void testIllegalArgumentException() throws Exception {
 		doThrow(new IllegalArgumentException()).when(mockService).example();
-		mockMvc.perform(get("/welcome"))
-		.andExpect(view().name("error/error"));
+		mockMvc.perform(get("/welcome")).andExpect(view().name("error/error"));
 	}
 }

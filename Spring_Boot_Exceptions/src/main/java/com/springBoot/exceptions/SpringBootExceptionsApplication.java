@@ -16,7 +16,7 @@ import service.WelcomeServiceImpl;
 import web.MeasurementInterceptor;
 
 @SpringBootApplication
-public class SpringBootExceptionsApplication implements WebMvcConfigurer{
+public class SpringBootExceptionsApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootExceptionsApplication.class, args);
@@ -26,36 +26,33 @@ public class SpringBootExceptionsApplication implements WebMvcConfigurer{
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/welcome");
 	}
-	
+
 	@Bean
-    SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
+	SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+		SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
 
-        Properties mappings = new Properties();
-        mappings.put("exception.ReservationNotAvailableException", 
-        		     "error/reservationNotAvailable");
-        mappings.put("java.lang.NumberFormatException", 
-                "error/generic_error");
+		Properties mappings = new Properties();
+		mappings.put("exception.ReservationNotAvailableException", "error/reservationNotAvailable");
+		mappings.put("java.lang.NumberFormatException", "error/generic_error");
 
-        r.setDefaultErrorView("error/error");
-        r.setExceptionMappings(mappings);
-        return r;
-    }
+		r.setDefaultErrorView("error/error");
+		r.setExceptionMappings(mappings);
+		return r;
+	}
 
 	@Bean
 	WelcomeService welcomeService() {
-        return new WelcomeServiceImpl();
-    }
-	
-    @Bean
-    HandlerInterceptor measurementInterceptor() {
-        return new MeasurementInterceptor();
-    }
-    
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(measurementInterceptor()).
-                addPathPatterns("/welcome");
-    }
+		return new WelcomeServiceImpl();
+	}
+
+	@Bean
+	HandlerInterceptor measurementInterceptor() {
+		return new MeasurementInterceptor();
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(measurementInterceptor()).addPathPatterns("/welcome");
+	}
 
 }

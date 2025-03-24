@@ -19,24 +19,23 @@ public class WelcomeController {
 
 	@Autowired
 	private WelcomeService welcomeService;
-	
-    @GetMapping
-    public String welcome(Model model) {
-        LocalDate today = LocalDate.now();
-        
-        welcomeService.example();
-        
-        model.addAttribute("today", today);
-        return "welcome";
-    }
 
-    @ExceptionHandler(CustomGenericException.class)
-    public ModelAndView handleCustomException(CustomGenericException ex) {
-        ModelAndView model
-                = new ModelAndView("error/generic_error");
-        model.addObject("errCode", ex.getErrCode());
-        model.addObject("errMsg", ex.getErrMsg());
-        return model;
-    }
+	@GetMapping
+	public String welcome(Model model) {
+		LocalDate today = LocalDate.now();
+
+		welcomeService.example();
+
+		model.addAttribute("today", today);
+		return "welcome";
+	}
+
+	@ExceptionHandler(CustomGenericException.class)
+	public ModelAndView handleCustomException(CustomGenericException ex) {
+		ModelAndView model = new ModelAndView("error/generic_error");
+		model.addObject("errCode", ex.getErrCode());
+		model.addObject("errMsg", ex.getErrMsg());
+		return model;
+	}
 
 }
