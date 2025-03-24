@@ -16,28 +16,31 @@ import jakarta.validation.Valid;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    @Autowired
-    private Validator registrationValidator;
-    
-    @GetMapping
-    public String showHomePage(Model model) {
-        model.addAttribute("registration", new Registration());
-        return "registrationForm";
-    }
+	// @Autowired
+	// private Validator registrationValidator;
 
-    @PostMapping
-    public String processRegistration(@Valid Registration registration, 
-    		 BindingResult result, Model model) {
-    	
-    	registrationValidator.validate(registration, result);
+	@GetMapping
+	public String showHomePage(Model model) {
+		model.addAttribute("registration", new Registration());
+		return "registrationForm";
+	}
 
-        if (result.hasErrors()) {
-            return "registrationForm";
-        }
-        
-        registration.setConfirmPassword(null);
-        registration.setPassword(null);
-        return "registrationSuccess";
-    }
+	@PostMapping
+	public String processRegistration(
+			@Valid Registration registration,
+			BindingResult result,
+			Model model
+	) {
+
+//    	registrationValidator.validate(registration, result);
+
+		if (result.hasErrors()) {
+			return "registrationForm";
+		}
+
+		registration.setConfirmPassword(null);
+		registration.setPassword(null);
+		return "registrationSuccess";
+	}
 
 }

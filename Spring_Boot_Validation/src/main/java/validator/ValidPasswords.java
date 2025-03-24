@@ -12,12 +12,14 @@ import jakarta.validation.Payload;
 
 @Documented
 @Constraint(validatedBy = PasswordConstraintValidator.class)
-@Target({TYPE})
+@Target({ TYPE })
 @Retention(RUNTIME)
 public @interface ValidPasswords {
 
-	    String message() default "password does not match the confirm password";
-	    Class<?>[] groups() default{};
-	    Class<? extends Payload>[] payload() default {};
-	
+	String message() default "password does not match the confirm password";
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
+
 }

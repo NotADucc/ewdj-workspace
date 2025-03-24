@@ -12,11 +12,13 @@ import jakarta.validation.Payload;
 
 @Documented
 @Constraint(validatedBy = EmailConstraintValidator.class)
-@Target({FIELD})
+@Target({ FIELD })
 @Retention(RUNTIME)
 public @interface ValidEmail {
 
-    String message() default "you must include a valid email";
-    Class<?>[] groups() default{};
-    Class<? extends Payload>[] payload() default {};
+	String message() default "you must include a valid email";
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }

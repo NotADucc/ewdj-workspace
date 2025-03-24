@@ -16,8 +16,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/account")
 public class AccountController {
 
-    @Autowired
-    private Validator accountValidator;
+//    @Autowired
+//    private Validator accountValidator;
 	
 	@GetMapping
 	public String showHomePage(Model model) {
@@ -28,7 +28,7 @@ public class AccountController {
 	@PostMapping
 	public String onSubmit(@Valid Account account, BindingResult result, Model model) {
 
-		accountValidator.validate(account, result);
+//		accountValidator.validate(account, result);
 
 		if (result.hasErrors())
 			return "accountForm";

@@ -14,26 +14,25 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import validator.RegistrationValidator;
 
 @SpringBootApplication
-public class SpringBootValidationApplication implements WebMvcConfigurer{
+public class SpringBootValidationApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootValidationApplication.class, args);
 	}
-	
+
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-	    registry.addRedirectViewController("/", "/registration");
+		registry.addRedirectViewController("/", "/registration");
 	}
 
-	@Bean
-	Validator registrationValidator() {
-	    return new RegistrationValidator();
-	}
-	
+//	@Bean
+//	Validator registrationValidator() {
+//	    return new RegistrationValidator();
+//	}
 	@Bean
 	LocaleResolver localeResolver() {
-	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.ENGLISH);
-	    return slr;
+		SessionLocaleResolver slr = new SessionLocaleResolver();
+		slr.setDefaultLocale(Locale.ENGLISH);
+		return slr;
 	}
 }
