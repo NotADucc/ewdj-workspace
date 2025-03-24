@@ -3,11 +3,13 @@ package com.springBoot_bank_start;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import domain.BankCustomer;
+import jakarta.validation.Valid;
 import service.BankCustomerService;
 
 @Controller
@@ -19,13 +21,16 @@ public class BankController {
 	
 	@GetMapping
 	public String showHomePage(Model model) {
-		model.addAttribute("bankRequest", new BankRequest());
+		model.addAttribute("bankCustomer", new BankCustomer());
 		return "form";
 	}
 
 	@PostMapping
-	public String onSubmit(BankRequest req, Model model) {
-		var id = req.getId();
+	public String onSubmit(@Valid BankCustomer bankRequest, BindingResult result, Model model) {
+		if (result.hasErrors())
+			return "form";
+		
+		var id = bankRequest.getId();
 		
 		BankCustomer customer = bankService.getCustomer(id);
 		if (customer == null)

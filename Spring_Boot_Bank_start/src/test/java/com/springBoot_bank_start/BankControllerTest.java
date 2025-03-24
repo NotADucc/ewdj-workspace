@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ class BankControllerTest {
 	@Test
 	void testBankGet() throws Exception {
 		mockMvc.perform(get("/bank")).andExpect(status().isOk()).andExpect(view().name("form"))
-				.andExpect(model().attributeExists("bankRequest"));
+				.andExpect(model().attributeExists("bankCustomer"));
 	}
 
 	@ParameterizedTest
@@ -39,7 +41,7 @@ class BankControllerTest {
 
 		when(bankService.getCustomer(id)).thenReturn(expResult);
 
-		mockMvc.perform(post("/bank").flashAttr("bankRequest", new BankRequest(id)))
+		mockMvc.perform(post("/bank").flashAttr("bankCustomer", new BankCustomer(id)))
 				.andExpect(status().isOk()).andExpect(view().name(view))
 				.andExpect(model().attributeExists("customer"))
 				.andExpect(model().attribute("customer", expResult));
@@ -49,7 +51,18 @@ class BankControllerTest {
 	void testBankUnknownPost() throws Exception {
 		var id = "123";
 
-		mockMvc.perform(post("/bank").flashAttr("bankRequest", new BankRequest(id)))
+		mockMvc.perform(post("/bank").flashAttr("bankCustomer", new BankCustomer(id)))
 				.andExpect(status().isOk()).andExpect(view().name("unknownCustomer"));
+	}
+	
+	@ParameterizedTest
+	@NullAndEmptySource
+	@ValueSource(strings = {"abc", "011", "11", "1000"})
+	void testBankPost_InvalidId(String id) throws Exception {
+		mockMvc.perform(post("/bank").flashAttr("bankCustomer", new BankCustomer(id)))
+				.andExpect(status().isOk()).andExpect(view().name("form"))
+				.andExpect(model().attributeDoesNotExist("customer"))
+				.andExpect(model().attributeHasFieldErrors("bankCustomer", "id"));
+	        
 	}
 }

@@ -9,12 +9,12 @@
 
 	<fieldset>
 		<legend>Bank Account Balance</legend>
-		<form th:action="@{/bank}" th:object="${bankRequest}" method="post">
+		<form th:action="@{/bank}" th:object="${bankCustomer}" method="post">
 
 			<label>Customer ID:</label> 
 			<input type="text" th:field="*{id}" placeholder="Id"/> 
 			<button type="submit">Show Balance</button>
-
+			<span th:if="${#fields.hasErrors('id')}" th:errorclass="error" th:errors="*{id}"></span>
 		</form>
 	</fieldset>
 </body>

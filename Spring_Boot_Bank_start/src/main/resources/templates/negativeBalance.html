@@ -9,7 +9,8 @@
  <img th:src="@{/img/Club.gif}"/>
 	
 	  <p th:text="|Watch out, ${customer.firstName} ${customer.lastName}, we know where you live|"></p>
-	  <p th:text="|Pay us the ${customer.balanceNoSign} euro!|"></p>
+	  <p th:text="|Pay us the ${#numbers.formatDecimal(customer.balanceNoSign, 1, 'POINT', 2, 'COMMA')} euro!|"></p>
+	  <p th:text="|Pay us the &euro;${#numbers.formatDecimal(customer.balanceNoSign, 1, 2, 'COMMA')}!|"></p>
 	   
 </body>
 </html>

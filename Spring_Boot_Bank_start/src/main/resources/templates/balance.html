@@ -10,7 +10,8 @@
 	<ul>
 	    <li th:text="|id: ${customer.id}|"></li>
 	    <li th:text="|name: ${customer.firstName} ${customer.lastName}|"></li>
-	    <li th:text="|balance: ${customer.balance} euro|"></li>
+	    <li th:text="|balance: ${#numbers.formatDecimal(customer.balance, 1, 'POINT', 2, 'COMMA')} euro|"></li>
+	    <li th:text="|balance: &euro;${#numbers.formatDecimal(customer.balance, 1, 2, 'COMMA')}|"></li>
 	</ul>
 </body>
 </html>
