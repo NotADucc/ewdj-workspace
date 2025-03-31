@@ -1,5 +1,11 @@
 package com.springBoot.jpaDocentCampus_start;
 
+import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import domain.Campus;
 import domain.Docent;
 import domain.Werkruimte;
@@ -8,15 +14,16 @@ import repository.DocentRepository;
 import repository.WerkruimteRepository;
 
 //TODO
-public class InitDataConfig //TODO
-{
-	//TODO
-	/*
+@Component
+public class InitDataConfig implements CommandLineRunner {
+	// TODO
+	@Autowired
 	private DocentRepository docentRepository;
+	@Autowired
 	private CampusRepository campusRepository;
+	@Autowired
 	private WerkruimteRepository werkruimteRepository;
 
-	
 	@Override
 	public void run(String... args) {
 
@@ -42,18 +49,15 @@ public class InitDataConfig //TODO
 		piet.setWerkruimte(zolder);
 		joris.setWerkruimte(dak);
 
-		//TODO
-		werkruimteRepository.(zolder);
-		werkruimteRepository.(kelder);
-		werkruimteRepository.(dak);
+		werkruimteRepository.save(zolder);
+		werkruimteRepository.save(kelder);
+		werkruimteRepository.save(dak);
 
-		campusRepository.(gent);
-		campusRepository.(aalst);
+		campusRepository.save(gent);
+		campusRepository.save(aalst);
 
-		docentRepository.(jan);
-		docentRepository.(piet);
-		docentRepository.(joris);
-
-	}*/
-
+		docentRepository.save(jan);
+		docentRepository.save(piet);
+		docentRepository.save(joris);
+	}
 }

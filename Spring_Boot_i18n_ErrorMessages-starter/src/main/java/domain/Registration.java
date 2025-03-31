@@ -9,8 +9,8 @@ public class Registration {
 
 	// @Pattern(regexp = "^[a-zA-Z]+", message = "Username must be alphanumeric with
 	// no spaces")
-	@Pattern(regexp = "^[a-zA-Z]+", message = "{validation.userName.Pattern.message}")
-	// @ValidUserName
+//	@Pattern(regexp = "^[a-zA-Z]+", message = "{validation.userName.Pattern.message}")
+	@ValidUserName
 	private String userName;
 
 	@NotBlank

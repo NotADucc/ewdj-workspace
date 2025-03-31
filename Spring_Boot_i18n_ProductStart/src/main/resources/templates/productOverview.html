@@ -7,11 +7,7 @@
 <body>
 
 	<h1>Producten</h1>
-	<p      >
-	</p>
-	<br>
-
-	<a      ></a>
-
+	<p th:each="product: ${productList}" th:text="|${product.description} ${#numbers.formatDecimal(product.price, 1, 2)}&euro;|"></p>
+		<br> <a href="/increaseDecrease" th:text="|Wijzig prijzen|"></a>
 </body>
 </html>

@@ -21,13 +21,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NamedQueries({ 
-	@NamedQuery(name = "Docent.docentenInTweeCampussen", 
-	query = """
-			SELECT d 
-			FROM Docent d 
-			WHERE :campusA MEMBER OF d.campussen AND :campusB MEMBER OF d.campussen
-			""") })
+@NamedQueries({ @NamedQuery(name = "Docent.docentenInTweeCampussen", query = """
+		SELECT d
+		FROM Docent d
+		WHERE :campusA MEMBER OF d.campussen AND :campusB MEMBER OF d.campussen
+		""") })
 @EqualsAndHashCode(of = "docentNr")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -44,13 +42,15 @@ public class Docent implements Serializable {
 
 	private String voornaam;
 	private String familienaam;
-	@Setter private BigDecimal wedde;
+	@Setter
+	private BigDecimal wedde;
 
 	@ManyToMany
-    private Set<Campus> campussen = new HashSet<>();
-    
-    @ManyToOne
-	@Setter private Werkruimte werkruimte;
+	private Set<Campus> campussen = new HashSet<>();
+
+	@ManyToOne
+	@Setter
+	private Werkruimte werkruimte;
 
 	public Docent(int docentNr, String voornaam, String familienaam, BigDecimal wedde) {
 		this.docentNr = docentNr;
@@ -59,23 +59,24 @@ public class Docent implements Serializable {
 		this.wedde = wedde;
 	}
 
-	public Set<Campus> getCampussen(){
-    	return Collections.unmodifiableSet(campussen);
-    }
+	public Set<Campus> getCampussen() {
+		return Collections.unmodifiableSet(campussen);
+	}
 
 	public void opslag(BigDecimal bedrag) {
 		wedde = wedde.add(bedrag);
 	}
 
 	public void addCampus(Campus campus) {
-        campussen.add(campus);
-    }
+		campussen.add(campus);
+	}
 
-    public void removeCampus(Campus campus) {
-        campussen.remove(campus);
-    }
+	public void removeCampus(Campus campus) {
+		campussen.remove(campus);
+	}
 
-    public String toString() {
-    	return "%s %s %.2f Campus: %s Werkruimte: %s%n".formatted(familienaam, voornaam, wedde, campussen, werkruimte);
-    }
+	public String toString() {
+		return "%s %s %.2f Campus: %s Werkruimte: %s%n"
+				.formatted(familienaam, voornaam, wedde, campussen, werkruimte);
+	}
 }

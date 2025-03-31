@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Werkruimte implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String lokaalcode;
 	private String naam;
@@ -30,5 +30,5 @@ public class Werkruimte implements Serializable {
 	public String toString() {
 		return String.format("%s %s %d %d", lokaalcode, naam, aantalStoelen, aantalComputers);
 	}
-	
+
 }

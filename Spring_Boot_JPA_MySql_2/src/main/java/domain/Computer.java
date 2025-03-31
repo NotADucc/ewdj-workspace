@@ -13,16 +13,16 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @ToString
 public class Computer {
-	
- @EmbeddedId
- private ComputerId id;
- 
- @Getter private String brand;
- 
- public Computer(String code, int number, String brand)
- {
-	 this.id = new ComputerId(code, number);
-	 this.brand = brand;
- }
- 
+
+	@EmbeddedId
+	private ComputerId id;
+
+	@Getter
+	private String brand;
+
+	public Computer(String code, int number, String brand) {
+		this.id = new ComputerId(code, number);
+		this.brand = brand;
+	}
+
 }

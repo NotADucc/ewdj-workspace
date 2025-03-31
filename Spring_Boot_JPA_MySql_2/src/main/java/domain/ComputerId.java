@@ -22,5 +22,5 @@ public class ComputerId implements Serializable {
 
 	private String code;
 
-    private int number;
+	private int number;
 }

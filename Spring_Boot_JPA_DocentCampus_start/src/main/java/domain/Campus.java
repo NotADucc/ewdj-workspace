@@ -20,35 +20,37 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "campusNaam")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Campus implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int campusID;
-	
-	@Getter @Setter private String campusNaam;
-	
+
+	@Getter
+	@Setter
+	private String campusNaam;
+
 	@ManyToMany(mappedBy = "campussen")
-    private final  Set<Docent> docenten = new HashSet<>();
-    
-    public Campus(String campusNaam) {
-        this.campusNaam = campusNaam;
-    }
+	private final Set<Docent> docenten = new HashSet<>();
 
-    public Set<Docent> getDocenten() {
+	public Campus(String campusNaam) {
+		this.campusNaam = campusNaam;
+	}
+
+	public Set<Docent> getDocenten() {
 		return Collections.unmodifiableSet(docenten);
-    }
-    
-    public void addDocent(Docent docent) {
-        docenten.add(docent);
-    }
+	}
 
-    public void removeDocent(Docent docent) {
-        docenten.remove(docent);
-    }
-    
-    public String toString() {
-    	return "%s%n".formatted(campusNaam);
-    }
+	public void addDocent(Docent docent) {
+		docenten.add(docent);
+	}
+
+	public void removeDocent(Docent docent) {
+		docenten.remove(docent);
+	}
+
+	public String toString() {
+		return "%s%n".formatted(campusNaam);
+	}
 }
