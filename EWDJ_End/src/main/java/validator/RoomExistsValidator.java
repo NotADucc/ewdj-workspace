@@ -1,5 +1,6 @@
 package validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -8,7 +9,8 @@ import domain.room.IRoomRepository;
 import domain.room.Room;
 
 public class RoomExistsValidator implements Validator {
-
+	
+	@Autowired
 	private IRoomRepository roomRepository;
 
 	@Override

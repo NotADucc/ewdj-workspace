@@ -22,7 +22,6 @@ public class LocaleController {
     public String changeLocale(HttpServletRequest request, HttpServletResponse response, @RequestParam("lang") String lang) {
         Locale locale = switch (lang) {
             case "nl" -> Locale.forLanguageTag("nl-NL"); 
-            //case "en" -> Locale.ENGLISH;
             default -> Locale.ENGLISH;
         };
 
