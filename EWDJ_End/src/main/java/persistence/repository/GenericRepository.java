@@ -2,12 +2,14 @@ package persistence.repository;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import domain.IGenericRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 public class GenericRepository<T> implements IGenericRepository<T> {
-	
+
 	@PersistenceContext
 	protected EntityManager em;
 	private final Class<T> type;
@@ -23,46 +25,49 @@ public class GenericRepository<T> implements IGenericRepository<T> {
 
 	@Override
 	public void startTransaction() {
-		em.getTransaction().begin();
 	}
 
 	@Override
 	public void commitTransaction() {
-		em.getTransaction().commit();
 	}
 
 	@Override
 	public void rollbackTransaction() {
-		em.getTransaction().rollback();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<T> findAll() {
 		return em.createQuery("select entity from " + type.getName() + " entity", type)
 				.getResultList();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public <U> T get(U id) {
 		return em.find(type, id);
 	}
 
 	@Override
+	@Transactional
 	public T update(T object) {
 		return em.merge(object);
 	}
 
 	@Override
+	@Transactional
 	public void delete(T object) {
 		em.remove(em.merge(object));
 	}
 
 	@Override
+	@Transactional
 	public void insert(T object) {
 		em.persist(object);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public <U> boolean exists(U id) {
 		return em.find(type, id) != null;
 	}

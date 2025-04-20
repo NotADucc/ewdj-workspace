@@ -3,10 +3,12 @@ package persistence.repository;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import domain.room.IRoomRepository;
 import domain.room.Room;
 import persistence.entity.RoomEntity;
+import persistence.mapper.RoomMapper;
 
 @Repository
 public class RoomRepository extends GenericRepository<RoomEntity> implements IRoomRepository {
@@ -34,5 +36,12 @@ public class RoomRepository extends GenericRepository<RoomEntity> implements IRo
 	@Override
 	public boolean existsByName(String name) {
 		return this.exists(name);
+	}
+
+	@Override
+	@Transactional
+	public void AddRoom(Room room) {
+		RoomEntity entity = RoomMapper.toEntity(room, em);
+		insert(entity);
 	}
 }
