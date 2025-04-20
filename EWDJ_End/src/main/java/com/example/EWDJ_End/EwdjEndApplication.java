@@ -29,12 +29,12 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	}
 
 	@Bean
-	LocalDateTime conferentieperiodeStart() {
+	LocalDateTime conferenceRangeStart() {
 		return LocalDateTime.now();
 	}
 
 	@Bean
-	LocalDateTime conferentieperiodeEnd() {
+	LocalDateTime conferenceRangeEnd() {
 		return LocalDateTime.now().plusYears(1);
 	}
 }
