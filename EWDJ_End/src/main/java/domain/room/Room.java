@@ -2,9 +2,11 @@
 package domain.room;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 public class Room {
 	private String name;
-	private int capacity;
+	private Integer capacity;
 }
