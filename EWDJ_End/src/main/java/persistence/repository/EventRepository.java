@@ -1,18 +1,27 @@
 package persistence.repository;
 
+import org.springframework.stereotype.Repository;
+
 import domain.event.Event;
 import domain.event.IEventRepository;
 import persistence.entity.EventEntity;
 
-public class EventRepository extends GenericRepository<Event> implements IEventRepository {
+@Repository
+public class EventRepository extends GenericRepository<EventEntity> implements IEventRepository {
 
 	public EventRepository() {
-		super(Event.class);
+		super(EventEntity.class);
 	}
 
 	@Override
 	public boolean DoesEventExistOnSpecificDay(Event event) {
-		var res = em.createNamedQuery("EventEntity.doesEventExistOnSpecificDay", EventEntity.class)
+		String jpql = """
+				SELECT e
+				FROM EventEntity e
+				WHERE e.name = :name AND CAST(e.dateTime AS DATE) = :date
+				""";
+		
+		var res = em.createQuery(jpql, EventEntity.class)
 				.setParameter("name", event.getName())
 				.setParameter("date", event.getDateTime().toLocalDate())
 				.getResultList();

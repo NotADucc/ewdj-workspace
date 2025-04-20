@@ -4,14 +4,12 @@ import java.util.List;
 
 import domain.IGenericRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 
 public class GenericRepository<T> implements IGenericRepository<T> {
-
-	private static final String PU_NAME = "EWDJ_End";
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU_NAME);
-	protected static final EntityManager em = emf.createEntityManager();
+	
+	@PersistenceContext
+	protected EntityManager em;
 	private final Class<T> type;
 
 	public GenericRepository(Class<T> type) {
@@ -21,7 +19,6 @@ public class GenericRepository<T> implements IGenericRepository<T> {
 	@Override
 	public void closePersistency() {
 		em.close();
-		emf.close();
 	}
 
 	@Override

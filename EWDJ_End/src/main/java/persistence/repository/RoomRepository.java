@@ -2,23 +2,37 @@ package persistence.repository;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Repository;
+
 import domain.room.IRoomRepository;
 import domain.room.Room;
 import persistence.entity.RoomEntity;
 
-public class RoomRepository extends GenericRepository<Room> implements IRoomRepository {
+@Repository
+public class RoomRepository extends GenericRepository<RoomEntity> implements IRoomRepository {
 
 	public RoomRepository() {
-		super(Room.class);
+		super(RoomEntity.class);
 	}
 
 	@Override
-	public boolean IsRoomBooked(Room room, LocalDateTime dateTime) {
-		var res = em.createNamedQuery("RoomEntity.isRoomBooked", RoomEntity.class)
-				.setParameter("name", room.getName())
+	public boolean isRoomBooked(Room room, LocalDateTime dateTime) {
+		String jpql = """
+				SELECT e
+				FROM EventEntity e
+				WHERE e.room = :room AND e.dateTime = :dateTime
+				""";
+
+		var res = em.createQuery(jpql, RoomEntity.class)
+				.setParameter("room", room)
 				.setParameter("dateTime", dateTime)
 				.getResultList();
-		
+
 		return res.size() > 0;
+	}
+
+	@Override
+	public boolean existsByName(String name) {
+		return this.exists(name);
 	}
 }

@@ -1,7 +1,5 @@
 package domain.event;
 
-import domain.IGenericRepository;
-
-public interface IEventRepository extends IGenericRepository<Event> {
+public interface IEventRepository {
 	boolean DoesEventExistOnSpecificDay(Event event);
 }
