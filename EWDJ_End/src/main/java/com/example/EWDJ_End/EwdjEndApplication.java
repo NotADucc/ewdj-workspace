@@ -50,7 +50,7 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	    messageSource.setDefaultEncoding("UTF-8");
 	    return messageSource;
 	}
-
+	
 	@Bean
 	LocalDateTime conferenceRangeStart() {
 		return LocalDateTime.now();
