@@ -1,10 +1,12 @@
 package persistence.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import domain.event.Event;
 import domain.event.IEventRepository;
 import persistence.entity.EventEntity;
+import persistence.mapper.EventMapper;
 
 @Repository
 public class EventRepository extends GenericRepository<EventEntity> implements IEventRepository {
@@ -27,5 +29,12 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 				.getResultList();
 
 		return res.size() > 0;
+	}
+
+	@Override
+	@Transactional
+	public void AddEvent(Event event) {
+		EventEntity eventEntity = EventMapper.toEntity(event, em);
+		insert(eventEntity);
 	}
 }

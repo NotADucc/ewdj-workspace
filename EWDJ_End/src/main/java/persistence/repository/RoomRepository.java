@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import domain.room.IRoomRepository;
 import domain.room.Room;
+import persistence.entity.EventEntity;
 import persistence.entity.RoomEntity;
 import persistence.mapper.RoomMapper;
 
@@ -25,8 +26,8 @@ public class RoomRepository extends GenericRepository<RoomEntity> implements IRo
 				WHERE e.room = :room AND e.dateTime = :dateTime
 				""";
 
-		var res = em.createQuery(jpql, RoomEntity.class)
-				.setParameter("room", room)
+		var res = em.createQuery(jpql, EventEntity.class)
+				.setParameter("room", RoomMapper.toEntity(room, em))
 				.setParameter("dateTime", dateTime)
 				.getResultList();
 

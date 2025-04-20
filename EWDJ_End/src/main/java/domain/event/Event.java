@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import persistence.entity.RoomEntity;
 import validator.BeamerChecksum;
 import validator.HasDuplicateSpeakers;
 
@@ -22,6 +23,7 @@ import validator.HasDuplicateSpeakers;
 @BeamerChecksum(divisor = 97)
 @HasDuplicateSpeakers
 public class Event implements IHasSpeakers, IHasRoom {
+	private int id;
 	@NotEmpty
 	@Pattern(regexp = "^[a-zA-Z](\\w|\\W)*$")
 	private String name;
@@ -42,4 +44,18 @@ public class Event implements IHasSpeakers, IHasRoom {
 	private Double price;
 	@Size(min = 1, max = 3, message = "{event.Size.message}")
 	private List<String> speakers = new ArrayList<>();
+	
+	public Event(
+			String name, String description, Room room, LocalDateTime dateTime,
+			String beamercode, Integer beamercheck, Double price, List<String> speakers
+	) {
+		this.name = name;
+		this.description = description;
+		this.room = room;
+		this.dateTime = dateTime;
+		this.beamercode = beamercode;
+		this.beamercheck = beamercheck;
+		this.price = price;
+		this.speakers = speakers != null ? speakers : new ArrayList<>();
+	}
 }
