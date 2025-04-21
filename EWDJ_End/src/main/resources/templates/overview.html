@@ -10,8 +10,10 @@
     <div th:replace="~{fragments/localeSwitcher :: locale-switch}"></div>
     
     <main>
-        <p th:each="event: ${eventList}" th:text="${event}"></p>
-    </main>
+		<div class="event-container">
+			<p class="event-item" th:each="event: ${eventList}" th:text="${event}"></p>
+		</div>
+	</main>
     
     <!-- Include the footer fragment -->
     <div th:replace="~{fragments/footer :: footer}"></div>
