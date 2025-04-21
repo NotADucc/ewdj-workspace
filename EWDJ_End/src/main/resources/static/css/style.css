@@ -42,6 +42,10 @@ main h1 {
 	align-items: stretch;
 	padding: 10px;
 	animation: slide-up .5s ease;
+	transition: transform 0.3s ease-in-out;
+	&:hover {
+		transform: scale(1.05);
+	}
 }
 
 @keyframes slide-up {
@@ -114,27 +118,29 @@ header .link {
 }
 
 
-.button {
-	padding-top: 0.625rem;
+.header-lang-form {
 	padding-bottom: 0.625rem; 
 	padding-left: 1.25rem;
 	padding-right: 1.25rem; 
 	margin-right: 1.75rem;
 	border-radius: 0.5rem; 
 	background-color: transparent;
-	transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 300ms; 
-	&:hover {
-		background-color: #262626; 
-	}
+}
+
+.header-lang-select {
+	background-color: #171717;
+	color: white;
+	padding: 1rem;
+	width: 12rem;
+	border: none;
+	font-size: 1rem;
+	box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+	-webkit-appearance: button;
+	appearance: button;
+	outline: none;
 }
 
 
-.header_buttons {
-	display: flex;
-	flex-direction: row;
-}
 
 footer {
 	border-top: solid;
