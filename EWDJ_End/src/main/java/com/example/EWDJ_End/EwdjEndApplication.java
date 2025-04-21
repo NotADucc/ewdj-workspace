@@ -1,5 +1,6 @@
 package com.example.EWDJ_End;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -53,12 +54,12 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	
 	@Bean
 	LocalDateTime conferenceRangeStart() {
-		return LocalDateTime.now();
+		return LocalDateTime.of(LocalDate.now().getYear(), 1, 1, 1, 0);
 	}
 
 	@Bean
 	LocalDateTime conferenceRangeEnd() {
-		return LocalDateTime.now().plusYears(1);
+		return conferenceRangeStart().plusYears(1);
 	}
 	
     @Bean
