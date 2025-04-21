@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <title th:text="#{notfound.title}"></title>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<title th:text="#{notfound.title}"></title>
 </head>
-<body>
+<body style="max-width: max-content; margin: auto;">
 
-<div>
-    <div>
-        <h1 th:text="#{notfound.code}"></h1>
-        <p th:text="#{notfound.message1}"></p>
-        <p th:text="#{notfound.message2}"></p>
-        <a th:href="@{/}" th:text="#{notfound.return}"></a>
-    </div>
-</div>
+	<div>
+		<h1 th:text="#{notfound.code}"
+			style="font-size: 3.75rem; color: white;"></h1>
+		<p th:text="#{notfound.message1}"
+			style="font-size: 1.75rem; color: white;"></p>
+		<p th:text="#{notfound.message2}"
+			style="font-size: 1.75rem; color: white;"></p>
+		<a th:href="@{/}" th:text="#{notfound.return}"></a>
+	</div>
 
 </body>
 </html>
