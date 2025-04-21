@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
