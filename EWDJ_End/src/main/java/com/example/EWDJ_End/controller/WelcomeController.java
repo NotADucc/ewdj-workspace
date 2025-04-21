@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import domain.LocaleException;
-
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController {

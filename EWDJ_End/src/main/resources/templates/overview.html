@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{title}">Demo</title>
+</head>
+<body>
+    
+     <!-- Include the localeSwitcher fragment (custom fragment) -->
+    <div th:replace="~{fragments/localeSwitcher :: locale-switch}"></div>
+    
+    <main>
+        <p th:each="event: ${eventList}" th:text="${event}"></p>
+    </main>
+    
+    <!-- Include the footer fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+     
+</body>
+</html>

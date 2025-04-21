@@ -24,8 +24,8 @@ public class InitDataConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		Room room1 = new Room("A123", 10), room2 = new Room("B123", 30);
-		roomManager.AddRoom(room1);
-		roomManager.AddRoom(room2);
+		roomManager.addRoom(room1);
+		roomManager.addRoom(room2);
 
 		Event event1 = new Event(
 				"Event 1",
@@ -60,8 +60,8 @@ public class InitDataConfig implements CommandLineRunner {
 				List.of("Naam 3")
 		);
 		
-		eventManager.AddEvent(event1);
-		eventManager.AddEvent(event2);
-		eventManager.AddEvent(event3);
+		eventManager.addEvent(event1);
+		eventManager.addEvent(event2);
+		eventManager.addEvent(event3);
 	}
 }

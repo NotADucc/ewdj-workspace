@@ -1,6 +1,9 @@
 package domain.event;
 
+import java.util.List;
+
 public interface IEventRepository {
-	boolean DoesEventExistOnSpecificDay(Event event);
-	void AddEvent(Event event);
+	boolean doesEventExistOnSpecificDay(Event event);
+	void addEvent(Event event);
+	List<Event> getAllEvents();
 }

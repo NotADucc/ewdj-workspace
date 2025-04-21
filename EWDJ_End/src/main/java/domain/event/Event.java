@@ -44,10 +44,10 @@ public class Event implements IHasSpeakers, IHasRoom {
 	private Double price;
 	@Size(min = 1, max = 3, message = "{event.Size.message}")
 	private List<String> speakers = new ArrayList<>();
-	
+
 	public Event(
-			String name, String description, Room room, LocalDateTime dateTime,
-			String beamercode, Integer beamercheck, Double price, List<String> speakers
+			String name, String description, Room room, LocalDateTime dateTime, String beamercode,
+			Integer beamercheck, Double price, List<String> speakers
 	) {
 		this.name = name;
 		this.description = description;
@@ -57,5 +57,13 @@ public class Event implements IHasSpeakers, IHasRoom {
 		this.beamercheck = beamercheck;
 		this.price = price;
 		this.speakers = speakers != null ? speakers : new ArrayList<>();
+	}
+
+	public Event(
+			int id, String name, String description, Room room, LocalDateTime dateTime,
+			String beamercode, Integer beamercheck, Double price, List<String> speakers
+	) {
+		this(name, description, room, dateTime, beamercode, beamercheck, price, speakers);
+		this.id = id;
 	}
 }

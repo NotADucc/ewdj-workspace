@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 public class RoomManager {
 	private IRoomRepository roomRepository;
 
-	public void AddRoom(Room room) {
+	public void addRoom(Room room) {
 		if (roomRepository.existsByName(room.getName())) {
 			throw new LocaleException("RoomManager.AddRoom.existsByName");
 		}

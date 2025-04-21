@@ -1,5 +1,7 @@
 package persistence.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,7 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	}
 
 	@Override
-	public boolean DoesEventExistOnSpecificDay(Event event) {
+	public boolean doesEventExistOnSpecificDay(Event event) {
 		String jpql = """
 				SELECT e
 				FROM EventEntity e
@@ -33,8 +35,14 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 
 	@Override
 	@Transactional
-	public void AddEvent(Event event) {
+	public void addEvent(Event event) {
 		EventEntity eventEntity = EventMapper.toEntity(event, em);
 		insert(eventEntity);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> getAllEvents() {
+		return EventMapper.toDomain(findAll());
 	}
 }

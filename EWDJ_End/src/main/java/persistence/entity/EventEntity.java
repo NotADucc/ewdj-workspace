@@ -29,7 +29,6 @@ public class EventEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter(AccessLevel.NONE)
 	private int eventId;
 	private String name;
 	private String description;

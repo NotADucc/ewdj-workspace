@@ -1,7 +1,9 @@
 package persistence.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import domain.event.Event;
-import domain.room.Room;
 import jakarta.persistence.EntityManager;
 import persistence.entity.EventEntity;
 import persistence.entity.RoomEntity;
@@ -26,5 +28,23 @@ public class EventMapper {
 		}
 
 		return entity;
+	}
+
+	public static List<Event> toDomain(List<EventEntity> eventEntities) {
+		return eventEntities.stream().map(EventMapper::toDomain).collect(Collectors.toList());
+	}
+
+	public static Event toDomain(EventEntity eventEntity) {
+		return new Event(
+				eventEntity.getEventId(),
+				eventEntity.getName(),
+				eventEntity.getDescription(),
+				RoomMapper.toDomain(eventEntity.getRoom()),
+				eventEntity.getDateTime(),
+				eventEntity.getBeamercode(),
+				eventEntity.getBeamercheck(),
+				eventEntity.getPrice(),
+				eventEntity.getSpeakers()
+		);
 	}
 }

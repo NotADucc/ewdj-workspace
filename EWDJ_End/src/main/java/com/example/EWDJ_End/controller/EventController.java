@@ -1,36 +1,22 @@
 package com.example.EWDJ_End.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.LocaleResolver;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import domain.event.EventManager;
 
 @Controller
 @RequestMapping("/events")
 public class EventController {
-
 	@Autowired
-	private LocaleResolver localeResolver;
+	EventManager eventManager;
 
-	@GetMapping("/changeLocale")
-	public String changeLocale(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			@RequestParam("lang") String lang
-	) {
-		Locale locale = switch (lang) {
-			case "nl" -> Locale.forLanguageTag("nl-NL");
-			default -> Locale.ENGLISH;
-		};
-
-		localeResolver.setLocale(request, response, locale);
-		return "redirect:" + request.getHeader("Referer");
+	@GetMapping
+	public String showEvents(Model model) {
+		model.addAttribute("eventList", eventManager.giveEvents());
+		return "overview";
 	}
 }
