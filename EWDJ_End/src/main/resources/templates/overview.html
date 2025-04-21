@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{overview.title}"></title>
-	<link rel="stylesheet" th:href="@{/css/style.css}" />
+<title th:text="#{overview.title}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    
-     <!-- Include the localeSwitcher fragment (custom fragment) -->
-    <div th:replace="~{fragments/localeSwitcher :: locale-switch}"></div>
-    
-    <main>
-		<div class="event-container">
-			<p class="event-item" th:each="event: ${eventList}" th:text="${event}"></p>
+
+	<!-- Include the localeSwitcher fragment (custom fragment) -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<div>
+			<h1 th:text="#{overview.title}"></h1>
+			<div class="event-container">
+				<div class="event-item" th:each="event: ${eventList}">
+                <div class="event-content">
+                    <h3 class="event-title" th:text="${event.name}"></h3>
+                    <h4 class="speakers"><i th:text="|#{overview.event-content.room}: ${event.room.name}|"></i></h4>
+                    <p th:text="|#{overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
+                    <p class="project-description" th:text="|#{overview.event-content.date}: ${#temporals.format(event.dateTime, #messages.msg('format.datetime'))}|"></p>
+                </div>
+				</div>
+			</div>
 		</div>
 	</main>
-    
-    <!-- Include the footer fragment -->
-    <div th:replace="~{fragments/footer :: footer}"></div>
-     
+
+	<!-- Include the footer fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>
