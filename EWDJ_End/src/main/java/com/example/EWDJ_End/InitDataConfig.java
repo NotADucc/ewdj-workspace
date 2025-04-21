@@ -57,7 +57,7 @@ public class InitDataConfig implements CommandLineRunner {
 				"0097",
 				0,
 				10.00,
-				List.of("Naam 3")
+				List.of("Naam 3", "Naam 4")
 		);
 		
 		eventManager.addEvent(event1);
