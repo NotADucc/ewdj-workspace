@@ -72,12 +72,12 @@ public class EwdjEndApplication implements WebMvcConfigurer {
     }
 	
 	@Bean
-	EventManager eventManager() {
-		return new EventManager();
+	EventManager eventManager(IEventRepository eventRepository, IRoomRepository roomRepository) {
+		return new EventManager(eventRepository, roomRepository);
 	}
 
 	@Bean
-	RoomManager roomManager() {
-		return new RoomManager();
+	RoomManager roomManager(IRoomRepository roomRepository) {
+		return new RoomManager(roomRepository);
 	}
 }

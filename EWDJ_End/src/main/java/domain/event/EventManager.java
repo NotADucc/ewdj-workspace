@@ -1,16 +1,13 @@
 package domain.event;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import domain.LocaleException;
 import domain.room.IRoomRepository;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class EventManager {
 
-	@Autowired
 	private IEventRepository eventRepository;
-
-	@Autowired
 	private IRoomRepository roomRepository;
 
 	public void AddEvent(Event event) {
