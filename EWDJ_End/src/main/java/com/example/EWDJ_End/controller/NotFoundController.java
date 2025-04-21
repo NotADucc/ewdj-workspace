@@ -22,7 +22,7 @@ public class NotFoundController implements ErrorController {
 				return "notFound";
 			}
 		}
-		return "redirect:/welcome";
+		return "redirect:/";
 	}
 
 }

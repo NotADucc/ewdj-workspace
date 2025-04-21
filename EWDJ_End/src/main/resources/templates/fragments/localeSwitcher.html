@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="locale-switch" >
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="locale-switch">
 	<fieldset>
 		<legend>A CUSTOM FRAGMENT</legend>
 		<form th:action="@{/changeLocale}" method="get">
@@ -8,7 +6,6 @@
 				<option value="nl" th:selected="${#locale.language == 'nl'}">Nederlands</option>
 				<option value="en" th:selected="${#locale.language == 'en'}">English</option>
 			</select>
-		</form> 
+		</form>
 	</fieldset>
 </div>
-</html>
