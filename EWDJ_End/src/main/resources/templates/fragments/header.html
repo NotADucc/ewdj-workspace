@@ -1,11 +1,14 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="locale-switch">
-	<fieldset>
-		<legend>A CUSTOM FRAGMENT</legend>
-		<form th:action="@{/changeLocale}" method="get">
-			<select name="lang" onchange="this.form.submit()">
+
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+	<div class="container">
+		<a href="/"> <img th:src="@{/img/hehe-logo.png}" alt="Hehe cat" />
+			<span class="link"> Hehe.</span>
+		</a>
+		<form class="header-lang-form" th:action="@{/changeLocale}" method="get">
+			<select class="header-lang-select" name="lang" onchange="this.form.submit()">
 				<option value="nl" th:selected="${#locale.language == 'nl'}">Nederlands</option>
 				<option value="en" th:selected="${#locale.language == 'en'}">English</option>
 			</select>
 		</form>
-	</fieldset>
-</div>
+	</div>
+</header>
