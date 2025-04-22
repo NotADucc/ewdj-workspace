@@ -144,6 +144,15 @@ header .link {
 	outline: none;
 }
 
+.login_div {
+	color: white;
+	padding: 1rem;
+	font-size: 1rem;
+	margin-right: 1.75rem;
+	border-radius: 0.5rem; 
+	background-color: transparent;
+}
+
 .button {
 	color: white;
 	padding: 1rem;

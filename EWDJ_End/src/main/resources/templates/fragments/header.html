@@ -1,8 +1,8 @@
 
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
 	<div class="container">
-		<a th:href="@{/}"> <img th:src="@{/img/hehe-logo.png}" alt="Hehe cat" />
-			<span class="link"> Hehe.</span>
+		<a th:href="@{/}"> <img th:src="@{/img/hehe-logo.png}"
+			alt="Hehe cat" /> <span class="link"> Hehe.</span>
 		</a>
 		<div class="header_buttons">
 			<form class="header-lang-form" th:action="@{/changeLocale}"
@@ -13,9 +13,10 @@
 					<option value="en" th:selected="${#locale.language == 'en'}">English</option>
 				</select>
 			</form>
-			
-			<button id="expand_button" class="button" th:text="false ? #{header.logout} : #{header.login}">
-			</button>
+			<div class="login_div"
+				th:text="false ? #{header.user} : #{header.admin}"></div>
+			<button class="button"
+				th:text="false ? #{header.logout} : #{header.login}"></button>
 		</div>
 	</div>
 </header>
