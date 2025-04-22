@@ -33,4 +33,15 @@ public class EventManager {
 	public List<Event> giveEvents() {
 		return eventRepository.getAllEvents();
 	}
+	
+	public Event giveEvent(int id) {
+		if (!eventRepository.doesEventExist(id)) {
+			throw new LocaleException(
+					"EventManager.giveEvent.doesEventExist",
+					new Object[] { id }
+			);
+		}
+		
+		return eventRepository.getEvent(id);
+	}
 }

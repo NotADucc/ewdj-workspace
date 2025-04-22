@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +32,7 @@ public class EventEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eventId;
 	private String name;
+	@Column(length = 1000)
 	private String description;
 	@ManyToOne
 	private RoomEntity room;

@@ -37,7 +37,7 @@ public class InitDataConfig implements CommandLineRunner {
 				10.00,
 				List.of("Naam 1")
 		);
-		
+
 		Event event2 = new Event(
 				"Event 2",
 				"Description 2",
@@ -48,10 +48,10 @@ public class InitDataConfig implements CommandLineRunner {
 				10.00,
 				List.of("Naam 2")
 		);
-		
+
 		Event event3 = new Event(
 				"Event 3",
-				"Description 3",
+				"This is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long description.",
 				room2,
 				LocalDateTime.now().plusDays(1),
 				"0097",
@@ -59,7 +59,7 @@ public class InitDataConfig implements CommandLineRunner {
 				10.00,
 				List.of("Naam 3", "Naam 4")
 		);
-		
+
 		eventManager.addEvent(event1);
 		eventManager.addEvent(event2);
 		eventManager.addEvent(event3);

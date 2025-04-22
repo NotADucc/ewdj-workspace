@@ -45,4 +45,14 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	public List<Event> getAllEvents() {
 		return EventMapper.toDomain(findAll());
 	}
+
+	@Override
+	public boolean doesEventExist(int id) {
+		return exists(id);
+	}
+
+	@Override
+	public Event getEvent(int id) {
+		return EventMapper.toDomain(get(id));
+	}
 }

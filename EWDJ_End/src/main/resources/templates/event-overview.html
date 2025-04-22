@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="#{overview.title}"></title>
+<title th:text="#{event-overview.title}"></title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
@@ -11,7 +11,7 @@
 
 	<main>
 		<div>
-			<h1 th:text="#{overview.title}"></h1>
+			<h1 th:text="#{event-overview.title}"></h1>
 			<div class="event-container">
 				<div class="event-item" th:each="event: ${eventList}">
 					<a class="invisible" th:href="|/events/${event.id}|">
@@ -19,12 +19,12 @@
 							<h3 class="event-title" th:text="${event.name}"></h3>
 							<h4 class="speakers">
 								<i
-									th:text="|#{overview.event-content.room}: ${event.room.name}|"></i>
+									th:text="|#{event-overview.event-content.room}: ${event.room.name}|"></i>
 							</h4>
 							<p
-								th:text="|#{overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
+								th:text="|#{event-overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
 							<p class="project-description"
-								th:text="|#{overview.event-content.date}: ${#temporals.format(event.dateTime, #messages.msg('format.datetime'))}|"></p>
+								th:text="|#{event-overview.event-content.date}: ${#temporals.format(event.dateTime, #messages.msg('format.datetime'))}|"></p>
 						</div>
 					</a>
 				</div>
