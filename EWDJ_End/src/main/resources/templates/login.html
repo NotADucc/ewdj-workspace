@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{event-overview.title}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<!-- Include the localeSwitcher fragment (custom fragment) -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<div class="form-container">
+		  <form class="form" action="/login" method="post">
+		    <div class="form-group">
+		      <label class="form-label-input-text" for="email" th:text="#{login.form.email.label}"></label>
+		      <input
+		        class="form-input-text"
+		        id="email"
+		        name="email"
+		        th:aria-label="#{login.form.email.arial}"
+		        type="text"
+		        th:placeholder="#{login.form.email.placeholder}"
+		        autocapitalize="off"
+		        autocorrect="off"
+		        autocomplete="email"
+		        required
+		      />
+		    </div>
+		    <div class="form-group">
+		      <label class="form-label-input-text" for="password" th:text="#{login.form.password.label}"></label>
+		      <input
+		        class="form-input-text"
+		        id="password"
+		        name="password"
+		        th:aria-label="#{login.form.password.label}"
+		        type="password"
+		        placeholder="******************"
+		        autocapitalize="off"
+		        autocorrect="off"
+		        autocomplete="current-password"
+		        spellcheck="false"
+		        required
+		      />
+		    </div>
+		    <div class="form-actions">
+		      <button class="form-btn-primary" id="submit_form" type="submit" th:text="#{login.form.primary.button}"></button>
+		    </div>
+		    <div id="any-errors"></div>
+		  </form>
+		</div>
+	</main>
+
+	<!-- Include the footer fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ public class EventController {
 	EventManager eventManager;
 
 	@GetMapping
-	public String showEvents(Model model) {
+	public String showLogin(Model model) {
 		model.addAttribute("eventList", eventManager.giveEventsSorted());
 		return "event-overview";
 	}
