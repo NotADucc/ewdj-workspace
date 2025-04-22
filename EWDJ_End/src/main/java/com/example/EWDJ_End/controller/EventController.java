@@ -18,11 +18,13 @@ public class EventController {
 	@GetMapping
 	public String showEvents(Model model) {
 		model.addAttribute("eventList", eventManager.giveEvents());
+		model.addAttribute("loginStatus", false);
 		return "event-overview";
 	}
     @GetMapping("/{id}")
     public String showEventDetails(@PathVariable int id, Model model) {
         model.addAttribute("event", eventManager.giveEvent(id));
+        model.addAttribute("loginStatus", false);
         return "event-details";
     }
 }
