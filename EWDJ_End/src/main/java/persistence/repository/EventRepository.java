@@ -45,6 +45,21 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	public List<Event> getAllEvents() {
 		return EventMapper.toDomain(findAll());
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> getAllEventsSorted() {
+		String jpql = """
+				SELECT e
+				FROM EventEntity e
+				ORDER BY e.dateTime
+				""";
+		
+		var res = em.createQuery(jpql, EventEntity.class)
+				.getResultList();
+		
+		return EventMapper.toDomain(res);
+	}
 
 	@Override
 	public boolean doesEventExist(int id) {

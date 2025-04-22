@@ -30,8 +30,8 @@ public class EventManager {
 		eventRepository.addEvent(event);
 	}
 	
-	public List<Event> giveEvents() {
-		return eventRepository.getAllEvents();
+	public List<Event> giveEventsSorted() {
+		return eventRepository.getAllEventsSorted();
 	}
 	
 	public Event giveEvent(int id) {

@@ -42,7 +42,7 @@ public class InitDataConfig implements CommandLineRunner {
 				"Event 2",
 				"Description 2",
 				room1,
-				LocalDateTime.now().plusDays(1),
+				LocalDateTime.now().minusWeeks(1),
 				"0097",
 				0,
 				10.00,

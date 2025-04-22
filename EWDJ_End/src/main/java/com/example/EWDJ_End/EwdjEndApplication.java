@@ -47,7 +47,6 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 		Properties mappings = new Properties();
 		mappings.put("domain.LocaleException", "error/locale-exception");
 
-		r.setDefaultErrorView("error/error");
 		r.setExceptionMappings(mappings);
 		return r;
 	}

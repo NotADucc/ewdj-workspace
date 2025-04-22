@@ -6,6 +6,7 @@ public interface IEventRepository {
 	boolean doesEventExistOnSpecificDay(Event event);
 	void addEvent(Event event);
 	List<Event> getAllEvents();
+	List<Event> getAllEventsSorted();
 	boolean doesEventExist(int id);
 	Event getEvent(int id);
 }

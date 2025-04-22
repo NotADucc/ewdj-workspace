@@ -17,7 +17,7 @@ public class EventController {
 
 	@GetMapping
 	public String showEvents(Model model) {
-		model.addAttribute("eventList", eventManager.giveEvents());
+		model.addAttribute("eventList", eventManager.giveEventsSorted());
 		return "event-overview";
 	}
     @GetMapping("/{id}")
