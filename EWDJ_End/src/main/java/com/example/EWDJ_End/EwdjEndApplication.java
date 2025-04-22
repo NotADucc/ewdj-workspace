@@ -3,6 +3,7 @@ package com.example.EWDJ_End;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import domain.event.EventManager;
@@ -36,7 +38,19 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/events");
 	}
+	
+	@Bean
+	SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+		SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
 
+		Properties mappings = new Properties();
+		mappings.put("domain.LocaleException", "error/locale-exception");
+
+		r.setDefaultErrorView("error/error");
+		r.setExceptionMappings(mappings);
+		return r;
+	}
+	
 	@Bean
 	LocaleResolver localeResolver() {
 		SessionLocaleResolver slr = new SessionLocaleResolver();

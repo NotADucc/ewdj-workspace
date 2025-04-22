@@ -19,7 +19,7 @@ public class NotFoundController implements ErrorController {
 			Integer statusCode = Integer.valueOf(status.toString());
 
 			if (statusCode == 404) {
-				return "notFound";
+				return "error/not-found";
 			}
 		}
 		return "redirect:/";

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<meta http-equiv="refresh" content="10;url='/'" />
+<title th:text="Oopsie"></title>
+</head>
+<body style="max-width: max-content; margin: auto;">
+
+	<h1 th:text="${exception.message}"
+		style="font-size: 3.75rem; color: white;"></h1>
+</body>
+</html>
