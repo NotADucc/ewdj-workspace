@@ -1,7 +1,7 @@
 
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
 	<div class="container">
-		<a href="/"> <img th:src="@{/img/hehe-logo.png}" alt="Hehe cat" />
+		<a th:href="@{/}"> <img th:src="@{/img/hehe-logo.png}" alt="Hehe cat" />
 			<span class="link"> Hehe.</span>
 		</a>
 		<div class="header_buttons">
@@ -14,7 +14,7 @@
 				</select>
 			</form>
 			
-			<button id="expand_button" class="button" th:text="${loginStatus} ? #{header.logout} : #{header.login}">
+			<button id="expand_button" class="button" th:text="false ? #{header.logout} : #{header.login}">
 			</button>
 		</div>
 	</div>

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -38,7 +39,7 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/events");
 	}
-	
+
 	@Bean
 	SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
 		SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
@@ -50,22 +51,22 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 		r.setExceptionMappings(mappings);
 		return r;
 	}
-	
+
 	@Bean
 	LocaleResolver localeResolver() {
 		SessionLocaleResolver slr = new SessionLocaleResolver();
 		slr.setDefaultLocale(Locale.ENGLISH);
 		return slr;
 	}
-	
+
 	@Bean
 	MessageSource messageSource() {
-	    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-	    messageSource.setBasename("classpath:i18n/messages");
-	    messageSource.setDefaultEncoding("UTF-8");
-	    return messageSource;
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:i18n/messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
 	}
-	
+
 	@Bean
 	LocalDateTime conferenceRangeStart() {
 		return LocalDateTime.of(LocalDate.now().getYear(), 1, 1, 1, 0);
@@ -75,17 +76,17 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	LocalDateTime conferenceRangeEnd() {
 		return conferenceRangeStart().plusYears(1);
 	}
-	
-    @Bean
-    IEventRepository eventRepository() {
-        return new EventRepository(); 
-    }
-	
-    @Bean
-    IRoomRepository roomRepository() {
-        return new RoomRepository(); 
-    }
-	
+
+	@Bean
+	IEventRepository eventRepository() {
+		return new EventRepository();
+	}
+
+	@Bean
+	IRoomRepository roomRepository() {
+		return new RoomRepository();
+	}
+
 	@Bean
 	EventManager eventManager(IEventRepository eventRepository, IRoomRepository roomRepository) {
 		return new EventManager(eventRepository, roomRepository);
