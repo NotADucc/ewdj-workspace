@@ -67,6 +67,16 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	}
 
 	@Bean
+	DateFormatter dateFormatter() {
+		return new DateFormatter();
+	}
+	
+	@Bean
+	DatetimeFormatter datetimeFormatter() {
+		return new DatetimeFormatter();
+	}
+
+	@Bean
 	LocalDateTime conferenceRangeStart() {
 		return LocalDateTime.of(LocalDate.now().getYear(), 1, 1, 1, 0);
 	}

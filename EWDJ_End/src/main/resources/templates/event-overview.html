@@ -24,7 +24,7 @@
 							<p
 								th:text="|#{event-overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
 							<p class="project-description"
-								th:text="|#{event-overview.event-content.date}: ${#temporals.format(event.dateTime, #messages.msg('format.datetime'))}|"></p>
+								th:text="|#{event-overview.event-content.date}: ${{event.dateTime}}|"></p>
 						</div>
 					</a>
 				</div>

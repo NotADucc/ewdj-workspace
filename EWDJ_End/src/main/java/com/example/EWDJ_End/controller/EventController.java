@@ -21,7 +21,7 @@ public class EventController {
 		return "event-overview";
 	}
     @GetMapping("/{id}")
-    public String showEventDetails(@PathVariable int id, Model model) {
+    public String showEventDetails(@PathVariable Integer id, Model model) {
         model.addAttribute("event", eventManager.giveEvent(id));
         return "event-details";
     }
