@@ -6,21 +6,38 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		auth.inMemoryAuthentication()
+			.withUser("nameUser").password(encoder.encode("12345678")).roles("USER")
+			.and()
+			.withUser("nameAdmin").password(encoder.encode("admin1234")).roles("ADMIN");
+	}
 
-    }
-    
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	
-    	return http.build();
-    	        
-    }
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
+			.authorizeHttpRequests(req -> req.requestMatchers("/login**").permitAll()
+				.requestMatchers("/css/**").permitAll()
+				.requestMatchers("/403**").permitAll()
+				.requestMatchers("/students/list").hasAnyRole("USER", "ADMIN")
+				.requestMatchers("/students/{id}").hasRole("ADMIN")
+				//.requestMatchers("/students/**").hasRole("ADMIN")
+			).formLogin(form -> form.defaultSuccessUrl("/students/list", true)
+					.loginPage("/login")
+			).exceptionHandling(ex -> ex.accessDeniedPage("/403"));
+		
+		
+		return http.build();
+	}
 }

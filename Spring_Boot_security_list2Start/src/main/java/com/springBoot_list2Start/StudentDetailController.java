@@ -19,12 +19,7 @@ public class StudentDetailController {
 
 	@Autowired
     private StudentService studentService;
-	
-	@ModelAttribute("username")
-    public String populateColors(Principal principal) {
-        return principal.getName();
-    }
-	
+		
 	@GetMapping(value = "/{id}")
     public String show(@PathVariable("id") Integer studentId, Model model) {
        

@@ -16,11 +16,6 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
-    @ModelAttribute("username")
-    public String populateUsername(Principal principal) {
-        return principal.getName();
-    }
     
     @GetMapping(value = "/list")
     public String listStudents(Model model) {

@@ -23,8 +23,11 @@
 			    <td th:text="${iter.index}"></td>
 			    <td th:text="${iter.count}"></td>
 				<td>
-				<a th:href="|/students/${student.id}|" th:text="${student.lastname}"></a>
+					<a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="|/students/${student.id}|" th:text="${student.lastname}"></a>
+					<a th:unless="${#authorization.expression('hasRole(''ADMIN'')')}" th:text="${student.lastname}"></a>
+				
 				</td>
+				
 				<td th:text="${student.firstname}"></td>
 			</tr>
 		</th:block>

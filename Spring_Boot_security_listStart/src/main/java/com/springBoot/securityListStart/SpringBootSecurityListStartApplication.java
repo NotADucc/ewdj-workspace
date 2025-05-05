@@ -20,6 +20,7 @@ public class SpringBootSecurityListStartApplication implements WebMvcConfigurer{
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/students/list");
 		//TODO
+		registry.addViewController("/403").setViewName("403");
 	}
 	
 	@Bean

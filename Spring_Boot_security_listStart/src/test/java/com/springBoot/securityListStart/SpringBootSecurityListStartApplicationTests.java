@@ -41,26 +41,41 @@ class SpringBootSecurityListStartApplicationTests {
     }
 	
 //TODO	
+	@WithMockUser(username = "user", roles = {"ADMIN"})
 	@Test
     public void testAccessOneStudentWithAdminRole() throws Exception {
         //"/students/1"
+    	mockMvc.perform(get("/students/1"))
+        .andExpect(status().isOk())
+    	.andExpect(view().name("grade/detailStudent"))
+    	.andExpect(model().attributeExists("student"));
     }
 	
+	@WithMockUser(username = "user", roles = {"USER"})
 	@Test
     public void testAccessOneStudentWithUserRole_NoAccess() throws Exception {
 		 //"/students/1"
+    	mockMvc.perform(get("/students/1"))
+        .andExpect(status().isForbidden());
     }
 	
 	@Test
 	@WithMockUser(username = "admin", roles = {"ADMIN"})
 	public void testOneStudentWithAdminRole_StudentDoesNotExist() throws Exception {
 	    //"/students/99"
+    	mockMvc.perform(get("/students/99"))
+        .andExpect(status().isFound())
+        .andExpect(redirectedUrl("/students/list"));
+//    	.andExpect(view().name("grade/listStudents"))
+//    	.andExpect(model().attributeExists("studentList"));
 	}
 	
 	@Test
 	public void testNoAccessAnonymous() throws Exception {
 	    //"/students/**"
-	      
+    	mockMvc.perform(get("/students/**"))
+        .andExpect(status().isFound())
+        .andExpect(redirectedUrlPattern("**/login"));
 	}
 
 }
