@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome2</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+</script>
+</head>
+<body>
+	<h2 th:text="|Hello ${username}|"></h2>
+	<br>
+	<button type="button" onclick="goBack()">Back</button>
+</body>
+</html>

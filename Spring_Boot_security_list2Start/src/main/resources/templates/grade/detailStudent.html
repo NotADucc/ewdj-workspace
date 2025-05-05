@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student</title>
+<script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+</script>
+</head>
+<body>
+<h1 th:text="|Hello ${username}|"></h1>
+<table>
+		<tr>
+			<td>First name</td>
+			<td th:text="${student.firstname}"></td>
+		</tr>
+		<tr>
+			<td>Last name</td>
+			<td th:text="${student.lastname}"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td th:text="${student.email}"></td>
+		</tr>
+	</table>
+
+    <br>
+	<button type="button" onclick="goBack()">Back</button>
+</body>
+</html>
