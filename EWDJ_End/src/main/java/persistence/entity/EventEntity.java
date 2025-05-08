@@ -11,7 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,8 +25,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = "eventId")
+@EqualsAndHashCode(of = {"name", "dateTime"})
 @Setter
+@Table(name = "events")
 public class EventEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -42,10 +45,11 @@ public class EventEntity implements Serializable {
 	private Double price;
 	@ElementCollection
 	private List<String> speakers = new ArrayList<>();
-
+	@ManyToMany
+	private List<UserEntity> users = new ArrayList<>();
 	public EventEntity(
 			String name, String description, RoomEntity room, LocalDateTime dateTime,
-			String beamercode, Integer beamercheck, Double price, List<String> speakers
+			String beamercode, Integer beamercheck, Double price, List<String> speakers, List<UserEntity> users
 	) {
 		this.name = name;
 		this.description = description;
@@ -55,5 +59,6 @@ public class EventEntity implements Serializable {
 		this.beamercheck = beamercheck;
 		this.price = price;
 		this.speakers = speakers != null ? speakers : new ArrayList<>();
+		this.users = users != null ? users : new ArrayList<>();
 	}
 }

@@ -1,5 +1,6 @@
 package persistence.mapper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +23,20 @@ public class EventMapper {
 					event.getBeamercode(),
 					event.getBeamercheck(),
 					event.getPrice(),
-					event.getSpeakers()
+					event.getSpeakers(),
+					List.of()
 			);
 			roomEntity.AddEvent(entity);
 		}
 
 		return entity;
 	}
+	
+	public static List<EventEntity> toEntity(Collection<Event> events, EntityManager em) {
+		return events.stream().map(event -> toEntity(event, em)).collect(Collectors.toList());
+	}
 
-	public static List<Event> toDomain(List<EventEntity> eventEntities) {
+	public static List<Event> toDomain(Collection<EventEntity> eventEntities) {
 		return eventEntities.stream().map(EventMapper::toDomain).collect(Collectors.toList());
 	}
 

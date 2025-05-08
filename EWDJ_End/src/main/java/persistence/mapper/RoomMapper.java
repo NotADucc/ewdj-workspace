@@ -3,6 +3,8 @@ package persistence.mapper;
 import domain.room.Room;
 import jakarta.persistence.EntityManager;
 import persistence.entity.RoomEntity;
+
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ public class RoomMapper {
 	}
 
 	
-	public static List<Room> toDomain(List<RoomEntity> roomEntities) {
+	public static List<Room> toDomain(Collection<RoomEntity> roomEntities) {
 		return roomEntities.stream().map(RoomMapper::toDomain).collect(Collectors.toList());
 	}
 	public static Room toDomain(RoomEntity roomEntity) {

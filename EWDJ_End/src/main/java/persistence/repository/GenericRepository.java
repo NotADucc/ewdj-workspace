@@ -38,7 +38,7 @@ public class GenericRepository<T> implements IGenericRepository<T> {
 	@Override
 	@Transactional(readOnly = true)
 	public List<T> findAll() {
-		return em.createQuery("select entity from " + type.getName() + " entity", type)
+		return em.createQuery("select entity from %s entity".formatted(type.getName()), type)
 				.getResultList();
 	}
 

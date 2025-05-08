@@ -8,9 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+    
+    @GetMapping
+    public String login(String error, String logout, Model model) {
 
-	@GetMapping
-	public String showEvents(Model model) {
-		return "login";
-	}
+        if (error != null) {
+            model.addAttribute("error", "Invalid username and password!");
+        }
+        if (logout != null) {
+            model.addAttribute("msg", "You've been logged out successfully.");
+        }
+        return "login";
+    }
+
 }

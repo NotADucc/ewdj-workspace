@@ -7,6 +7,7 @@ import java.util.Set;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(of = { "name" })
 @Setter
+@Table(name = "rooms")
 public class RoomEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
