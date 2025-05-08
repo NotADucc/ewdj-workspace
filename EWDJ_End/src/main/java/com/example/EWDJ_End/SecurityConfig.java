@@ -13,37 +13,38 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+	}
 
 	@Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
-                .authorizeHttpRequests(requests ->
-                        requests.requestMatchers("/login**").permitAll()
-                                .requestMatchers("/css/**").permitAll()
-                                .requestMatchers("/img/**").permitAll()
-                                .requestMatchers("/error/**").permitAll()
-                                .requestMatchers("/fragments/**").permitAll()
-                                .requestMatchers("/").permitAll()
-                                .requestMatchers("/changeLocale").permitAll()
-                                .requestMatchers("/events").permitAll()
-                                .requestMatchers("/events/**").permitAll())
-                .formLogin(form ->
-                        form.defaultSuccessUrl("/events", true)
-                                .loginPage("/login")
-                                .usernameParameter("username").passwordParameter("password")
-                )
-                .exceptionHandling(handling -> handling.accessDeniedPage("/error/acces-denied"));
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
+				.authorizeHttpRequests(
+						requests -> requests.requestMatchers(
+								"/login**",
+								"/css/**",
+								"/img/**",
+								"/error/**",
+								"/fragments/**",
+								"/",
+								"/changeLocale",
+								"/events",
+								"/events/**"
+						).permitAll()
+				)
+				.formLogin(
+						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")
+								.usernameParameter("username").passwordParameter("password")
+				).exceptionHandling(handling -> handling.accessDeniedPage("/error/acces-denied"));
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

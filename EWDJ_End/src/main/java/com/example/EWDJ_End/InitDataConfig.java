@@ -72,8 +72,8 @@ public class InitDataConfig implements CommandLineRunner {
 		eventManager.addEvent(event2);
 		eventManager.addEvent(event3);
 
-		User user = new User("User", encoder.encode("test"), UserRole.USER);
-		User admin = new User("Admin", encoder.encode("test"), UserRole.ADMIN);
+		User user = new User("user", encoder.encode("test"), UserRole.USER);
+		User admin = new User("admin", encoder.encode("test"), UserRole.ADMIN);
 		
 		userManager.addUser(user);
 		userManager.addUser(admin);

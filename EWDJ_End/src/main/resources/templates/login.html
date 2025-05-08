@@ -11,19 +11,19 @@
 
 	<main>
 		<div class="form-container">
-		  <form class="form" action="/login" method="post">
+		  <form class="form" th:action="@{/login}" method="post">
 		    <div class="form-group">
-		      <label class="form-label-input-text" for="email" th:text="#{login.form.email.label}"></label>
+		      <label class="form-label-input-text" for="username" th:text="#{login.form.username.label}"></label>
 		      <input
 		        class="form-input-text"
-		        id="email"
-		        name="email"
-		        th:aria-label="#{login.form.email.arial}"
+		        id="username"
+		        name="username"
+		        th:aria-label="#{login.form.username.arial}"
 		        type="text"
-		        th:placeholder="#{login.form.email.placeholder}"
+		        th:placeholder="#{login.form.username.placeholder}"
 		        autocapitalize="off"
 		        autocorrect="off"
-		        autocomplete="email"
+		        autocomplete="username"
 		        required
 		      />
 		    </div>

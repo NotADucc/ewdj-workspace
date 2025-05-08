@@ -25,6 +25,7 @@ public class UserRepository extends GenericRepository<UserEntity>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		var user = getUserByUsername(username);
 		if (user == null) {
@@ -45,6 +46,7 @@ public class UserRepository extends GenericRepository<UserEntity>
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public User getUserByUsername(String username) {
 		String jpql = """
 				SELECT e
