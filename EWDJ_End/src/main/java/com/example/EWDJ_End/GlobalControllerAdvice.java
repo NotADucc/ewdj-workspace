@@ -1,6 +1,9 @@
 package com.example.EWDJ_End;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import domain.user.UserRole;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
@@ -14,7 +17,11 @@ public class GlobalControllerAdvice {
 
 	@ModelAttribute("role")
 	public String populateRole(Authentication authentication) {
-		return authentication == null ? ""
-				: authentication.getAuthorities().iterator().next().getAuthority();
+		if (authentication == null)
+			return "";
+		
+		String role = authentication.getAuthorities().iterator().next().getAuthority();
+		
+		return UserRole.valueOf(role).resourceBundleCode();
 	}
 }
