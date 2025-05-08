@@ -30,18 +30,20 @@ public class SecurityConfig{
                 .authorizeHttpRequests(requests ->
                         requests.requestMatchers("/login**").permitAll()
                                 .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/img/**").permitAll()
                                 .requestMatchers("/error/**").permitAll()
                                 .requestMatchers("/fragments/**").permitAll()
-                                .requestMatchers("/event-overview**").permitAll()
-                                .requestMatchers("/event-details**").permitAll())
+                                .requestMatchers("/").permitAll()
+                                .requestMatchers("/changeLocale").permitAll()
+                                .requestMatchers("/events").permitAll()
+                                .requestMatchers("/events/**").permitAll())
                 .formLogin(form ->
-                        form.defaultSuccessUrl("/welcome", true)
+                        form.defaultSuccessUrl("/events", true)
                                 .loginPage("/login")
                                 .usernameParameter("username").passwordParameter("password")
                 )
-                .exceptionHandling(handling -> handling.accessDeniedPage("/403"));
+                .exceptionHandling(handling -> handling.accessDeniedPage("/error/acces-denied"));
 
         return http.build();
     }
-
 }
