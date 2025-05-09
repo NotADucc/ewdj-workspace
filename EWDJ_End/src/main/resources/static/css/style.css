@@ -96,7 +96,7 @@ header {
 	border-color: #ffffff; 
 }
 
-header .container {
+header .container, .favorite-container {
 	display: flex; 
 	flex-wrap: wrap; 
 	justify-content: space-between; 

@@ -38,7 +38,7 @@ public class SecurityConfig {
 										"/changeLocale",
 										"/events"
 								).permitAll().requestMatchers("/events/**")
-								.hasAnyRole("ADMIN")
+								.hasAnyRole("USER", "ADMIN")
 				)
 				.formLogin(
 						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")

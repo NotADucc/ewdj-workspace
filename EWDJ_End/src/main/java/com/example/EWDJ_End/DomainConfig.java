@@ -32,8 +32,8 @@ public class DomainConfig {
 	}
 
 	@Bean
-	EventManager eventManager(IEventRepository eventRepository, IRoomRepository roomRepository) {
-		return new EventManager(eventRepository, roomRepository);
+	EventManager eventManager(IEventRepository eventRepository, IRoomRepository roomRepository, IUserRepository userRepository) {
+		return new EventManager(eventRepository, roomRepository, userRepository);
 	}
 
 	@Bean

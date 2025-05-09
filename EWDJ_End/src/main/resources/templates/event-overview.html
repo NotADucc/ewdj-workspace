@@ -14,7 +14,7 @@
 			<h1 th:text="#{event-overview.title}"></h1>
 			<div class="event-container">
 				<div class="event-item" th:each="event: ${eventList}">
-					<a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="invisible" th:href="|/events/${event.id}|">
+					<a th:if="${isLoggedIn}" class="invisible" th:href="|/events/${event.id}|">
 						<div class="event-content">
 							<h3 class="event-title" th:text="${event.name}"></h3>
 							<h4 class="speakers">
@@ -27,7 +27,7 @@
 								th:text="|#{event-overview.event-content.date}: ${{event.dateTime}}|"></p>
 						</div>
 					</a>
-					<div th:unless="${#authorization.expression('hasRole(''ADMIN'')')}" class="event-content">
+					<div th:unless="${isLoggedIn}" class="event-content">
 							<h3 class="event-title" th:text="${event.name}"></h3>
 							<h4 class="speakers">
 								<i

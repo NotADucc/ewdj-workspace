@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class User {
-	private long id;
+	private int id;
 	private String name;
 	private String password;
 	private UserRole role;
@@ -20,5 +20,21 @@ public class User {
 		this.name = name;
 		this.password = password;
 		this.role = role;
+	}
+	
+	public void addEvent(Event event) {
+		int count = favoriteEvents.size();
+		favoriteEvents.add(event);
+		if (count == favoriteEvents.size()) {
+			// can throw exc here
+		}
+	}
+	
+	public void removeEvent(Event event) {
+		int count = favoriteEvents.size();
+		favoriteEvents.remove(event);
+		if (count == favoriteEvents.size()) {
+			// can throw exc here
+		}
 	}
 }

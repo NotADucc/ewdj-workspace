@@ -9,4 +9,6 @@ public interface IEventRepository {
 	List<Event> getAllEventsSorted();
 	boolean doesEventExist(int id);
 	Event getEvent(int id);
+	void favorite(int eventid, int userid);
+	void unfavorite(int eventid, int userid);
 }

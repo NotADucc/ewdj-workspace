@@ -11,7 +11,12 @@
 
 	<main>
 		<div>
-			<h1 th:text="#{event-details.title}"></h1>
+			<div class="favorite-container">
+				<h1 th:text="#{event-details.title}"></h1>
+				<form th:if="${#authorization.expression('hasRole(''USER'')')}" th:action="@{/events/{id}/favorite(id=${event.id})}" method="post">
+					<input class="button" type="submit" th:value="#{header.login}" /> 
+				</form>
+			</div>
 			<div class="event-container">
 				<div class="event-content">
 					<h3 class="event-title" th:text="${event.name}"></h3>

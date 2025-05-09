@@ -40,7 +40,7 @@ public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Setter(AccessLevel.NONE)
-	private Long id;
+	private int id;
 	private String name;
 	private String password;
 	@Enumerated(EnumType.STRING)
@@ -48,11 +48,21 @@ public class UserEntity implements Serializable {
 	private UserRole role;
 	@ManyToMany
 	private Set<EventEntity> favoriteEvents = new HashSet<>();
-	
-	public UserEntity(String name, String password, UserRole role, Set<EventEntity> favoriteEvents) {
-	    this.name = name;
-	    this.password = password;
-	    this.role = role;
-	    this.favoriteEvents = favoriteEvents != null ? favoriteEvents : new HashSet<>();
+
+	public UserEntity(
+			String name, String password, UserRole role, Set<EventEntity> favoriteEvents
+	) {
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.favoriteEvents = favoriteEvents != null ? favoriteEvents : new HashSet<>();
+	}
+
+	public void addEvent(EventEntity event) {
+		favoriteEvents.add(event);
+	}
+
+	public void removeEvent(EventEntity event) {
+		favoriteEvents.remove(event);
 	}
 }

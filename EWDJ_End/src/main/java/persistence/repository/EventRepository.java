@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import domain.event.Event;
 import domain.event.IEventRepository;
 import persistence.entity.EventEntity;
+import persistence.entity.UserEntity;
 import persistence.mapper.EventMapper;
 
 @Repository
@@ -69,5 +70,21 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	@Override
 	public Event getEvent(int id) {
 		return EventMapper.toDomain(get(id));
+	}
+
+	@Override
+	@Transactional
+	public void favorite(int eventid, int userid) {
+		var user = em.find(UserEntity.class, userid);
+		var event = get(eventid);
+		user.addEvent(event);
+	}
+
+	@Override
+	@Transactional
+	public void unfavorite(int eventid, int userid) {
+		var user = em.find(UserEntity.class, userid);
+		var event = get(eventid);
+		user.removeEvent(event);
 	}
 }

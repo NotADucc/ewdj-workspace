@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = {"name", "dateTime"})
+@EqualsAndHashCode(of = { "name", "dateTime" })
 @Setter
 @Table(name = "events")
 public class EventEntity implements Serializable {
@@ -45,11 +45,13 @@ public class EventEntity implements Serializable {
 	private Double price;
 	@ElementCollection
 	private List<String> speakers = new ArrayList<>();
-	@ManyToMany
-	private List<UserEntity> users = new ArrayList<>();
+	//@ManyToMany
+	//private List<UserEntity> users = new ArrayList<>();
+
 	public EventEntity(
 			String name, String description, RoomEntity room, LocalDateTime dateTime,
-			String beamercode, Integer beamercheck, Double price, List<String> speakers, List<UserEntity> users
+			String beamercode, Integer beamercheck, Double price, List<String> speakers,
+			List<UserEntity> users
 	) {
 		this.name = name;
 		this.description = description;
@@ -59,6 +61,8 @@ public class EventEntity implements Serializable {
 		this.beamercheck = beamercheck;
 		this.price = price;
 		this.speakers = speakers != null ? speakers : new ArrayList<>();
-		this.users = users != null ? users : new ArrayList<>();
+		//this.users = users != null ? users : new ArrayList<>();
 	}
+
+
 }
