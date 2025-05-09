@@ -19,13 +19,13 @@ public class EventController {
 	EventManager eventManager;
 
 	@GetMapping
-	public String showLogin(Model model) {
+	public String getEvents(Model model) {
 		model.addAttribute("eventList", eventManager.giveEventsSorted());
 		return "event-overview";
 	}
 
 	@GetMapping("/{id}")
-	public String showEventDetails(
+	public String getEvent(
 			@PathVariable Integer id,
 			@AuthenticationPrincipal UserDetails user,
 			Model model
@@ -40,7 +40,7 @@ public class EventController {
 	}
 
 	@PostMapping("/{id}/favorite")
-	public String toggleFavorite(
+	public String postToggleFavorite(
 			@PathVariable Integer id,
 			@AuthenticationPrincipal UserDetails user,
 			Model model
@@ -48,6 +48,28 @@ public class EventController {
 		eventManager.toggleFavorite(id, user.getUsername());
 		model.addAttribute("event", eventManager.giveEvent(id));
 
+		return "redirect:/events/%s".formatted(id);
+	}
+
+	@GetMapping("/{id}/edit")
+	public String getEdit(
+			@PathVariable Integer id,
+			@AuthenticationPrincipal UserDetails user,
+			Model model
+	) {
+		//TODO
+		model.addAttribute("event", eventManager.giveEvent(id));
+		return "";
+	}
+
+	@PostMapping("/{id}/edit")
+	public String postEdit(
+			@PathVariable Integer id,
+			@AuthenticationPrincipal UserDetails user,
+			Model model
+	) {
+		//TODO
+		model.addAttribute("event", eventManager.giveEvent(id));
 		return "redirect:/events/%s".formatted(id);
 	}
 }

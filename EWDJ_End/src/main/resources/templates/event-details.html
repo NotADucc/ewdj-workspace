@@ -19,6 +19,12 @@
 						th:value="${!isFavorited} ? #{event-details.favorite} : #{event-details.unfavorite}"
 						th:disabled="${!isFavorited and favoriteCountExceeded}" />
 				</form>
+				<form th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+					th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+					<input class="button" type="submit"
+						th:value="#{event-details.edit}"
+						 />
+				</form>
 			</div>
 			<div class="event-container">
 				<div class="event-content">
