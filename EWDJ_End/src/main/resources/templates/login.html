@@ -46,7 +46,7 @@
 		    <div class="form-actions">
 		      <button class="form-btn-primary" id="submit_form" type="submit" th:text="#{login.form.primary.button}"></button>
 		    </div>
-		    <div id="any-errors"></div>
+		    <div th:if="${error}" class="error" th:text="${error}"></div>
 		  </form>
 		</div>
 	</main>

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="10;url='/'" />
+<title th:text="#{access-denied.title}"></title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<title th:text="${acces-denied.title}"></title>
 </head>
 <body style="max-width: max-content; margin: auto;">
 
 	<div>
-		<h1 th:text="${acces-denied.message}"></h1>
+		<h1 th:text="#{access-denied.message}" style="font-size: 3.75rem; color: white;"></h1>
 	</div>
 
 </body>

@@ -288,6 +288,36 @@ footer .icon {
   }
 }
 
+.error {
+  max-width: 72rem; 
+  background-color: #fee2e2;
+  border-left: 4px solid #ef4444;
+  color: #b91c1c;
+  padding: 1rem; 
+  margin-top: 1rem; 
+  transition: opacity 0.2s ease-in-out; 
+  animation: shake 0.5s ease-in-out;
+}
+
+@media (min-width: 1024px) {
+  .alert {
+    max-width: 72rem;
+    width: 100%;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
 @media (max-width: 600px) {
 	#counter {
 		display: none;
