@@ -39,12 +39,12 @@ public class SecurityConfig {
 										"/changeLocale",
 										"/events"
 								).permitAll().requestMatchers("/events/**")
-								.hasAnyRole("USER", "ADMIN")
+								.hasAnyRole("ADMIN")
 				)
 				.formLogin(
 						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")
 								.usernameParameter("username").passwordParameter("password")
-				).exceptionHandling(handling -> handling.accessDeniedPage("/error/acces-denied"));
+				).exceptionHandling(handling -> handling.accessDeniedPage("/error/access-denied"));
 
 		return http.build();
 	}

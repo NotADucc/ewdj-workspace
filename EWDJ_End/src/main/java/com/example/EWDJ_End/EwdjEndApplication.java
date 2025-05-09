@@ -28,7 +28,7 @@ public class EwdjEndApplication implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/events");
-		registry.addViewController("/403").setViewName("/error/acces-denied");
+		registry.addViewController("/403").setViewName("/error/access-denied");
 	}
 
 	@Bean

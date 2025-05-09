@@ -13,9 +13,10 @@ public class GlobalControllerAdvice {
 	public boolean populateLoggedIn(Authentication authentication) {
 		if (authentication == null)
 			return false;
-		
+
 		return authentication.isAuthenticated();
 	}
+
 	@ModelAttribute("username")
 	public String populateUsername(Authentication authentication) {
 		return authentication == null ? "" : authentication.getName();
@@ -25,9 +26,10 @@ public class GlobalControllerAdvice {
 	public String populateRole(Authentication authentication) {
 		if (authentication == null)
 			return "";
-		
-		String role = authentication.getAuthorities().iterator().next().getAuthority();
-		
+
+		String role = authentication.getAuthorities().iterator().next().getAuthority()
+				.replace("ROLE_", "");
+
 		return UserRole.valueOf(role).resourceBundleCode();
 	}
 }

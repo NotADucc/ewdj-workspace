@@ -42,7 +42,7 @@ public class UserRepository extends GenericRepository<UserEntity>
 	}
 
 	private Collection<? extends GrantedAuthority> convertAuthorities(UserRole role) {
-		return Collections.singletonList(new SimpleGrantedAuthority(role.toString()));
+		return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.toString()));
 	}
 
 	@Override

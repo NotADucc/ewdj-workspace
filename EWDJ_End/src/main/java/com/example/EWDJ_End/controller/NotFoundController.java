@@ -17,12 +17,10 @@ public class NotFoundController implements ErrorController {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());
-
-			if (statusCode == 404) {
-				return "error/not-found";
-			}
+            if (statusCode == 404) {
+                return "error/not-found"; 
+            }
 		}
 		return "redirect:/";
 	}
-
 }
