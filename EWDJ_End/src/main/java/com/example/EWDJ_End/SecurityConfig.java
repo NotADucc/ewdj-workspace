@@ -28,17 +28,18 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
 				.authorizeHttpRequests(
-						requests -> requests.requestMatchers(
-								"/login**",
-								"/css/**",
-								"/img/**",
-								"/error/**",
-								"/fragments/**",
-								"/",
-								"/changeLocale",
-								"/events",
-								"/events/**"
-						).permitAll()
+						requests -> requests
+								.requestMatchers(
+										"/login**",
+										"/css/**",
+										"/img/**",
+										"/error/**",
+										"/fragments/**",
+										"/",
+										"/changeLocale",
+										"/events"
+								).permitAll().requestMatchers("/events/**")
+								.hasAnyRole("USER", "ADMIN")
 				)
 				.formLogin(
 						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")

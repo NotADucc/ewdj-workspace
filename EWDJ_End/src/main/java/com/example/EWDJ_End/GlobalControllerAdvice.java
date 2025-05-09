@@ -9,7 +9,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice
 public class GlobalControllerAdvice {
-
+	@ModelAttribute("isLoggedIn")
+	public boolean populateLoggedIn(Authentication authentication) {
+		if (authentication == null)
+			return false;
+		
+		return authentication.isAuthenticated();
+	}
 	@ModelAttribute("username")
 	public String populateUsername(Authentication authentication) {
 		return authentication == null ? "" : authentication.getName();

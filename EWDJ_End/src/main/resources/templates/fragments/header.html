@@ -14,11 +14,11 @@
 				</select>
 			</form>
 			<div class="login_div"
-				th:text="${#strings.isEmpty(role)} ? #{userRole.guest} : #{${role}}"></div>
-			<form th:if="${#strings.isEmpty(username)}" th:action="@{/login}" method="get">
+				th:text="${!isLoggedIn} ? #{userRole.guest} : #{${role}}"></div>
+			<form th:if="${!isLoggedIn}" th:action="@{/login}" method="get">
 				<input class="button" type="submit" th:value="#{header.login}" /> 
 			</form>
-			<form th:unless="${#strings.isEmpty(username)}" th:action="@{/logout}" method="post">
+			<form th:unless="${!isLoggedIn}" th:action="@{/logout}" method="post">
 				<input class="button" type="submit" th:value="#{header.logout}" /> 
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			</form>
