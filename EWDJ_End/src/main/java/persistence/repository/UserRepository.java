@@ -66,4 +66,10 @@ public class UserRepository extends GenericRepository<UserEntity>
 		UserEntity entity = UserMapper.toEntity(user, em);
 		insert(entity);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public boolean doesUserExist(String username) {
+		return getUserByUsername(username) != null;
+	}
 }

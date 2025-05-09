@@ -13,8 +13,11 @@
 		<div>
 			<div class="favorite-container">
 				<h1 th:text="#{event-details.title}"></h1>
-				<form th:if="${#authorization.expression('hasRole(''USER'')')}" th:action="@{/events/{id}/favorite(id=${event.id})}" method="post">
-					<input class="button" type="submit" th:value="#{header.login}" /> 
+				<form th:if="${#authorization.expression('hasRole(''USER'')')}"
+					th:action="@{/events/{id}/favorite(id=${event.id})}" method="post">
+					<input class="button" type="submit"
+						th:value="${!isFavorited} ? #{event-details.favorite} : #{event-details.unfavorite}"
+						th:disabled="${!isFavorited and favoriteCountExceeded}" />
 				</form>
 			</div>
 			<div class="event-container">
@@ -28,8 +31,7 @@
 						th:text="|#{event-overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
 					<p class="project-description"
 						th:text="|#{event-overview.event-content.date}: ${{event.dateTime}}|"></p>
-					<p class="project-description"
-						th:text="${event.description}"></p>
+					<p class="project-description" th:text="${event.description}"></p>
 				</div>
 			</div>
 		</div>

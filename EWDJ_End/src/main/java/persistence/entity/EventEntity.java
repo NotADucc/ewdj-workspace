@@ -45,8 +45,6 @@ public class EventEntity implements Serializable {
 	private Double price;
 	@ElementCollection
 	private List<String> speakers = new ArrayList<>();
-	//@ManyToMany
-	//private List<UserEntity> users = new ArrayList<>();
 
 	public EventEntity(
 			String name, String description, RoomEntity room, LocalDateTime dateTime,
@@ -61,8 +59,5 @@ public class EventEntity implements Serializable {
 		this.beamercheck = beamercheck;
 		this.price = price;
 		this.speakers = speakers != null ? speakers : new ArrayList<>();
-		//this.users = users != null ? users : new ArrayList<>();
 	}
-
-
 }

@@ -25,8 +25,17 @@ public class EventController {
 	}
 
 	@GetMapping("/{id}")
-	public String showEventDetails(@PathVariable Integer id, Model model) {
+	public String showEventDetails(
+			@PathVariable Integer id,
+			@AuthenticationPrincipal UserDetails user,
+			Model model
+	) {
 		model.addAttribute("event", eventManager.giveEvent(id));
+		model.addAttribute("isFavorited", eventManager.isFavorited(id, user.getUsername()));
+		model.addAttribute(
+				"favoriteCountExceeded",
+				eventManager.hasMaxFavoriteCountBeenExceeded(user.getUsername())
+		);
 		return "event-details";
 	}
 
@@ -38,6 +47,7 @@ public class EventController {
 	) {
 		eventManager.toggleFavorite(id, user.getUsername());
 		model.addAttribute("event", eventManager.giveEvent(id));
-		return "event-details";
+
+		return "redirect:/events/%s".formatted(id);
 	}
 }
