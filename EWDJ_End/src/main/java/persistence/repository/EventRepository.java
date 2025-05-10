@@ -10,6 +10,7 @@ import domain.event.IEventRepository;
 import persistence.entity.EventEntity;
 import persistence.entity.UserEntity;
 import persistence.mapper.EventMapper;
+import persistence.mapper.RoomMapper;
 
 @Repository
 public class EventRepository extends GenericRepository<EventEntity> implements IEventRepository {
@@ -86,5 +87,19 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 		var user = em.find(UserEntity.class, userid);
 		var event = get(eventid);
 		user.removeEvent(event);
+	}
+
+	@Override
+	@Transactional
+	public void editEvent(Event event) {
+		var db_event = get(event.getId());
+		db_event.setName(event.getName());
+		db_event.setDescription(event.getDescription());
+		db_event.setRoom(RoomMapper.toEntity(event.getRoom(), em));
+		db_event.setDateTime(event.getDateTime());
+		db_event.setBeamercode(event.getBeamercode());
+		db_event.setBeamercheck(event.getBeamercheck());
+		db_event.setPrice(event.getPrice());
+		db_event.setSpeakers(event.getSpeakers());
 	}
 }

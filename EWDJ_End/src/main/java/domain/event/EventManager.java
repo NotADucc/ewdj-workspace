@@ -39,9 +39,27 @@ public class EventManager {
 		if (!eventRepository.doesEventExist(eventId)) {
 			throw new LocaleException("EventManager.editEvent.doesEventExist", new Object[] { eventId });
 		}
+		
 		if (eventId != event.getId()) {
 			throw new LocaleException("EventManager.editEvent.idDoesNotMatch", new Object[] { eventId, event.getId() });
 		}
+		
+		if (eventRepository.doesEventExistOnSpecificDay(event)) {
+			throw new LocaleException(
+					"EventManager.editEvent.DoesEventExistOnSpecificDay",
+					new Object[] { event.getName(), event.getDateTime() }
+			);
+		}
+		
+		if (roomRepository.isRoomBooked(event.getRoom(), event.getDateTime())) {
+			throw new LocaleException(
+					"EventManager.editEvent.isRoomBooked",
+					new Object[] { event.getRoom().getName(), event.getDateTime() }
+			);
+		}
+		
+		// can pull up event from db and check if anything has changed
+		eventRepository.editEvent(event);
 	}
 	
 	public List<Event> giveEventsSorted() {

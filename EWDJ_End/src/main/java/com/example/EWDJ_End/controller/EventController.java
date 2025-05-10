@@ -81,7 +81,8 @@ public class EventController {
 			model.addAttribute("roomList", roomManager.giveRooms());
 			return "event-cu";
 		}
-		model.addAttribute("event", eventManager.giveEvent(id));
+		
+		eventManager.editEvent(id, event);
 		return "redirect:/events/%s".formatted(id);
 	}
 }

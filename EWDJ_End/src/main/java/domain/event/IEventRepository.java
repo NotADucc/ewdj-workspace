@@ -5,6 +5,7 @@ import java.util.List;
 public interface IEventRepository {
 	boolean doesEventExistOnSpecificDay(Event event);
 	void addEvent(Event event);
+	void editEvent(Event event);
 	List<Event> getAllEvents();
 	List<Event> getAllEventsSorted();
 	boolean doesEventExist(int id);
