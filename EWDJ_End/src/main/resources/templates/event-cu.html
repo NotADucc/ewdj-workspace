@@ -94,9 +94,9 @@
 						<div th:if="${#fields.hasErrors('speakers')}"
 							th:errors="*{speakers}" th:errorclass="error"></div>
 						<div class="speaker-add-remove-buttons ">
-							<button class="form-btn-secondary" onclick="addSpeakerInput()"
+							<button type="button" class="form-btn-secondary" onclick="addSpeakerInput()"
 								th:text="#{event-cu.form.speakers.add}"></button>
-							<button class="form-btn-secondary" onclick="removeSpeakerInput()"
+							<button type="button" class="form-btn-secondary" onclick="removeSpeakerInput()"
 								th:text="#{event-cu.form.speakers.remove}"></button>
 						</div>
 					</div>
