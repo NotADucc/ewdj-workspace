@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 @Retention(RUNTIME)
 public @interface BeamerChecksum {
 
-    String message() default "Checksum does not match with divisor {divisor}.";
+    String message() default "{beamerChecksum.message}";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default {};
 

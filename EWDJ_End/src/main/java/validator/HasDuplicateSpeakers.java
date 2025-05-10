@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 @Retention(RUNTIME)
 public @interface HasDuplicateSpeakers {
 
-    String message() default "Contains duplicate speakers.";
+    String message() default "{hasDuplicateSpeakers.message}";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default {};
 }

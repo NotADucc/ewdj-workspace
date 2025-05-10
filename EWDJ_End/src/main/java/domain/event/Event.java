@@ -31,7 +31,7 @@ import validator.HasDuplicateSpeakers;
 public class Event implements IHasSpeakers, IHasRoom {
 	private int id;
 	@NotEmpty
-	@Pattern(regexp = "^[a-zA-Z](\\w|\\W)*$")
+	@Pattern(regexp = "^[a-zA-Z](\\w|\\W)*$", message = "{event.name.message}")
 	private String name;
 	private String description;
 	@NotNull
