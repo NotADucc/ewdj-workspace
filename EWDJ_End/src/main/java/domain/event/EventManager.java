@@ -20,14 +20,14 @@ public class EventManager {
 	public void addEvent(Event event) {
 		if (eventRepository.doesEventExistOnSpecificDay(event)) {
 			throw new LocaleException(
-					"EventManager.DoesEventExistOnSpecificDay",
+					"EventManager.addEvent.DoesEventExistOnSpecificDay",
 					new Object[] { event.getName(), event.getDateTime() }
 			);
 		}
 
 		if (roomRepository.isRoomBooked(event.getRoom(), event.getDateTime())) {
 			throw new LocaleException(
-					"EventManager.isRoomBooked",
+					"EventManager.addEvent.isRoomBooked",
 					new Object[] { event.getRoom().getName(), event.getDateTime() }
 			);
 		}
@@ -35,13 +35,22 @@ public class EventManager {
 		eventRepository.addEvent(event);
 	}
 
+	public void editEvent(int eventId, Event event) {
+		if (!eventRepository.doesEventExist(eventId)) {
+			throw new LocaleException("EventManager.editEvent.doesEventExist", new Object[] { eventId });
+		}
+		if (eventId != event.getId()) {
+			throw new LocaleException("EventManager.editEvent.idDoesNotMatch", new Object[] { eventId, event.getId() });
+		}
+	}
+	
 	public List<Event> giveEventsSorted() {
 		return eventRepository.getAllEventsSorted();
 	}
 
 	public Event giveEvent(int id) {
 		if (!eventRepository.doesEventExist(id)) {
-			throw new LocaleException("EventManager.doesEventExist", new Object[] { id });
+			throw new LocaleException("EventManager.giveEvent.doesEventExist", new Object[] { id });
 		}
 
 		return eventRepository.getEvent(id);
@@ -49,11 +58,11 @@ public class EventManager {
 
 	public void toggleFavorite(int eventId, String username) {
 		if (!eventRepository.doesEventExist(eventId)) {
-			throw new LocaleException("EventManager.doesEventExist", new Object[] { eventId });
+			throw new LocaleException("EventManager.toggleFavorite.doesEventExist", new Object[] { eventId });
 		}
 		
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.doesUserExist", new Object[] { username });
+			throw new LocaleException("EventManager.toggleFavorite.doesUserExist", new Object[] { username });
 		}
 		
 		User user = userRepository.getUserByUsername(username);
@@ -65,7 +74,7 @@ public class EventManager {
 
 		if (wantsToFavorite && favoriteCount >= MAX_FAVORITE_EVENTS) {
 			throw new LocaleException(
-					"EventManager.favoriteCountExceeded",
+					"EventManager.toggleFavorite.favoriteCountExceeded",
 					new Object[] { MAX_FAVORITE_EVENTS }
 			);
 		}
@@ -81,11 +90,11 @@ public class EventManager {
 
 	public boolean isFavorited(int eventId, String username) {
 		if (!eventRepository.doesEventExist(eventId)) {
-			throw new LocaleException("EventManager.doesEventExist", new Object[] { eventId });
+			throw new LocaleException("EventManager.isFavorited.doesEventExist", new Object[] { eventId });
 		}
 		
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.doesUserExist", new Object[] { username });
+			throw new LocaleException("EventManager.isFavorited.doesUserExist", new Object[] { username });
 		}
 		
 		User user = userRepository.getUserByUsername(username);
@@ -94,7 +103,7 @@ public class EventManager {
 
 	public boolean hasMaxFavoriteCountBeenExceeded(String username) {
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.doesUserExist", new Object[] { username });
+			throw new LocaleException("EventManager.hasMaxFavoriteCountBeenExceeded.doesUserExist", new Object[] { username });
 		}
 		
 		User user = userRepository.getUserByUsername(username);
