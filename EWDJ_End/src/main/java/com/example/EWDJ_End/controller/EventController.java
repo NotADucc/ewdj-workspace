@@ -46,24 +46,37 @@ public class EventController {
 		return "event-details";
 	}
 
-	@PostMapping("/favorites")
-	public String postEvent(
-			@AuthenticationPrincipal UserDetails user,
-			Model model
-	) {
-		return "";
+	@GetMapping("/create")
+	public String getCreateEvent(@AuthenticationPrincipal UserDetails user, Model model) {
+		model.addAttribute("event", new Event());
+		model.addAttribute("roomList", roomManager.giveRooms());
+		model.addAttribute("cu", "create");
+		return "event-cu";
 	}
-	
-	@GetMapping("/favorites")
-	public String getFavorites(
+
+	@PostMapping("/create")
+	public String postCreateEvent(
 			@AuthenticationPrincipal UserDetails user,
+			@Valid Event event,
+			BindingResult result,
 			Model model
 	) {
+		if (result.hasErrors()) {
+			model.addAttribute("roomList", roomManager.giveRooms());
+			model.addAttribute("cu", "create");
+			return "event-cu";
+		}
+		eventManager.addEvent(event);
+		return "redirect:/events";
+	}
+
+	@GetMapping("/favorites")
+	public String getFavorites(@AuthenticationPrincipal UserDetails user, Model model) {
 		model.addAttribute("eventList", eventManager.getFavoriteEventsForUser(user.getUsername()));
 
 		return "event-favorites";
 	}
-	
+
 	@PostMapping("/{id}/favorite")
 	public String postToggleFavorite(
 			@PathVariable Integer id,
@@ -73,7 +86,7 @@ public class EventController {
 		eventManager.toggleFavorite(id, user.getUsername());
 		return "redirect:/events/%s".formatted(id);
 	}
-	
+
 	@GetMapping("/{id}/edit")
 	public String getEdit(
 			@PathVariable Integer id,
@@ -82,6 +95,7 @@ public class EventController {
 	) {
 		model.addAttribute("event", eventManager.giveEvent(id));
 		model.addAttribute("roomList", roomManager.giveRooms());
+		model.addAttribute("cu", "edit");
 		return "event-cu";
 	}
 
@@ -95,9 +109,10 @@ public class EventController {
 	) {
 		if (result.hasErrors()) {
 			model.addAttribute("roomList", roomManager.giveRooms());
+			model.addAttribute("cu", "edit");
 			return "event-cu";
 		}
-		
+
 		eventManager.editEvent(id, event);
 		return "redirect:/events/%s".formatted(id);
 	}

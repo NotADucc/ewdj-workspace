@@ -19,7 +19,7 @@
 						th:value="#{event-overview.favorites}" />
 				</form>
 				<form th:if="${isADMIN}" th:action="@{/events/create}"
-					method="post">
+					method="get">
 					<input class="button" type="submit"
 						th:value="#{event-overview.create}" />
 				</form>

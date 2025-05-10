@@ -13,7 +13,7 @@
 		<div>
 			<div class="form-container">
 				<form class="form" th:object="${event}"
-					th:action="@{/events/{id}/edit(id=${event.id})}" method="post">
+					th:action="${cu} == 'edit' ? @{/events/{id}/edit(id=${event.id})} : @{/events/create}" method="post">
 					<h1 th:text="#{event-cu.title}"></h1>
 					<div class="form-group">
 						<label class="form-label-input-text" for="name"
