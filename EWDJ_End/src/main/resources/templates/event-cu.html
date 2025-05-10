@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{event-details.title}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<!-- Include the localeSwitcher fragment (custom fragment) -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<div>
+			<div class="form-container">
+				<form class="form" th:action="@{/events/{id}/edit(id=${event.id})}" method="post">
+				<h1 th:text="#{event-cu.title}"></h1>
+				  <div class="form-group">
+				    <label class="form-label-input-text" for="name" th:text="#{event-cu.form.name.label}"></label>
+				    <input
+				      class="form-input-text"
+				      id="name"
+				      name="name"
+				      th:aria-label="#{event-cu.form.name.arial}"
+				      type="text"
+				      th:placeholder="#{event-cu.form.name.placeholder}"
+				      th:field="*{event.name}"
+				      required
+				    />
+				  </div>
+				  <div class="form-group">
+				    <label class="form-label-input-text" for="description" th:text="#{event-cu.form.description.label}"></label>
+				    <input
+				      class="form-input-text"
+				      id="description"
+				      name="description"
+				      th:aria-label="#{event-cu.form.description.arial}"
+				      type="text"
+				      th:placeholder="#{event-cu.form.description.placeholder}"
+				      th:field="*{event.description}"
+				    />
+				  </div>
+  				  <div class="form-group">
+				    <label class="form-label-input-text" for="datetime" th:text="#{event-cu.form.datetime.label}"></label>
+				    <input 
+   				      	class="form-input-text"
+						id="datetime"
+						name="datetime"
+						th:aria-label="#{event-cu.form.datetime.arial}"
+				    	type="text" 
+				    	th:field="*{event.dateTime}"
+			    	/>
+				  </div>
+				  <div class="form-actions">
+				    <button class="form-btn-primary" id="submit_form" type="submit" th:text="#{event-cu.form.primary.button}"></button>
+				  </div>
+				  <div th:if="${error}" class="error" th:text="${error}"></div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<!-- Include the footer fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
