@@ -57,9 +57,8 @@ public class EventController {
 			@AuthenticationPrincipal UserDetails user,
 			Model model
 	) {
-		//TODO
 		model.addAttribute("event", eventManager.giveEvent(id));
-		return "";
+		return "event-cu";
 	}
 
 	@PostMapping("/{id}/edit")
