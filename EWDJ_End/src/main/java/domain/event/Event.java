@@ -3,6 +3,7 @@ package domain.event;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.NumberFormat;
 
@@ -23,7 +24,8 @@ import persistence.entity.RoomEntity;
 import validator.BeamerChecksum;
 import validator.HasDuplicateSpeakers;
 
-@Getter @Setter
+@Getter
+@Setter
 @BeamerChecksum(divisor = 97)
 @HasDuplicateSpeakers
 @NoArgsConstructor
@@ -62,6 +64,8 @@ public class Event implements IHasSpeakers, IHasRoom {
 		this.beamercode = beamercode;
 		this.beamercheck = beamercheck;
 		this.price = price;
-		this.speakers = speakers != null ? speakers : new ArrayList<>();
+		this.speakers = speakers != null
+				? speakers.stream().filter(s -> !s.isBlank()).collect(Collectors.toList())
+				: new ArrayList<>();
 	}
 }
