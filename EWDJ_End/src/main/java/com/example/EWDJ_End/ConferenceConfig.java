@@ -14,7 +14,7 @@ public class ConferenceConfig {
 	}
 
 	@Bean
-	LocalDateTime conferenceRangeEnd() {
-		return conferenceRangeStart().plusYears(1);
+	LocalDateTime conferenceRangeEnd(LocalDateTime conferenceRangeStart) {
+		return conferenceRangeStart.plusYears(1);
 	}
 }
