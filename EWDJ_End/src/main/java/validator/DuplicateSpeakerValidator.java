@@ -2,19 +2,22 @@ package validator;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import domain.IHasSpeakers;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class DuplicateSpeakerValidator implements ConstraintValidator<HasDuplicateSpeakers, IHasSpeakers> {
+public class DuplicateSpeakerValidator
+		implements ConstraintValidator<HasDuplicateSpeakers, IHasSpeakers> {
 	@Override
 	public void initialize(HasDuplicateSpeakers constraintAnnotation) {
 	}
 
 	@Override
 	public boolean isValid(IHasSpeakers target, ConstraintValidatorContext context) {
-		List<String> speakers = target.getSpeakers();
+		List<String> speakers = target.getSpeakers().stream().map(String::toLowerCase)
+				.collect(Collectors.toList());
 
 		if (speakers == null)
 			return true;

@@ -8,4 +8,5 @@ public interface IRoomRepository {
 	boolean existsByName(String name);
 	void AddRoom(Room room);
 	List<Room> giveRooms();
+	Room giveRoom(String name);
 }

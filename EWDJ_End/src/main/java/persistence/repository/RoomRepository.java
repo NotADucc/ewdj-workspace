@@ -52,4 +52,10 @@ public class RoomRepository extends GenericRepository<RoomEntity> implements IRo
 	public List<Room> giveRooms() {
 		return RoomMapper.toDomain(findAll());
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Room giveRoom(String name) {
+		return RoomMapper.toDomain(get(name));
+	}
 }

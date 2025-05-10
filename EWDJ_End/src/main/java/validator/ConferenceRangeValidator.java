@@ -25,7 +25,7 @@ public class ConferenceRangeValidator implements Validator {
 
 		if (dateTime == null)
 			return;
-
+		
 		if (dateTime.isBefore(conferenceRangeStart) || dateTime.isAfter(conferenceRangeEnd)) {
 			errors.rejectValue("dateTime", "", "DateTime is not between Conferenceperiod range.");
 		}

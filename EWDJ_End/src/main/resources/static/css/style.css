@@ -97,7 +97,7 @@ header {
 	border-color: #ffffff; 
 }
 
-header .container, .favorite-container {
+header .container, .favorite-container, .speaker-add-remove-buttons {
 	display: flex; 
 	flex-wrap: wrap; 
 	justify-content: space-between; 
@@ -308,6 +308,22 @@ footer .icon {
   background-color: #1d4ed8;
   width: 100%;
   font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem; 
+  border-radius: 0.5rem; 
+  border: none;
+  cursor: pointer;
+  &:hover{
+  	background-color: #1e40af;
+  }
+}
+
+.form-btn-secondary {
+  transition: background-color 300ms;
+  background-color: #1d4ed8;
+  width: 50%;
+  font-size: 1rem;
   color: white;
   font-weight: bold;
   padding: 0.5rem 1rem; 
