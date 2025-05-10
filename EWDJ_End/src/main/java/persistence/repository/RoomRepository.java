@@ -1,6 +1,7 @@
 package persistence.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +45,11 @@ public class RoomRepository extends GenericRepository<RoomEntity> implements IRo
 	public void AddRoom(Room room) {
 		RoomEntity entity = RoomMapper.toEntity(room, em);
 		insert(entity);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Room> giveRooms() {
+		return RoomMapper.toDomain(findAll());
 	}
 }

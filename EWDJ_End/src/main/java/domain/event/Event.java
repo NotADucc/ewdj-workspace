@@ -12,32 +12,38 @@ import domain.room.Room;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import persistence.entity.RoomEntity;
 import validator.BeamerChecksum;
 import validator.HasDuplicateSpeakers;
 
-@Getter
+@Getter @Setter
 @BeamerChecksum(divisor = 97)
 @HasDuplicateSpeakers
+@NoArgsConstructor
+@AllArgsConstructor
 public class Event implements IHasSpeakers, IHasRoom {
 	private int id;
 	@NotEmpty
 	@Pattern(regexp = "^[a-zA-Z](\\w|\\W)*$")
 	private String name;
 	private String description;
-	@NotEmpty
+	@NotNull
 	private Room room;
-	@NotEmpty
+	@NotNull
 	private LocalDateTime dateTime;
 	@NotEmpty
 	@Pattern(regexp = "^\\d{4}$")
 	private String beamercode;
-	@NotEmpty
+	@NotNull
 	private Integer beamercheck;
-	@NotEmpty
+	@NotNull
 	@DecimalMin(value = "9.99")
 	@DecimalMax(value = "100.00", inclusive = false)
 	@NumberFormat(pattern = "#.00")
@@ -57,13 +63,5 @@ public class Event implements IHasSpeakers, IHasRoom {
 		this.beamercheck = beamercheck;
 		this.price = price;
 		this.speakers = speakers != null ? speakers : new ArrayList<>();
-	}
-
-	public Event(
-			int id, String name, String description, Room room, LocalDateTime dateTime,
-			String beamercode, Integer beamercheck, Double price, List<String> speakers
-	) {
-		this(name, description, room, dateTime, beamercode, beamercheck, price, speakers);
-		this.id = id;
 	}
 }

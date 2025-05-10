@@ -5,10 +5,12 @@ import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"name"})
 public class Room {
 	@Pattern(regexp = "^[a-zA-Z]\\d{3}$")
 	private String name;

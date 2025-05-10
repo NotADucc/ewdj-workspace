@@ -5,19 +5,24 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import domain.event.Event;
 import domain.event.EventManager;
+import domain.room.RoomManager;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/events")
 public class EventController {
 	@Autowired
 	EventManager eventManager;
-
+	@Autowired
+	RoomManager roomManager;
 	@GetMapping
 	public String getEvents(Model model) {
 		model.addAttribute("eventList", eventManager.giveEventsSorted());
@@ -58,6 +63,7 @@ public class EventController {
 			Model model
 	) {
 		model.addAttribute("event", eventManager.giveEvent(id));
+		model.addAttribute("roomList", roomManager.giveRooms());
 		return "event-cu";
 	}
 
@@ -65,9 +71,14 @@ public class EventController {
 	public String postEdit(
 			@PathVariable Integer id,
 			@AuthenticationPrincipal UserDetails user,
+			@Valid Event event,
+			BindingResult result,
 			Model model
 	) {
-		//TODO
+		if (result.hasErrors()) {
+			System.out.println(event.getBeamercode());
+			return "event-cu";
+		}
 		model.addAttribute("event", eventManager.giveEvent(id));
 		return "redirect:/events/%s".formatted(id);
 	}
