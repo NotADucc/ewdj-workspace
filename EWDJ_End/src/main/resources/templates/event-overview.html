@@ -18,6 +18,11 @@
 					<input class="button" type="submit"
 						th:value="#{event-overview.favorites}" />
 				</form>
+				<form th:if="${isADMIN}" th:action="@{/events/create}"
+					method="post">
+					<input class="button" type="submit"
+						th:value="#{event-overview.create}" />
+				</form>
 			</div>
 			<div class="event-container">
 				<div class="event-item" th:each="event: ${eventList}">

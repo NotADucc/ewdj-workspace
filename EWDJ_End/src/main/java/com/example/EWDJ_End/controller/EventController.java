@@ -46,6 +46,14 @@ public class EventController {
 		return "event-details";
 	}
 
+	@PostMapping("/favorites")
+	public String postEvent(
+			@AuthenticationPrincipal UserDetails user,
+			Model model
+	) {
+		return "";
+	}
+	
 	@GetMapping("/favorites")
 	public String getFavorites(
 			@AuthenticationPrincipal UserDetails user,
@@ -65,7 +73,7 @@ public class EventController {
 		eventManager.toggleFavorite(id, user.getUsername());
 		return "redirect:/events/%s".formatted(id);
 	}
-
+	
 	@GetMapping("/{id}/edit")
 	public String getEdit(
 			@PathVariable Integer id,
