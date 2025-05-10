@@ -65,6 +65,10 @@ public class EventManager {
 	public List<Event> giveEventsSorted() {
 		return eventRepository.getAllEventsSorted();
 	}
+	
+	public List<Event> getFavoriteEventsForUser(String username) {
+		return eventRepository.getFavoriteEventsForUser(username);
+	}
 
 	public Event giveEvent(int id) {
 		if (!eventRepository.doesEventExist(id)) {

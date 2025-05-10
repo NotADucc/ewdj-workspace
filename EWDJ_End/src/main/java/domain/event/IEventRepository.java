@@ -8,6 +8,7 @@ public interface IEventRepository {
 	void editEvent(Event event);
 	List<Event> getAllEvents();
 	List<Event> getAllEventsSorted();
+	List<Event> getFavoriteEventsForUser(String username);
 	boolean doesEventExist(int id);
 	Event getEvent(int id);
 	void favorite(int eventid, int userid);

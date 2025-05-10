@@ -40,6 +40,10 @@ public class SecurityConfig {
 								).permitAll()
 								.requestMatchers("/events/{id}")
 								.hasAnyRole("USER", "ADMIN")
+								.requestMatchers(
+										"/events/{id}/favorite", 
+										"/events/favorites"
+								).hasAnyRole("USER")
 								.requestMatchers("/events/**")
 								.hasAnyRole("ADMIN")
 				)

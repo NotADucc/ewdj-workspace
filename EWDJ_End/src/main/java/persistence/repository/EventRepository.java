@@ -1,6 +1,8 @@
 package persistence.repository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +28,9 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 				FROM EventEntity e
 				WHERE e.name = :name AND CAST(e.dateTime AS DATE) = :date
 				""";
-		
-		var res = em.createQuery(jpql, EventEntity.class)
-				.setParameter("name", event.getName())
-				.setParameter("date", event.getDateTime().toLocalDate())
-				.getResultList();
+
+		var res = em.createQuery(jpql, EventEntity.class).setParameter("name", event.getName())
+				.setParameter("date", event.getDateTime().toLocalDate()).getResultList();
 
 		return res.size() > 0;
 	}
@@ -47,7 +47,7 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	public List<Event> getAllEvents() {
 		return EventMapper.toDomain(findAll());
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Event> getAllEventsSorted() {
@@ -56,10 +56,9 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 				FROM EventEntity e
 				ORDER BY e.dateTime
 				""";
-		
-		var res = em.createQuery(jpql, EventEntity.class)
-				.getResultList();
-		
+
+		var res = em.createQuery(jpql, EventEntity.class).getResultList();
+
 		return EventMapper.toDomain(res);
 	}
 
@@ -101,5 +100,28 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 		db_event.setBeamercheck(event.getBeamercheck());
 		db_event.setPrice(event.getPrice());
 		db_event.setSpeakers(event.getSpeakers());
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> getFavoriteEventsForUser(String username) {
+		String jpql = """
+				SELECT e
+				FROM UserEntity e
+				WHERE e.name = :name
+				""";
+
+		var res = em.createQuery(jpql, UserEntity.class)
+				.setParameter("name", username)
+				.getResultList();
+		
+		var user = res.getFirst();
+		
+		return EventMapper.toDomain(
+				user.getFavoriteEvents().stream().sorted(
+						Comparator.comparing(EventEntity::getDateTime)
+								.thenComparing(EventEntity::getName)
+				).collect(Collectors.toList())
+		);
 	}
 }
