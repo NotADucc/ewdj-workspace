@@ -79,11 +79,23 @@ public class InitDataConfig implements CommandLineRunner {
 				List.of("Naam 3", "Naam 4")
 		);
 		
+		Event event5 = new Event(
+				"Event 5",
+				"This a short description.",
+				room2,
+				LocalDateTime.now().plusDays(1).plusHours(2),
+				"0097",
+				0,
+				10.00,
+				List.of("Naam 3", "Naam 4")
+		);
+		
 		eventManager.addEvent(event1);
 		eventManager.addEvent(event2);
 		eventManager.addEvent(event3);
 		eventManager.addEvent(event4);
-
+		eventManager.addEvent(event5);
+		
 		User user = new User("user", encoder.encode("test"), UserRole.USER);
 		User admin = new User("admin", encoder.encode("test"), UserRole.ADMIN);
 		
