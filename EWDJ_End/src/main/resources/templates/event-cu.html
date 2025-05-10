@@ -69,7 +69,7 @@
 						<label for="beamercheck"
 							th:text="#{event-cu.form.beamercheck.label}"></label> <input
 							id="beamercheck" class="form-input-text" name="beamercheck"
-							type="number" th:field="*{beamercheck}"
+							type="number" th:field="*{beamercheck}" step="1"
 							th:aria-label="#{event-cu.form.beamercheck.arial}" />
 						<div th:if="${#fields.hasErrors('beamercheck')}"
 							th:errors="*{beamercheck}" th:errorclass="error"></div>

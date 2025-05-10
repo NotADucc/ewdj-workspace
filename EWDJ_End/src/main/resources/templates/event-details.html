@@ -22,23 +22,20 @@
 				<form th:if="${isADMIN}"
 					th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
 					<input class="button" type="submit"
-						th:value="#{event-details.edit}"
-						 />
+						th:value="#{event-details.edit}" />
 				</form>
 			</div>
-			<div class="event-container">
-				<div class="event-content">
-					<h3 class="event-title" th:text="${event.name}"></h3>
-					<h4 class="speakers">
-						<i
-							th:text="|#{event-overview.event-content.room}: ${event.room.name} #{event-overview.event-content.room.capacity(${event.room.capacity})}|"></i>
-					</h4>
-					<p
-						th:text="|#{event-overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
-					<p class="project-description"
-						th:text="|#{event-overview.event-content.date}: ${{event.dateTime}}|"></p>
-					<p class="project-description" th:text="${event.description}"></p>
-				</div>
+			<div class="event-content">
+				<h2 class="event-title" th:text="${event.name}"></h2>
+				<h4 class="speakers">
+					<i
+						th:text="|#{event-overview.event-content.room}: ${event.room.name} #{event-overview.event-content.room.capacity(${event.room.capacity})}|"></i>
+				</h4>
+				<p
+					th:text="|#{event-overview.event-content.speakers}: ${#strings.listJoin(event.speakers, ', ')}|"></p>
+				<p class="project-description"
+					th:text="|#{event-overview.event-content.date}: ${{event.dateTime}}|"></p>
+				<p class="project-description" th:text="${event.description}"></p>
 			</div>
 		</div>
 	</main>
