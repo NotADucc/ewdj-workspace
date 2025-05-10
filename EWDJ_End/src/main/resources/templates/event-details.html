@@ -13,13 +13,13 @@
 		<div>
 			<div class="favorite-container">
 				<h1 th:text="#{event-details.title}"></h1>
-				<form th:if="${#authorization.expression('hasRole(''USER'')')}"
+				<form th:if="${isUSER}"
 					th:action="@{/events/{id}/favorite(id=${event.id})}" method="post">
 					<input class="button" type="submit"
 						th:value="${!isFavorited} ? #{event-details.favorite} : #{event-details.unfavorite}"
 						th:disabled="${!isFavorited and favoriteCountExceeded}" />
 				</form>
-				<form th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+				<form th:if="${isADMIN}"
 					th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
 					<input class="button" type="submit"
 						th:value="#{event-details.edit}"

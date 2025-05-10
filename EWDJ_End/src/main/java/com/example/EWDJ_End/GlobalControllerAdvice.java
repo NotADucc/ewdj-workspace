@@ -16,6 +16,22 @@ public class GlobalControllerAdvice {
 
 		return authentication.isAuthenticated();
 	}
+	
+	@ModelAttribute("isUSER")
+	public boolean populateisUSER(Authentication authentication) {
+		if (authentication == null)
+			return false;
+
+		return parseRole(authentication) == UserRole.USER;
+	}
+	
+	@ModelAttribute("isADMIN")
+	public boolean populateisADMIN(Authentication authentication) {
+		if (authentication == null)
+			return false;
+
+		return parseRole(authentication) == UserRole.ADMIN;
+	}
 
 	@ModelAttribute("username")
 	public String populateUsername(Authentication authentication) {
@@ -27,9 +43,16 @@ public class GlobalControllerAdvice {
 		if (authentication == null)
 			return "";
 
+		return parseRole(authentication).resourceBundleCode();
+	}
+	
+	private static final UserRole parseRole(Authentication authentication) {
+		if (authentication == null)
+			return UserRole.BANNED;
+		
 		String role = authentication.getAuthorities().iterator().next().getAuthority()
 				.replace("ROLE_", "");
-
-		return UserRole.valueOf(role).resourceBundleCode();
+		
+		return UserRole.valueOf(role);
 	}
 }
