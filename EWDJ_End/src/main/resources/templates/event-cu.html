@@ -102,7 +102,7 @@
 					</div>
 					<div class="form-actions">
 						<button class="form-btn-primary" id="submit_form" type="submit"
-							th:text="#{event-cu.form.primary.button}"></button>
+							th:text="${cu} == 'edit' ? #{event-cu.form.primary.button.edit} : #{event-cu.form.primary.button.create}"></button>
 					</div>
 					<div th:if="${error}" th:errorclass="error" th:text="${error}"></div>
 				</form>
