@@ -241,7 +241,7 @@ footer .icon {
 .form-container {
   display: flex;
   justify-content: center;
-  max-height: 100vh;
+  /*max-height: 100vh;*/
 }
 
 .form {
