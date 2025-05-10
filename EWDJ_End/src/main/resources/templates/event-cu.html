@@ -12,60 +12,94 @@
 	<main>
 		<div>
 			<div class="form-container">
-				<form class="form" th:object="${event}" th:action="@{/events/{id}/edit(id=${event.id})}" method="post">
-				<h1 th:text="#{event-cu.title}"></h1>
-				  <div class="form-group">
-				    <label class="form-label-input-text" for="name" th:text="#{event-cu.form.name.label}"></label>
-				    <input
-				      class="form-input-text"
-				      id="name"
-				      name="name"
-				      th:aria-label="#{event-cu.form.name.arial}"
-				      type="text"
-				      th:placeholder="#{event-cu.form.name.placeholder}"
-				      th:field="*{name}"
-				      required
-				    />
-	    			<span th:if="${#fields.hasErrors('name')}"
-						th:errorclass="error" th:errors="*{name}"></span>
-				  </div>
-				  <div class="form-group">
-				    <label class="form-label-input-text" for="description" th:text="#{event-cu.form.description.label}"></label>
-				    <input
-				      class="form-input-text"
-				      id="description"
-				      name="description"
-				      th:aria-label="#{event-cu.form.description.arial}"
-				      type="text"
-				      th:placeholder="#{event-cu.form.description.placeholder}"
-				      th:field="*{description}"
-				    />
-   	    			<span th:if="${#fields.hasErrors('description')}"
-						th:errorclass="error" th:errors="*{description}"></span>
-				  </div>
-  				  <div class="form-group">
-				    <label class="form-label-input-text" for="datetime" th:text="#{event-cu.form.datetime.label}"></label>
-				    <input 
-   				      	class="form-input-text"
-						id="datetime"
-						name="datetime"
-						th:aria-label="#{event-cu.form.datetime.arial}"
-				    	type="text" 
-				    	th:field="*{dateTime}"
-			    	/>
-   	    			<span th:if="${#fields.hasErrors('dateTime')}"
-						th:errorclass="error" th:errors="*{dateTime}"></span>
-				  </div>
-			      <div class="form-group">
-				  	<label for="room" class="form-label-input-text" th:text="#{event-cu.form.room.label}"></label>
-				    <select id="room" class="form-select" name="room" th:field="*{room}" th:aria-label="#{event-cu.form.room.arial}">
-				    	<option th:each="room : ${roomList}" th:value="${room}" th:text="${room.name}"></option>
-				    </select>
-				    <span th:if="${#fields.hasErrors('room')}" th:errors="*{room}" th:errorclass="error"></span>
-			      </div>
-				  <div class="form-actions">
-				    <button class="form-btn-primary" id="submit_form" type="submit" th:text="#{event-cu.form.primary.button}"></button>
-				  </div>
+				<form class="form" th:object="${event}"
+					th:action="@{/events/{id}/edit(id=${event.id})}" method="post">
+					<h1 th:text="#{event-cu.title}"></h1>
+					<div class="form-group">
+						<label class="form-label-input-text" for="name"
+							th:text="#{event-cu.form.name.label}"></label> <input
+							class="form-input-text" id="name" name="name"
+							th:aria-label="#{event-cu.form.name.arial}" type="text"
+							th:placeholder="#{event-cu.form.name.placeholder}"
+							th:field="*{name}" required /> <span
+							th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+							th:errors="*{name}"></span>
+					</div>
+					<div class="form-group">
+						<label class="form-label-input-text" for="description"
+							th:text="#{event-cu.form.description.label}"></label>
+						<textarea class="form-input-text" id="description"
+							name="description"
+							th:aria-label="#{event-cu.form.description.arial}"
+							th:placeholder="#{event-cu.form.description.placeholder}"
+							th:field="*{description}"></textarea>
+						<span th:if="${#fields.hasErrors('description')}"
+							th:errorclass="error" th:errors="*{description}"></span>
+					</div>
+					<div class="form-group">
+						<label class="form-label-input-text" for="datetime"
+							th:text="#{event-cu.form.datetime.label}"></label> <input
+							class="form-input-text" id="datetime" name="datetime"
+							th:aria-label="#{event-cu.form.datetime.arial}" type="text"
+							th:field="*{dateTime}" /> <span
+							th:if="${#fields.hasErrors('dateTime')}" th:errorclass="error"
+							th:errors="*{dateTime}"></span>
+					</div>
+					<div class="form-group">
+						<label for="room" class="form-label-input-text"
+							th:text="#{event-cu.form.room.label}"></label> <select id="room"
+							class="form-select" name="room" th:field="*{room}"
+							th:aria-label="#{event-cu.form.room.arial}">
+							<option th:each="room : ${roomList}" th:value="${room}"
+								th:text="${room.name}"></option>
+						</select> <span th:if="${#fields.hasErrors('room')}" th:errors="*{room}"
+							th:errorclass="error"></span>
+					</div>
+					<div class="form-group">
+						<label for="beamercode"
+							th:text="#{event-cu.form.beamercode.label}"></label> <input
+							id="beamercode" class="form-input-text" name="beamercode"
+							type="text" th:field="*{beamercode}"
+							th:aria-label="#{event-cu.form.beamercode.arial}" /> <span
+							th:if="${#fields.hasErrors('beamercode')}"
+							th:errors="*{beamercode}" th:errorclass="error"></span>
+					</div>
+					<div class="form-group">
+						<label for="beamercheck"
+							th:text="#{event-cu.form.beamercheck.label}"></label> <input
+							id="beamercheck" class="form-input-text" name="beamercheck"
+							type="number" th:field="*{beamercheck}"
+							th:aria-label="#{event-cu.form.beamercheck.arial}" /> <span
+							th:if="${#fields.hasErrors('beamercheck')}"
+							th:errors="*{beamercheck}" th:errorclass="error"></span>
+					</div>
+					<div class="form-group">
+						<label for="price" th:text="#{event-cu.form.price.label}"></label>
+						<input id="price" class="form-input-text" name="price"
+							type="number" step="0.01" th:field="*{price}"
+							th:aria-label="#{event-cu.form.price.arial}" /> <span
+							th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+							th:errorclass="error"></span>
+					</div>
+					<div class="form-group">
+						<label for="speakers" th:text="#{event-cu.form.speakers.label}"></label>
+						<div id="speakers-container">
+							<div th:each="speaker, it : *{speakers}">
+								<input type="text" th:field="*{speakers[__${it.index}__]}"
+									class="form-input-text" th:placeholder="#{event-cu.form.speakers.arial}" />
+							</div>
+						</div>
+						<button type="button" class="form-btn-secondary"
+							onclick="addSpeakerInput()">Add Speaker</button>
+						<button type="button" class="form-btn-secondary"
+							onclick="removeSpeakerInput()">Remove Speaker</button>
+						<span th:if="${#fields.hasErrors('speakers')}"
+							th:errors="*{speakers}" th:errorclass="error"></span>
+					</div>
+					<div class="form-actions">
+						<button class="form-btn-primary" id="submit_form" type="submit"
+							th:text="#{event-cu.form.primary.button}"></button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -73,6 +107,37 @@
 
 	<!-- Include the footer fragment -->
 	<div th:replace="~{fragments/footer :: footer}"></div>
-
+	<script th:inline="javascript">
+	    /*<![CDATA[*/
+	    const speakerPlaceholder = /*[[#{event-cu.form.speakers.arial}]]*/ 'speaker name';
+	    const maxSpeakers = 3;
+	    /*]]>*/
+		const addSpeakerInput = () => {
+			const container = document.getElementById('speakers-container');
+			const index = container.children.length;
+			if (index >= maxSpeakers) 
+				return;
+			
+			const input = document.createElement('input');
+			input.type = 'text';
+			input.id = `speakers${index}`;
+			input.name = `speakers[${index}]`;
+			input.className = 'form-input-text';
+			input.placeholder = speakerPlaceholder;
+			const wrapper = document.createElement('div');
+			wrapper.appendChild(input);
+			container.appendChild(wrapper);
+		}
+		
+		const removeSpeakerInput = () => {
+			const container = document.getElementById('speakers-container');
+			const index = container.children.length - 1;
+			if (index <= 0) 
+				return;
+			
+			const child = document.getElementById(`speakers${index}`);
+			child.parentElement.remove();
+		}
+	</script>
 </body>
 </html>
