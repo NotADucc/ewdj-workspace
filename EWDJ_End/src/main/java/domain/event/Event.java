@@ -60,7 +60,7 @@ public class Event implements IHasSpeakers, IHasRoom {
 		this.name = name;
 		this.description = description;
 		this.room = room;
-		this.dateTime = dateTime;
+		this.dateTime = dateTime.withSecond(0).withNano(0);
 		this.beamercode = beamercode;
 		this.beamercheck = beamercheck;
 		this.price = price;

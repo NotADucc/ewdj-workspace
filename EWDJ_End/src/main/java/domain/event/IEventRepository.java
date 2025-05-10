@@ -1,5 +1,6 @@
 package domain.event;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IEventRepository {
@@ -7,6 +8,7 @@ public interface IEventRepository {
 	void addEvent(Event event);
 	void editEvent(Event event);
 	List<Event> getAllEvents();
+	List<Event> getAllEventsOnSpecificDay(LocalDate date);
 	List<Event> getAllEventsSorted();
 	List<Event> getFavoriteEventsForUser(String username);
 	boolean doesEventExist(int id);

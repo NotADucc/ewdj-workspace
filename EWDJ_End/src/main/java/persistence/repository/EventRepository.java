@@ -1,5 +1,6 @@
 package persistence.repository;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +47,21 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 	@Transactional(readOnly = true)
 	public List<Event> getAllEvents() {
 		return EventMapper.toDomain(findAll());
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> getAllEventsOnSpecificDay(LocalDate date) {
+		String jpql = """
+				SELECT e
+				FROM EventEntity e
+				WHERE CAST(e.dateTime AS DATE) = :date
+				""";
+
+		var res = em.createQuery(jpql, EventEntity.class).setParameter("date", date)
+				.getResultList();
+
+		return EventMapper.toDomain(res);
 	}
 
 	@Override
@@ -111,17 +127,17 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 				WHERE e.name = :name
 				""";
 
-		var res = em.createQuery(jpql, UserEntity.class)
-				.setParameter("name", username)
+		var res = em.createQuery(jpql, UserEntity.class).setParameter("name", username)
 				.getResultList();
-		
+
 		var user = res.getFirst();
-		
+
 		return EventMapper.toDomain(
-				user.getFavoriteEvents().stream().sorted(
-						Comparator.comparing(EventEntity::getDateTime)
-								.thenComparing(EventEntity::getName)
-				).collect(Collectors.toList())
+				user.getFavoriteEvents().stream()
+						.sorted(
+								Comparator.comparing(EventEntity::getDateTime)
+										.thenComparing(EventEntity::getName)
+						).collect(Collectors.toList())
 		);
 	}
 }

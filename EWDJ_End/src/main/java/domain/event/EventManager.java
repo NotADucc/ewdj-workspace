@@ -37,35 +37,52 @@ public class EventManager {
 
 	public void editEvent(int eventId, Event event) {
 		if (!eventRepository.doesEventExist(eventId)) {
-			throw new LocaleException("EventManager.editEvent.doesEventExist", new Object[] { eventId });
+			throw new LocaleException(
+					"EventManager.editEvent.doesEventExist",
+					new Object[] { eventId }
+			);
 		}
-		
+
 		if (eventId != event.getId()) {
-			throw new LocaleException("EventManager.editEvent.idDoesNotMatch", new Object[] { eventId, event.getId() });
+			throw new LocaleException(
+					"EventManager.editEvent.idDoesNotMatch",
+					new Object[] { eventId, event.getId() }
+			);
 		}
-		
-		if (eventRepository.doesEventExistOnSpecificDay(event)) {
+
+		var eventsOnSameDay = eventRepository
+				.getAllEventsOnSpecificDay(event.getDateTime().toLocalDate());
+
+		var eventWithSameNameExists = eventsOnSameDay.stream()
+				.filter(e -> e.getId() != eventId && e.getName().equals(event.getName()))
+				.count() > 0;
+
+		if (eventWithSameNameExists) {
 			throw new LocaleException(
 					"EventManager.editEvent.DoesEventExistOnSpecificDay",
 					new Object[] { event.getName(), event.getDateTime() }
 			);
 		}
-		
-		if (roomRepository.isRoomBooked(event.getRoom(), event.getDateTime())) {
+
+		var db_event = eventRepository.getEvent(eventId);
+		var hasRoomOrDateTimeChanged = !db_event.getRoom().equals(event.getRoom())
+				|| !db_event.getDateTime().equals(event.getDateTime());
+
+		if (hasRoomOrDateTimeChanged
+				&& roomRepository.isRoomBooked(event.getRoom(), event.getDateTime())) {
 			throw new LocaleException(
 					"EventManager.editEvent.isRoomBooked",
 					new Object[] { event.getRoom().getName(), event.getDateTime() }
 			);
 		}
-		
-		// can pull up event from db and check if anything has changed
+
 		eventRepository.editEvent(event);
 	}
-	
+
 	public List<Event> giveEventsSorted() {
 		return eventRepository.getAllEventsSorted();
 	}
-	
+
 	public List<Event> getFavoriteEventsForUser(String username) {
 		return eventRepository.getFavoriteEventsForUser(username);
 	}
@@ -80,13 +97,19 @@ public class EventManager {
 
 	public void toggleFavorite(int eventId, String username) {
 		if (!eventRepository.doesEventExist(eventId)) {
-			throw new LocaleException("EventManager.toggleFavorite.doesEventExist", new Object[] { eventId });
+			throw new LocaleException(
+					"EventManager.toggleFavorite.doesEventExist",
+					new Object[] { eventId }
+			);
 		}
-		
+
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.toggleFavorite.doesUserExist", new Object[] { username });
+			throw new LocaleException(
+					"EventManager.toggleFavorite.doesUserExist",
+					new Object[] { username }
+			);
 		}
-		
+
 		User user = userRepository.getUserByUsername(username);
 		Event event = eventRepository.getEvent(eventId);
 
@@ -112,22 +135,31 @@ public class EventManager {
 
 	public boolean isFavorited(int eventId, String username) {
 		if (!eventRepository.doesEventExist(eventId)) {
-			throw new LocaleException("EventManager.isFavorited.doesEventExist", new Object[] { eventId });
+			throw new LocaleException(
+					"EventManager.isFavorited.doesEventExist",
+					new Object[] { eventId }
+			);
 		}
-		
+
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.isFavorited.doesUserExist", new Object[] { username });
+			throw new LocaleException(
+					"EventManager.isFavorited.doesUserExist",
+					new Object[] { username }
+			);
 		}
-		
+
 		User user = userRepository.getUserByUsername(username);
 		return user.getFavoriteEvents().stream().filter(x -> x.getId() == eventId).count() > 0;
 	}
 
 	public boolean hasMaxFavoriteCountBeenExceeded(String username) {
 		if (!userRepository.doesUserExist(username)) {
-			throw new LocaleException("EventManager.hasMaxFavoriteCountBeenExceeded.doesUserExist", new Object[] { username });
+			throw new LocaleException(
+					"EventManager.hasMaxFavoriteCountBeenExceeded.doesUserExist",
+					new Object[] { username }
+			);
 		}
-		
+
 		User user = userRepository.getUserByUsername(username);
 		return user.getFavoriteEvents().size() >= MAX_FAVORITE_EVENTS;
 	}
