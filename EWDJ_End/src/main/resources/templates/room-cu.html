@@ -42,6 +42,7 @@
 							th:text="${cu} == 'edit' ? #{room-cu.form.primary.button.edit} : #{room-cu.form.primary.button.create}"></button>
 					</div>
 					<div th:if="${error}" th:errorclass="error" th:text="${error}"></div>
+					<div th:if="${msg}" class="msg" th:text="${msg}"></div>
 				</form>
 			</div>
 		</div>

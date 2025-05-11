@@ -346,6 +346,17 @@ footer .icon {
   animation: shake 0.5s ease-in-out;
 }
 
+.msg {
+	max-width: 72rem; 
+	background-color: #7fa0ca;
+	border-left: 4px solid #1e40af;
+	color: white;
+	padding: 1rem; 
+	margin-top: 1rem; 
+	transition: opacity 0.2s ease-in-out; 
+	animation: fade-in-out 5s ease-in-out forwards;
+}
+
 @media (min-width: 1024px) {
   .alert {
     max-width: 72rem;
@@ -362,6 +373,21 @@ footer .icon {
   }
   75% {
     transform: translateX(5px);
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

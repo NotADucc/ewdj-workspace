@@ -1,5 +1,7 @@
 package com.example.EWDJ_End.controller;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/rooms")
 public class RoomController {
-	
+	private final MessageSource messageSource;
 	private final RoomManager roomManager;
 
 	@GetMapping
@@ -45,8 +47,16 @@ public class RoomController {
 			model.addAttribute("cu", "create");
 			return "room-cu";
 		}
-		System.out.println(room.getName());
+
 		roomManager.addRoom(room);
-		return "redirect:/rooms";
+
+		String localizedMsg = messageSource.getMessage(
+				"RoomController.postCreateRoom.succes",
+				new Object[] { room.getCapacity() },
+				LocaleContextHolder.getLocale()
+		);
+
+		model.addAttribute("msg", localizedMsg);
+		return "room-cu";
 	}
 }
