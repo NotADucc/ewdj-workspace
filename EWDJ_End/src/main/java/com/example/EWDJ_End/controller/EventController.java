@@ -1,6 +1,5 @@
 package com.example.EWDJ_End.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -15,14 +14,14 @@ import domain.event.Event;
 import domain.event.EventManager;
 import domain.room.RoomManager;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/events")
 public class EventController {
-	@Autowired
-	EventManager eventManager;
-	@Autowired
-	RoomManager roomManager;
+	private final EventManager eventManager;
+	private final RoomManager roomManager;
 
 	@GetMapping
 	public String getEvents(Model model) {

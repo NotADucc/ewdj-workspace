@@ -2,7 +2,6 @@ package com.example.EWDJ_End.controller;
 
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,12 +9,13 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 
 @Controller
+@AllArgsConstructor
 public class LocaleController {
 
-	@Autowired
-	private LocaleResolver localeResolver;
+	private final LocaleResolver localeResolver;
 
 	@GetMapping("/changeLocale")
 	public String changeLocale(

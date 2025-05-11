@@ -1,6 +1,5 @@
 package com.example.EWDJ_End.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.WebAttributes;
@@ -11,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/login")
 public class LoginController {
-	@Autowired
-	private MessageSource messageSource;
+	private final MessageSource messageSource;
 
 	@GetMapping
 	public String login(
