@@ -36,13 +36,13 @@ main h1 {
 	text-decoration: none !important;
 }
 
-.event-container {
+.event-container, .room-container {
 	display: grid;
 	padding: 10px;
 	margin-bottom: 20px;
 }
 
-.event-item {
+.event-item, .room-item {
 	display: flex;
 	align-items: stretch;
 	padding: 10px;
@@ -57,7 +57,7 @@ main h1 {
 	font-size: 1.25rem;
 }
 
-.event-content {
+.event-content, .room-content {
 	margin-left: 1rem;
 	margin-right: 1rem;
 	width: 100%;
@@ -67,7 +67,7 @@ main h1 {
 	font-size: medium;
 }
 
-.speakers {
+.speakers, .room-info {
 	-webkit-text-fill-color: transparent;
 	background: linear-gradient(20deg, #3875ea, #a62161);
 	-webkit-background-clip: text;
@@ -386,7 +386,7 @@ footer .icon {
 }
 
 @media (min-width: 900px) {
-	.event-container { 
+	.event-container, .room-container { 
 		grid-template-columns: repeat(2, 1fr); 
 	}
 	main > div {
@@ -399,7 +399,7 @@ footer .icon {
 }
 
 @media (min-width: 1400px) {
-	.event-container { 
+	.event-container, .room-container { 
 		grid-template-columns: repeat(3, 1fr); 
 	}
 	main > div {

@@ -38,15 +38,17 @@ public class SecurityConfig {
 										"/changeLocale",
 										"/events"
 								).permitAll()
-								.requestMatchers("/events/{id}")
-								.hasAnyRole("USER", "ADMIN")
+								.requestMatchers(
+										"/events/{id}"
+								).hasAnyRole("USER", "ADMIN")
 								.requestMatchers(
 										"/events/{id}/favorite", 
 										"/events/favorites"
 								).hasAnyRole("USER")
 								.requestMatchers(
 										"/events/**", 
-										"/rooms**"
+										"/rooms",
+										"/rooms/**"
 								).hasAnyRole("ADMIN")
 				)
 				.formLogin(

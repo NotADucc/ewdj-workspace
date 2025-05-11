@@ -26,7 +26,7 @@ public class RoomController {
 
 	@GetMapping
 	public String getEvents(Model model) {
-		model.addAttribute("eventList", roomManager.giveRooms());
+		model.addAttribute("roomList", roomManager.giveRooms());
 		return "room-overview";
 	}
 
@@ -48,6 +48,7 @@ public class RoomController {
 			model.addAttribute("cu", "create");
 			return "room-cu";
 		}
+		System.out.println(room.getName());
 		roomManager.addRoom(room);
 		return "redirect:/rooms";
 	}

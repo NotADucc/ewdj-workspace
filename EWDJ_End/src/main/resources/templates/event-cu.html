@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="#{event-cu.title}"></title>
+<title th:text="${cu} == 'edit' ? #{event-cu.title.edit} : #{event-cu.title.create}"></title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
@@ -14,7 +14,7 @@
 			<div class="form-container">
 				<form class="form" th:object="${event}"
 					th:action="${cu} == 'edit' ? @{/events/{id}/edit(id=${event.id})} : @{/events/create}" method="post">
-					<h1 th:text="#{event-cu.title}"></h1>
+					<h1 th:text="${cu} == 'edit' ? #{event-cu.title.edit} : #{event-cu.title.create}"></h1>
 					<div class="form-group">
 						<label class="form-label-input-text" for="name"
 							th:text="#{event-cu.form.name.label}"></label> <input

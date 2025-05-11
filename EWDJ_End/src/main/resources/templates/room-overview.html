@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{room-overview.title}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<!-- Include the localeSwitcher fragment (custom fragment) -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<div>
+			<div class="favorite-container">
+				<h1 th:text="#{room-overview.title}"></h1>
+				<form th:if="${isADMIN}" th:action="@{/rooms/create}" method="get">
+					<input class="button" type="submit"
+						th:value="#{room-overview.create}" />
+				</form>
+			</div>
+			<div class="room-container">
+				<div class="room-item" th:each="room: ${roomList}">
+					<div class="room-content">
+						<h3 class="room-title" th:text="${room.name}"></h3>
+						<h4 class="room-info">
+							<i
+								th:text="|#{room-overview.room-content.name}: ${room.name} #{room-overview.room-content.capacity(${room.capacity})}|"></i>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Include the footer fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
