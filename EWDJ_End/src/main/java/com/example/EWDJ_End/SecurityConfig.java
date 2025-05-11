@@ -44,8 +44,10 @@ public class SecurityConfig {
 										"/events/{id}/favorite", 
 										"/events/favorites"
 								).hasAnyRole("USER")
-								.requestMatchers("/events/**")
-								.hasAnyRole("ADMIN")
+								.requestMatchers(
+										"/events/**", 
+										"/rooms**"
+								).hasAnyRole("ADMIN")
 				)
 				.formLogin(
 						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")
