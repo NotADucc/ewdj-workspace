@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title
+	th:text="${cu} == 'edit' ? #{room-cu.title.edit} : #{room-cu.title.create}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<!-- Include the localeSwitcher fragment (custom fragment) -->
+	<div th:replace="~{fragments/header :: header}"></div>
+
+	<main>
+		<div>
+			<div class="form-container">
+				<form class="form" th:object="${room}"
+					th:action="${cu} == 'edit' ? @{/rooms/{id}/edit(id=${event.id})} : @{/rooms/create}"
+					method="post">
+					<h1
+						th:text="${cu} == 'edit' ? #{room-cu.title.edit} : #{room-cu.title.create}"></h1>
+					<div class="form-group">
+						<label class="form-label-input-text" for="name"
+							th:text="#{room-cu.form.name.label}"></label> <input
+							class="form-input-text" id="name" name="name"
+							th:aria-label="#{room-cu.form.name.arial}" type="text"
+							th:placeholder="#{room-cu.form.name.placeholder}"
+							th:field="*{name}" required />
+						<div th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+							th:errors="*{name}"></div>
+					</div>
+					<div class="form-group">
+						<label class="form-label-input-text" for="capacity"
+							th:text="#{room-cu.form.capacity.label}"></label>
+						<textarea class="form-input-text" id="description"
+							name="description" th:aria-label="#{room-cu.form.capacity.arial}"
+							th:placeholder="#{room-cu.form.capacity.placeholder}"
+							th:field="*{capacity}"></textarea>
+						<div th:if="${#fields.hasErrors('capacity')}"
+							th:errorclass="error" th:errors="*{capacity}"></div>
+					</div>
+					<div class="form-actions">
+						<button class="form-btn-primary" id="submit_form" type="submit"
+							th:text="${cu} == 'edit' ? #{room-cu.form.primary.button.edit} : #{room-cu.form.primary.button.create}"></button>
+					</div>
+					<div th:if="${error}" th:errorclass="error" th:text="${error}"></div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<!-- Include the footer fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
