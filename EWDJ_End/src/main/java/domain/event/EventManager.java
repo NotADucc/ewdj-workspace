@@ -7,7 +7,6 @@ import domain.room.IRoomRepository;
 import domain.user.IUserRepository;
 import domain.user.User;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public class EventManager {

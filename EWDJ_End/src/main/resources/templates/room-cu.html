@@ -32,8 +32,7 @@
 						<label class="form-label-input-text" for="capacity"
 							th:text="#{room-cu.form.capacity.label}"></label> <input
 							class="form-input-text" id="capacity" name="capacity"
-							th:aria-label="#{room-cu.form.capacity.arial}"
-							placeholder="0"
+							th:aria-label="#{room-cu.form.capacity.arial}" placeholder="0"
 							type="number" step="1" th:field="*{capacity}" />
 						<div th:if="${#fields.hasErrors('capacity')}"
 							th:errorclass="error" th:errors="*{capacity}"></div>

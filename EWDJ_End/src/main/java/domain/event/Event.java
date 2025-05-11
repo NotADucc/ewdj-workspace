@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import persistence.entity.RoomEntity;
 import validator.BeamerChecksum;
 import validator.HasDuplicateSpeakers;
 
@@ -69,3 +68,4 @@ public class Event implements IHasSpeakers, IHasRoom {
 				: new ArrayList<>();
 	}
 }
+

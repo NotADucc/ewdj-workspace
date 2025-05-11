@@ -4,11 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import domain.event.Event;
 import domain.user.User;
 import jakarta.persistence.EntityManager;
-import persistence.entity.EventEntity;
-import persistence.entity.RoomEntity;
 import persistence.entity.UserEntity;
 
 public class UserMapper {
