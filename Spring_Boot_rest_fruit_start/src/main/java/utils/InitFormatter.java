@@ -6,7 +6,8 @@ import java.util.Locale;
 
 public interface InitFormatter {
 
-	DecimalFormat FORMATTER = null;//TODO
-			//new DecimalFormat(         , DecimalFormatSymbols.getInstance(Locale.        ));
-	
+	DecimalFormat FORMATTER = new DecimalFormat(
+			"#.#",
+			DecimalFormatSymbols.getInstance(Locale.FRANCE)
+	);
 }

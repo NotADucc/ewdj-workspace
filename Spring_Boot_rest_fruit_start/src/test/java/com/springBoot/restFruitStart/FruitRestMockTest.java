@@ -51,7 +51,7 @@ class FruitRestMockTest {
 	private Fruit aFruit(int id, String name, double quality) {
 		Fruit fruit = new Fruit(id, name, quality);
 		//TODO
-		//expectedFormattedQuality = 
+		expectedFormattedQuality = FORMATTER.format(quality);
 		return fruit;
 	}
 	
@@ -59,10 +59,9 @@ class FruitRestMockTest {
 		mockMvc.perform(get(uri))
 		.andExpect(status().isOk()) 
 //TODO		
-		.andExpect(jsonPath("$.").value(ID))
-		.andExpect(jsonPath("$.").value(NAME))
-		//.andExpect(jsonPath("$.quality").value(     ))
-		;
+		.andExpect(jsonPath("$.fruit_id").value(ID))
+		.andExpect(jsonPath("$.fruit_name").value(NAME))
+		.andExpect(jsonPath("$.quality").value(expectedFormattedQuality));
 	}
 
 	@ParameterizedTest
