@@ -1,6 +1,8 @@
 package domain;
 
-import static domain.InitGame.*;
+import static domain.InitGame.DEFAULT_NUMBER;
+import static domain.InitGame.MAX_NUMBER;
+import static domain.InitGame.MIN_NUMBER;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Set;
@@ -25,11 +27,10 @@ class GameTest {
 		validator = factory.getValidator();
 	}
 	
-	/*
 	@ParameterizedTest
-	@ValueSource(ints = { TODO })
+	@ValueSource(ints = { MIN_NUMBER, MAX_NUMBER, DEFAULT_NUMBER })
 	public void testValidGame(Integer number) {
-		Game validGame = TODO
+		Game validGame = new Game(number); //Game.builder().number(number).build();
 
 		Set<ConstraintViolation<Game>> violations = validator.validate(validGame);
 		assertThat(violations).isEmpty();
@@ -37,14 +38,14 @@ class GameTest {
 	
 	@ParameterizedTest
 	@NullSource
-	@ValueSource(ints = { TODO,  -10, 0, 100 })
+	@ValueSource(ints = { MIN_NUMBER-1, MAX_NUMBER+1, -10, 0, 100 })
 	public void testInvalidGame(Integer number) 
 	{
-		Game invalidGame = TODO
+		Game invalidGame = new Game(number);
 
 		Set<ConstraintViolation<Game>> violations = validator.validate(invalidGame);
 		assertThat(violations).isNotEmpty();
 		assertThat(violations).anyMatch(v -> v.getPropertyPath().toString().equals("number"));
-	}*/
+	}
 
 }

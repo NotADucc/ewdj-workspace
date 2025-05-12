@@ -2,23 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>game TODO </title>
+<title th:text="#{startGame}">game</title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-  
-TODO
-		<table class="center">
-			<tr>
-				<th  TODO      ></th>
-				<td><input type="text" th:field="   TODO      "></td>
-				<td  TODO      ></td>
-			</tr>
-		</table>
-		<br/>
-		<div style="text-align: center">
-			<input type="submit" th:value="    TODO        ">
-		</div>
-TODO
+
+    <form th:action="@{/game}" th:object="${game}" method="post">
+	<table class="center">
+	        <tr>
+	           <th th:text="#{number}"></th>
+	           <td><input type="text" th:field="*{number}"></td>
+	           <td th:if="${#fields.hasErrors('number')}" th:errorclass="error"
+		    th:errors="*{number}"></td>
+	       </tr>
+	</table>
+	<br/>
+	<div style="text-align: center">
+		<input type="submit" th:value="#{execute}">
+	</div>
+     </form> 
 </body>
 </html>

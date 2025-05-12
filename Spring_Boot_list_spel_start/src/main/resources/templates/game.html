@@ -2,23 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>game TODO  </title>
+<title th:text="#{game}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 
-<div class="game-values">
+	<div class="game-values">
+		<th:block th:each="val,iter: ${game.showValue}">
+			<div>
+				<div th:if="${gameStatus}" class="value"
+					th:text="|${iter.count}.${val}|"></div>
+				<div th:unless="${gameStatus}" class="value">
+					<a th:href="|/game/${iter.index}|" class="new-game-link"
+						th:text="|${iter.count}.${val}|"></a>
+				</div>
+			</div>
+		</th:block>
 
-<!-- class="value" -->
+	</div>
 
-</div>
+	<div class="game-status" th:if="${gameStatus}" th:text="${gameStatus}"></div>
 
 
-<!-- 		 
-<div TODO class="game-status">
-		TODO
-		<a href="TODO" class="new-game-link" TODO></a>
-</div>
- -->
- 
 </body>
 </html>

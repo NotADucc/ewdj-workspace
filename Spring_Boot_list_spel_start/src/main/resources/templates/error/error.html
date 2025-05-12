@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>error TODO </title>
+<title th:text="#{errorPage}"></title>
 </head>
 <body>
-	TODO
+	<p th:text="#{${exception.message}}"></p>
 </body>
 </html>

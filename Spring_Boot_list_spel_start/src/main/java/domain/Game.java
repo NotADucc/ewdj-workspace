@@ -6,14 +6,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import exception.IndexNotFoundException;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 public class Game {
-
-    //TODO
+	
+    private static final long MIN_NUMBER = 3, MAX_NUMBER = 6;
+	@Min(MIN_NUMBER)
+    @Max(MAX_NUMBER)
+    @NotNull
     @Getter
     @Setter
+    @Builder.Default
     private Integer number = DEFAULT_NUMBER;
 
     private static final int DEFAULT_NUMBER = 6;
@@ -30,7 +38,11 @@ public class Game {
 
     @Getter private boolean win, lost;
 
-    public void startGame() {
+    public Game(Integer number2) {
+		number = number2;
+	}
+
+	public void startGame() {
         //Deze methode roep je in de controller op
         //nadat de gebruiker een geldige number
         //heeft ingegeven (bij de start van het spel)
