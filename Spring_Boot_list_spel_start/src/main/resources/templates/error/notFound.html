@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title th:text="#{notFound}">Page Not Found</title>
+</head>
+<body>
+
+<div class="error-container">
+    <div class="error-content">
+        <h1>404</h1>
+        <p th:text="#{text1}"></p>
+        <p th:text="#{text2}"></p>
+        <a th:href="@{/}" th:text="#{homepage}"></a>
+    </div>
+</div>
+
+</body>
+</html>
