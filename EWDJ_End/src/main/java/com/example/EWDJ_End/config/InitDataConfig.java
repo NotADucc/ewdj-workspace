@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.config;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.advice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Validator;

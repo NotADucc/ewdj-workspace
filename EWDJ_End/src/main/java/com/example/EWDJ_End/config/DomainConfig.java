@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

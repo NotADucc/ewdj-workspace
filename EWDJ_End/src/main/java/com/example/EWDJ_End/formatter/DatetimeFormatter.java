@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.formatter;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;

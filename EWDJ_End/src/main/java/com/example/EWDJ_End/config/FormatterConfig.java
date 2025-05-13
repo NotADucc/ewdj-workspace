@@ -1,7 +1,10 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.example.EWDJ_End.formatter.DateFormatter;
+import com.example.EWDJ_End.formatter.DatetimeFormatter;
 
 @Configuration
 public class FormatterConfig {

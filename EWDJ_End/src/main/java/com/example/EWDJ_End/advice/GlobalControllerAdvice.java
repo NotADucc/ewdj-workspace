@@ -1,4 +1,4 @@
-package com.example.EWDJ_End;
+package com.example.EWDJ_End.advice;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
