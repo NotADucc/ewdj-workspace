@@ -1,7 +1,7 @@
 package main;
 
-import com.example.EWDJ_End.rest.perform.PerformRestEvent;
-import com.example.EWDJ_End.rest.perform.PerformRestRoom;
+import com.springBoot.EWDJ_End.rest.perform.PerformRestEvent;
+import com.springBoot.EWDJ_End.rest.perform.PerformRestRoom;
 
 public class RunPerform {
     public static void main(String... args) {

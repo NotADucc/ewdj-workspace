@@ -3,7 +3,7 @@ package dto.mapper;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.example.EWDJ_End.rest.API_BASE_PATHS;
+import com.springBoot.EWDJ_End.rest.API_BASE_PATHS;
 
 import domain.event.Event;
 import dto.model.EventOutputDTO;

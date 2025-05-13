@@ -1,4 +1,4 @@
-package com.;
+package com.springBoot.EWDJ_End.rest;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,16 +31,17 @@ import service.EmployeeService;
 import static utils.InitFormatter.*;
 
 @SpringBootTest
-class EmployeeRestMockTest {
+class EventRestControllerTest {
 
 	@Mock
 	private EmployeeService mock;
 	
-	private EventRestController controller;
+	private EmployeeRestController controller;
 	private MockMvc mockMvc;
 
-	private final int ID = 1;
+	private final int ID = 1234;
 	private final String NAME = "Test";
+	private String expectedFormattedDateTime;
 
 	@BeforeEach
 	public void before() {
