@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/rooms")
+@RequestMapping(BASE_PATHS.ROOMS_URI)
 public class RoomController {
 	private final MessageSource messageSource;
 	private final RoomManager roomManager;

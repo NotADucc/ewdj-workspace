@@ -18,14 +18,14 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/events")
+@RequestMapping(BASE_PATHS.EVENTS_URI)
 public class EventController {
 	private final EventManager eventManager;
 	private final RoomManager roomManager;
 
 	@GetMapping
 	public String getEvents(Model model) {
-		model.addAttribute("eventList", eventManager.giveEventsSorted());
+		model.addAttribute("eventList", eventManager.getEventsSorted());
 		return "event-overview";
 	}
 

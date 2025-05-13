@@ -51,7 +51,7 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Event> getAllEventsOnSpecificDay(LocalDate date) {
+	public List<Event> getAllEventsOnSpecificDate(LocalDate date) {
 		String jpql = """
 				SELECT e
 				FROM EventEntity e

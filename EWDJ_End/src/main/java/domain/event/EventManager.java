@@ -1,5 +1,6 @@
 package domain.event;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import domain.LocaleException;
@@ -50,7 +51,7 @@ public class EventManager {
 		}
 
 		var eventsOnSameDay = eventRepository
-				.getAllEventsOnSpecificDay(event.getDateTime().toLocalDate());
+				.getAllEventsOnSpecificDate(event.getDateTime().toLocalDate());
 
 		var eventWithSameNameExists = eventsOnSameDay.stream()
 				.filter(e -> e.getId() != eventId && e.getName().equals(event.getName()))
@@ -78,12 +79,16 @@ public class EventManager {
 		eventRepository.editEvent(event);
 	}
 
-	public List<Event> giveEventsSorted() {
+	public List<Event> getEventsSorted() {
 		return eventRepository.getAllEventsSorted();
 	}
 
 	public List<Event> getFavoriteEventsForUser(String username) {
 		return eventRepository.getFavoriteEventsForUser(username);
+	}
+	
+	public List<Event> getEventsOnDate(LocalDate date) {
+		return eventRepository.getAllEventsOnSpecificDate(date);
 	}
 
 	public Event giveEvent(int id) {

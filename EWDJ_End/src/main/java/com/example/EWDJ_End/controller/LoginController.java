@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/login")
+@RequestMapping(BASE_PATHS.LOGIN_URI)
 public class LoginController {
 	private final MessageSource messageSource;
 
