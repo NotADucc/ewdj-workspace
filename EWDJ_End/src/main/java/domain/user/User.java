@@ -23,18 +23,16 @@ public class User {
 	}
 	
 	public void addEvent(Event event) {
-		int count = favoriteEvents.size();
-		favoriteEvents.add(event);
-		if (count == favoriteEvents.size()) {
+		if (favoriteEvents.contains(event)) {
 			// can throw exc here
 		}
+		favoriteEvents.add(event);
 	}
 	
 	public void removeEvent(Event event) {
-		int count = favoriteEvents.size();
-		favoriteEvents.remove(event);
-		if (count == favoriteEvents.size()) {
+		if (!favoriteEvents.contains(event)) {
 			// can throw exc here
 		}
+		favoriteEvents.remove(event);
 	}
 }
