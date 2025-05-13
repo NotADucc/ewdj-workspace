@@ -13,7 +13,7 @@
 		<div>
 			<div class="favorite-container">
 				<h1 th:text="#{room-overview.title}"></h1>
-				<form th:if="${isADMIN}" th:action="@{/rooms/create}" method="get">
+				<form th:if="${isADMIN}" th:action="@{/admin/rooms/create}" method="get">
 					<input class="button" type="submit"
 						th:value="#{room-overview.create}" />
 				</form>

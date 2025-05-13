@@ -1,6 +1,5 @@
 package com.example.EWDJ_End.formatter;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -24,8 +23,17 @@ public class DateFormatter implements Formatter<LocalDate> {
 	}
 
 	@Override
-	public LocalDate parse(String text, Locale locale) throws ParseException {
-		return LocalDate.parse(text, formatter(locale));
+	public LocalDate parse(String text, Locale locale) {
+		try {
+			return LocalDate.parse(text, formatter(locale));
+		} catch (Exception ex) {
+			String message = messageSource.getMessage(
+					"date.format.pattern.exception",
+					new Object[] { messageSource.getMessage("date.format.pattern", null, locale) },
+					locale
+			);
+			throw new IllegalArgumentException(message);
+		}
 	}
 
 	private DateTimeFormatter formatter(Locale locale) {

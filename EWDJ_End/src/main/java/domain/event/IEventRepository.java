@@ -10,7 +10,6 @@ public interface IEventRepository {
 	List<Event> getAllEvents();
 	List<Event> getAllEventsOnSpecificDate(LocalDate date);
 	List<Event> getAllEventsSorted();
-	List<Event> getFavoriteEventsForUser(String username);
 	boolean doesEventExist(int id);
 	Event getEvent(int id);
 	void favorite(int eventid, int userid);

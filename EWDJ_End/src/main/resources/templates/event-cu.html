@@ -14,7 +14,7 @@
 		<div>
 			<div class="form-container">
 				<form class="form" th:object="${event}"
-					th:action="${cu} == 'edit' ? @{/events/{id}/edit(id=${event.id})} : @{/events/create}"
+					th:action="${cu} == 'edit' ? @{/admin/events/{id}/edit(id=${event.id})} : @{/admin/events/create}"
 					method="post">
 					<h1
 						th:text="${cu} == 'edit' ? #{event-cu.title.edit} : #{event-cu.title.create}"></h1>

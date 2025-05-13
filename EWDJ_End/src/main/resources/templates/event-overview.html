@@ -13,12 +13,12 @@
 		<div>
 			<div class="favorite-container">
 				<h1 th:text="#{event-overview.title}"></h1>
-				<form th:if="${isUSER}" th:action="@{/events/favorites}"
+				<form th:if="${isUSER}" th:action="@{/users/favorite/events}"
 					method="get">
 					<input class="button" type="submit"
 						th:value="#{event-overview.favorites}" />
 				</form>
-				<form th:if="${isADMIN}" th:action="@{/events/create}"
+				<form th:if="${isADMIN}" th:action="@{/admin/events/create}"
 					method="get">
 					<input class="button" type="submit"
 						th:value="#{event-overview.create}" />

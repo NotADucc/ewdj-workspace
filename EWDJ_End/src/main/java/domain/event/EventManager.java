@@ -82,10 +82,6 @@ public class EventManager {
 	public List<Event> getEventsSorted() {
 		return eventRepository.getAllEventsSorted();
 	}
-
-	public List<Event> getFavoriteEventsForUser(String username) {
-		return eventRepository.getFavoriteEventsForUser(username);
-	}
 	
 	public List<Event> getEventsOnDate(LocalDate date) {
 		return eventRepository.getAllEventsOnSpecificDate(date);

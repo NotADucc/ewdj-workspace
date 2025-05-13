@@ -1,5 +1,9 @@
 package com.example.EWDJ_End.config;
 
+import static com.example.EWDJ_End.controller.BASE_PATHS.EVENTS_URI;
+import static com.example.EWDJ_End.controller.BASE_PATHS.LOGIN_URI;
+import static com.example.EWDJ_End.controller.BASE_PATHS.USERS_URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+
 
 @Configuration
 @EnableWebSecurity
@@ -29,27 +34,27 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						requests -> requests
 								.requestMatchers(
-										"/login**",
 										"/css/**",
 										"/img/**",
 										"/error/**",
 										"/fragments/**",
 										"/",
 										"/changeLocale",
-										"/events",
-										"/api/**"
+										"/api/**",
+										LOGIN_URI + "**",
+										EVENTS_URI
 								).permitAll()
 								.requestMatchers(
-										"/events/{id}"
+										EVENTS_URI + "/{id}"
 								).hasAnyRole("USER", "ADMIN")
 								.requestMatchers(
 										"/events/{id}/favorite", 
-										"/events/favorites"
+										USERS_URI,
+										USERS_URI + "/**"
 								).hasAnyRole("USER")
 								.requestMatchers(
-										"/events/**", 
-										"/rooms",
-										"/rooms/**"
+										"/admin**",
+										"/admin/**"
 								).hasAnyRole("ADMIN")
 				)
 				.formLogin(

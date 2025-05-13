@@ -2,6 +2,9 @@ package persistence.repository;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import domain.LocaleException;
+import domain.event.Event;
 import domain.user.IUserRepository;
 import domain.user.User;
 import domain.user.UserRole;
@@ -54,8 +58,7 @@ public class UserRepository extends GenericRepository<UserEntity>
 				WHERE e.name = :name
 				""";
 
-		var res = em.createQuery(jpql, UserEntity.class)
-				.setParameter("name", username)
+		var res = em.createQuery(jpql, UserEntity.class).setParameter("name", username)
 				.getResultList();
 		return res.size() == 0 ? null : UserMapper.toDomain(res.getFirst());
 	}
@@ -71,5 +74,15 @@ public class UserRepository extends GenericRepository<UserEntity>
 	@Transactional(readOnly = true)
 	public boolean doesUserExist(String username) {
 		return getUserByUsername(username) != null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Event> getFavoriteEvents(String username) {
+		var user = getUserByUsername(username);
+
+		return user.getFavoriteEvents().stream()
+				.sorted(Comparator.comparing(Event::getDateTime).thenComparing(Event::getName))
+				.collect(Collectors.toList());
 	}
 }

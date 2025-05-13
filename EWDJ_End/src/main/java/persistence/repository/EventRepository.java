@@ -1,9 +1,7 @@
 package persistence.repository;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,28 +114,5 @@ public class EventRepository extends GenericRepository<EventEntity> implements I
 		db_event.setBeamercheck(event.getBeamercheck());
 		db_event.setPrice(event.getPrice());
 		db_event.setSpeakers(event.getSpeakers());
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Event> getFavoriteEventsForUser(String username) {
-		String jpql = """
-				SELECT e
-				FROM UserEntity e
-				WHERE e.name = :name
-				""";
-
-		var res = em.createQuery(jpql, UserEntity.class).setParameter("name", username)
-				.getResultList();
-
-		var user = res.getFirst();
-
-		return EventMapper.toDomain(
-				user.getFavoriteEvents().stream()
-						.sorted(
-								Comparator.comparing(EventEntity::getDateTime)
-										.thenComparing(EventEntity::getName)
-						).collect(Collectors.toList())
-		);
 	}
 }

@@ -18,17 +18,17 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping(BASE_PATHS.ROOMS_URI)
-public class RoomController {
+@RequestMapping(BASE_PATHS.ADMIN_URI + BASE_PATHS.ROOMS_URI)
+public class AdminRoomController {
 	private final MessageSource messageSource;
 	private final RoomManager roomManager;
 
 	@GetMapping
-	public String getEvents(Model model) {
+	public String getRooms(Model model) {
 		model.addAttribute("roomList", roomManager.giveRooms());
 		return "room-overview";
 	}
-
+	
 	@GetMapping("/create")
 	public String getCreateRoom(@AuthenticationPrincipal UserDetails user, Model model) {
 		model.addAttribute("room", new Room());

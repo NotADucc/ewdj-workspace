@@ -20,7 +20,7 @@
 						th:disabled="${!isFavorited and favoriteCountExceeded}" />
 				</form>
 				<form th:if="${isADMIN}"
-					th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+					th:action="@{/admin/events/{id}/edit(id=${event.id})}" method="get">
 					<input class="button" type="submit"
 						th:value="#{event-details.edit}" />
 				</form>

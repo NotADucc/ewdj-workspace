@@ -38,6 +38,9 @@ public class Game {
 
     @Getter private boolean win, lost;
 
+    public Game() {
+	}
+    
     public Game(Integer number2) {
 		number = number2;
 	}
