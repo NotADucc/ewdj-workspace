@@ -1,4 +1,4 @@
-package com.;
+package com.springBoot.restExample1;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static utils.InitFormatter.FORMATTER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ import domain.Employee;
 import exceptions.DuplicateEmployeeException;
 import exceptions.EmployeeNotFoundException;
 import service.EmployeeService;
-import static utils.InitFormatter.*;
 
 @SpringBootTest
 class EmployeeRestMockTest {
@@ -36,11 +36,12 @@ class EmployeeRestMockTest {
 	@Mock
 	private EmployeeService mock;
 	
-	private EventRestController controller;
+	private EmployeeRestController controller;
 	private MockMvc mockMvc;
 
-	private final int ID = 1;
+	private final int ID = 1234;
 	private final String NAME = "Test";
+	private String expectedFormattedDateTime;
 
 	@BeforeEach
 	public void before() {

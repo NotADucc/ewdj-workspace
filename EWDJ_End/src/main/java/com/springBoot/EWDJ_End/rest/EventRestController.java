@@ -20,7 +20,7 @@ public class EventRestController {
 	private final EventManager eventManager;
 
 	@GetMapping
-	public Collection<EventOutputDTO> getEvent(@RequestParam LocalDate date) {
+	public Collection<EventOutputDTO> getEvents(@RequestParam LocalDate date) {
 		return EventOutputDTOMapper.toDTO(eventManager.getEventsOnDate(date));
 	}
 }

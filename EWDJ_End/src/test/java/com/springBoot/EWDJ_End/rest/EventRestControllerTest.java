@@ -1,14 +1,14 @@
 package com.springBoot.EWDJ_End.rest;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static com.springBoot.EWDJ_End.rest.API_BASE_PATHS.EVENTS_URI;
+import static com.springBoot.EWDJ_End.rest.API_BASE_PATHS.ROOMS_URI;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+import static utils.InitFormatter.FORMATTER;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,174 +18,95 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import domain.Employee;
-import exceptions.DuplicateEmployeeException;
-import exceptions.EmployeeNotFoundException;
-import service.EmployeeService;
-import static utils.InitFormatter.*;
+import domain.event.Event;
+import domain.event.EventManager;
+import domain.room.Room;
 
 @SpringBootTest
 class EventRestControllerTest {
-
 	@Mock
-	private EmployeeService mock;
-	
-	private EmployeeRestController controller;
+	private EventManager eventManager;
+	private EventRestController controller;
 	private MockMvc mockMvc;
 
 	private final int ID = 1234;
 	private final String NAME = "Test";
-	private String expectedFormattedDateTime;
+	private final String DESCRIPTION = "Description";
+	private final Room ROOM = new Room("a123", 5);
+	private final LocalDateTime TIME = LocalDateTime.now();
+	private final String EXPECTED_TIME_FORMATED = FORMATTER.format(TIME);
+	private final String B_CODE = "0000";
+	private final int B_CHECK = 0;
+	private final Double PRICE = 10.0;
+	private final List<String> SPEAKERS = List.of("Jeff");
 
 	@BeforeEach
 	public void before() {
 		MockitoAnnotations.openMocks(this);
-		controller = new EmployeeRestController();
+		controller = new EventRestController(eventManager);
 		mockMvc = standaloneSetup(controller).build();
-		ReflectionTestUtils.setField(controller, "employeeService", mock);
 	}
 
-	private Employee anEmployee(int id, String name) {
-		Employee emp = new Employee(id, name);
-		expectedFormattedDateTime = emp.getCreatedDateTime().format(FORMATTER);
-		return emp;
+	private List<Event> anEvents(
+			int id,
+			String name,
+			String description,
+			Room room,
+			LocalDateTime time,
+			String b_code,
+			int b_check,
+			Double price,
+			List<String> speakers
+	) {
+		return List
+				.of(anEvent(id, name, description, room, time, b_code, b_check, price, speakers));
 	}
 
-	private void performRest(String uri) throws Exception {
-		mockMvc.perform(get(uri))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.employee_id").value(ID))
-		.andExpect(jsonPath("$.name").value(NAME))
-		.andExpect(jsonPath("$.createdDateTime").value(expectedFormattedDateTime));
-	}
-	
-	@Test
-	public void testDummyEmployee_isOk() throws Exception {
-		Mockito.when(mock.createDummyEmployee()).thenReturn(anEmployee(ID, NAME));
-		performRest("/rest/emp/dummy");
-		Mockito.verify(mock).createDummyEmployee();
-	}
-	
-	@Test
-	public void testGetEmployee_isOk() throws Exception {
-		Mockito.when(mock.getEmployee(ID)).thenReturn(anEmployee(ID, NAME));
-		performRest("/rest/emp/" + ID);
-		Mockito.verify(mock).getEmployee(ID);
-	}
-
-	@Test
-	public void testGetEmployee_notFound() throws Exception {
-		Mockito.when(mock.getEmployee(ID)).thenThrow(new EmployeeNotFoundException(ID));
-		
-		Exception exception = assertThrows(Exception.class, () -> {
-			mockMvc.perform(get("/rest/emp/" + ID)).andReturn();
-	    });
-		//jakarta.servlet.ServletException
-		assertTrue(exception.getCause() instanceof EmployeeNotFoundException);
-		
-		Mockito.verify(mock).getEmployee(ID);
+	private Event anEvent(
+			int id,
+			String name,
+			String description,
+			Room room,
+			LocalDateTime time,
+			String b_code,
+			int b_check,
+			Double price,
+			List<String> speakers
+	) {
+		return new Event(id, name, description, room, time, b_code, b_check, price, speakers);
 	}
 
 	@Test
-	public void testGetAllEmployees_emptyList() throws Exception {
-		Mockito.when(mock.getAllEmployees()).thenReturn(new ArrayList<>());
-		
-		mockMvc.perform(get("/rest/emps"))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$").isEmpty());
-		
-		Mockito.verify(mock).getAllEmployees();
-	}
+	public void testGetEvents_isOk() throws Exception {
+		Mockito.when(eventManager.getEventsOnDate(TIME.toLocalDate())).thenReturn(
+				anEvents(ID, NAME, DESCRIPTION, ROOM, TIME, B_CODE, B_CHECK, PRICE, SPEAKERS)
+		);
 
-	@Test
-	public void testGetAllEmployees_noEmptyList() throws Exception {
-		Employee employee1 = anEmployee(ID, NAME);
-		String expectedFormattedDateTime1 = expectedFormattedDateTime;
-		Employee employee2 = anEmployee(5678, "Test2");
-		String expectedFormattedDateTime2 = expectedFormattedDateTime;
-		List<Employee> listEmployee = List.of(employee1, employee2);
-		Mockito.when(mock.getAllEmployees()).thenReturn(listEmployee);
+		String uri = "%s?date=%s".formatted(EVENTS_URI, TIME.toLocalDate());
 
-		mockMvc.perform(get("/rest/emps")).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$").isNotEmpty())
-				.andExpect(jsonPath("$[0].employee_id").value(ID))
+		mockMvc.perform(get(uri)).andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].id").value(ID))
 				.andExpect(jsonPath("$[0].name").value(NAME))
-				.andExpect(jsonPath("$[0].createdDateTime").value(expectedFormattedDateTime1))
-				.andExpect(jsonPath("$[1].employee_id").value(5678)).andExpect(jsonPath("$[1].name").value("Test2"))
-				.andExpect(jsonPath("$[1].createdDateTime").value(expectedFormattedDateTime2));
-		
-		Mockito.verify(mock).getAllEmployees();
+				.andExpect(jsonPath("$[0].roomURI").value(ROOMS_URI + "/" + ROOM.getName()))
+				.andExpect(jsonPath("$[0].dateTime").value(EXPECTED_TIME_FORMATED))
+				.andExpect(jsonPath("$[0].price").value(PRICE))
+				.andExpect(jsonPath("$[0].speakers[0]").value(SPEAKERS.getFirst()));
+		Mockito.verify(eventManager).getEventsOnDate(TIME.toLocalDate());
 	}
 
 	@Test
-	public void testCreateEmployee() throws Exception {
-	    Employee emp = new Employee(ID, NAME);
-	    String empJson = new ObjectMapper().writeValueAsString(emp);
+	public void testGetEvents_emptyList() throws Exception {
+		Mockito.when(eventManager.getEventsOnDate(TIME.toLocalDate()))
+				.thenReturn(new ArrayList<>());
+		
+		String uri = "%s?date=%s".formatted(EVENTS_URI, TIME.toLocalDate());
+		
+		mockMvc.perform(get(uri)).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
+				.andExpect(jsonPath("$").isEmpty());
 
-	    Mockito.when(mock.createEmployee(Mockito.any(Employee.class))).thenReturn(emp);
-	    
-	    mockMvc.perform(post("/rest/emp/create")
-	            .contentType(MediaType.APPLICATION_JSON)
-	            .content(empJson))
-	            .andExpect(status().isOk())
-	    
-	            .andExpect(jsonPath("$.employee_id").value(ID))
-	            .andExpect(jsonPath("$.name").value(NAME))
-	            .andExpect(jsonPath("$.createdDateTime").isNotEmpty());
-	    
-	    Mockito.verify(mock).createEmployee(Mockito.any(Employee.class));
+		Mockito.verify(eventManager).getEventsOnDate(TIME.toLocalDate());
 	}
-	
-	@Test
-	public void testCreateEmployee_duplicateKey() throws Exception {
-		String empJson = new ObjectMapper().writeValueAsString(new Employee(ID, NAME));
-		
-        Mockito.when(mock.createEmployee(Mockito.any(Employee.class))).thenThrow(new DuplicateEmployeeException(ID));
-        
-        Exception exception = assertThrows(Exception.class, () -> {
-        mockMvc.perform(post("/rest/emp/create")
-	            .contentType(MediaType.APPLICATION_JSON)
-	            .content(empJson))
-        		.andReturn();
-        });
-		assertTrue(exception.getCause() instanceof DuplicateEmployeeException);
-		
-		Mockito.verify(mock).createEmployee(Mockito.any(Employee.class));
-	}
-	
-	@Test
-	public void testDeleteEmployee() throws Exception {
-		Mockito.when(mock.deleteEmployee(ID)).thenReturn(anEmployee(ID, NAME));
-		
-		mockMvc.perform(delete("/rest/emp/delete/" + ID))
-		.andExpect(status().isOk())
-        .andExpect(jsonPath("$.employee_id").value(ID))
-        .andExpect(jsonPath("$.name").value(NAME))
-        .andExpect(jsonPath("$.createdDateTime").value(expectedFormattedDateTime));
-		
-		Mockito.verify(mock).deleteEmployee(ID);
-	}
-	
-	
-	@Test
-	public void testDeleteEmployee_notFound() throws Exception {
-	
-        Mockito.when(mock.deleteEmployee(ID)).thenThrow(new EmployeeNotFoundException(ID));
-        
-        Exception exception = assertThrows(Exception.class, () -> {
-        mockMvc.perform(delete("/rest/emp/delete/" + ID))
-        		.andReturn();
-        });
-        
-        assertTrue(exception.getCause() instanceof EmployeeNotFoundException);
-        Mockito.verify(mock).deleteEmployee(ID);
-	}
-	
+
 }
