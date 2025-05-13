@@ -36,7 +36,8 @@ public class SecurityConfig {
 										"/fragments/**",
 										"/",
 										"/changeLocale",
-										"/events"
+										"/events",
+										"/api/**"
 								).permitAll()
 								.requestMatchers(
 										"/events/{id}"
