@@ -30,6 +30,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -65,6 +66,7 @@ public class AdminEventControllerTest {
 	}
 
 	@Test
+	@WithAnonymousUser
 	void testGetCreateEvent_anonymous_noAccess() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create"))
 				.andExpect(status().is3xxRedirection());
@@ -442,5 +444,27 @@ public class AdminEventControllerTest {
 						new String[] {"speakers"}
 				)
 		);
+	}
+	
+	@Test
+	@WithMockUser(username = "user", roles = { "USER" })
+	void testPostCreateEvent_user_noAccess() throws Exception {
+		mockMvc.perform(
+				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create").flashAttr(
+						"event",
+						new Event()
+				).with(csrf())
+		).andExpect(status().isForbidden());
+	}
+	
+	@Test
+	@WithAnonymousUser
+	void testPostCreateEvent_anonymous_noAccess() throws Exception {
+		mockMvc.perform(
+				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create").flashAttr(
+						"event",
+						new Event()
+				).with(csrf())
+		).andExpect(status().is3xxRedirection());
 	}
 }
