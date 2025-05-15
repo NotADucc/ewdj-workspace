@@ -16,12 +16,14 @@ public class DuplicateSpeakerValidator
 
 	@Override
 	public boolean isValid(IHasSpeakers target, ConstraintValidatorContext context) {
-		List<String> speakers = target.getSpeakers().stream().map(String::toLowerCase)
-				.collect(Collectors.toList());
+		List<String> speakers = target.getSpeakers();
 
 		if (speakers == null)
 			return true;
-
+			
+		speakers = speakers.stream().map(String::toLowerCase)
+				.collect(Collectors.toList());
+		
 		boolean isValid = speakers.size() == new HashSet<>(speakers).size();
 
 		if (!isValid) {

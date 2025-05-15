@@ -2,6 +2,15 @@ package com.springBoot.EWDJ_End.rest;
 
 import static com.springBoot.EWDJ_End.rest.API_BASE_PATHS.EVENTS_URI;
 import static com.springBoot.EWDJ_End.rest.API_BASE_PATHS.ROOMS_URI;
+import static init.InitEvent.OK_B_CHECK;
+import static init.InitEvent.OK_B_CODE;
+import static init.InitEvent.OK_DESCRIPTION;
+import static init.InitEvent.OK_ID;
+import static init.InitEvent.OK_NAME;
+import static init.InitEvent.OK_PRICE;
+import static init.InitEvent.OK_ROOM;
+import static init.InitEvent.OK_SPEAKERS;
+import static init.InitEvent.OK_TIME;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,16 +40,8 @@ class EventRestControllerTest {
 	private EventRestController controller;
 	private MockMvc mockMvc;
 
-	private final int ID = 1234;
-	private final String NAME = "Test";
-	private final String DESCRIPTION = "Description";
-	private final Room ROOM = new Room("a123", 5);
-	private final LocalDateTime TIME = LocalDateTime.now();
-	private final String EXPECTED_TIME_FORMATED = FORMATTER.format(TIME);
-	private final String B_CODE = "0000";
-	private final int B_CHECK = 0;
-	private final Double PRICE = 10.0;
-	private final List<String> SPEAKERS = List.of("Jeff");
+	private final String EXPECTED_TIME_FORMATED = FORMATTER.format(OK_TIME);
+
 
 	@BeforeEach
 	public void before() {
@@ -80,33 +81,33 @@ class EventRestControllerTest {
 
 	@Test
 	public void testGetEvents_isOk() throws Exception {
-		Mockito.when(eventManager.getEventsOnDate(TIME.toLocalDate())).thenReturn(
-				anEvents(ID, NAME, DESCRIPTION, ROOM, TIME, B_CODE, B_CHECK, PRICE, SPEAKERS)
+		Mockito.when(eventManager.getEventsOnDate(OK_TIME.toLocalDate())).thenReturn(
+				anEvents(OK_ID, OK_NAME, OK_DESCRIPTION, OK_ROOM, OK_TIME, OK_B_CODE, OK_B_CHECK, OK_PRICE, OK_SPEAKERS)
 		);
 
-		String uri = "%s?date=%s".formatted(EVENTS_URI, TIME.toLocalDate());
+		String uri = "%s?date=%s".formatted(EVENTS_URI, OK_TIME.toLocalDate());
 
 		mockMvc.perform(get(uri)).andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].id").value(ID))
-				.andExpect(jsonPath("$[0].name").value(NAME))
-				.andExpect(jsonPath("$[0].roomURI").value(ROOMS_URI + "/" + ROOM.getName()))
+				.andExpect(jsonPath("$[0].id").value(OK_ID))
+				.andExpect(jsonPath("$[0].name").value(OK_NAME))
+				.andExpect(jsonPath("$[0].roomURI").value(ROOMS_URI + "/" + OK_ROOM.getName()))
 				.andExpect(jsonPath("$[0].dateTime").value(EXPECTED_TIME_FORMATED))
-				.andExpect(jsonPath("$[0].price").value(PRICE))
-				.andExpect(jsonPath("$[0].speakers[0]").value(SPEAKERS.getFirst()));
-		Mockito.verify(eventManager).getEventsOnDate(TIME.toLocalDate());
+				.andExpect(jsonPath("$[0].price").value(OK_PRICE))
+				.andExpect(jsonPath("$[0].speakers[0]").value(OK_SPEAKERS.getFirst()));
+		Mockito.verify(eventManager).getEventsOnDate(OK_TIME.toLocalDate());
 	}
 
 	@Test
 	public void testGetEvents_emptyList() throws Exception {
-		Mockito.when(eventManager.getEventsOnDate(TIME.toLocalDate()))
+		Mockito.when(eventManager.getEventsOnDate(OK_TIME.toLocalDate()))
 				.thenReturn(new ArrayList<>());
 		
-		String uri = "%s?date=%s".formatted(EVENTS_URI, TIME.toLocalDate());
+		String uri = "%s?date=%s".formatted(EVENTS_URI, OK_TIME.toLocalDate());
 		
 		mockMvc.perform(get(uri)).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
 				.andExpect(jsonPath("$").isEmpty());
 
-		Mockito.verify(eventManager).getEventsOnDate(TIME.toLocalDate());
+		Mockito.verify(eventManager).getEventsOnDate(OK_TIME.toLocalDate());
 	}
 
 }

@@ -51,6 +51,7 @@ public class Event implements IHasSpeakers, IHasRoom {
 	@DecimalMax(value = "100.00", inclusive = false)
 	@NumberFormat(pattern = "#.00")
 	private Double price;
+	@NotNull
 	@Size(min = 1, max = 3)
 	private List<String> speakers = new ArrayList<>();
 
