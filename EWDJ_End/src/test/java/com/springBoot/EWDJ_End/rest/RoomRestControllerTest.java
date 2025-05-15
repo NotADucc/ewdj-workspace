@@ -27,7 +27,6 @@ import domain.room.RoomManager;
 class RoomRestControllerTest {
 	
 	private IRoomRepository roomRepository;
-	private RoomManager roomManager;
 	private RoomRestController controller;
 	private MockMvc mockMvc;
 
@@ -37,9 +36,7 @@ class RoomRestControllerTest {
 		
         roomRepository = mock(IRoomRepository.class);
 
-        roomManager = new RoomManager(roomRepository);
-		
-		controller = new RoomRestController(roomManager);
+		controller = new RoomRestController(new RoomManager(roomRepository));
 		mockMvc = standaloneSetup(controller).build();
 	}
 

@@ -42,7 +42,7 @@ class EventRestControllerTest {
     private IEventRepository eventRepository;
     private IRoomRepository roomRepository;
     private IUserRepository userRepository; 
-	private EventManager eventManager;
+
 	private EventRestController controller;
 	private MockMvc mockMvc;
 
@@ -56,10 +56,8 @@ class EventRestControllerTest {
         eventRepository = mock(IEventRepository.class);
         roomRepository = mock(IRoomRepository.class);
         userRepository = mock(IUserRepository.class);
-
-        eventManager = new EventManager(eventRepository, roomRepository, userRepository);
-		
-		controller = new EventRestController(eventManager);
+        
+		controller = new EventRestController(new EventManager(eventRepository, roomRepository, userRepository));
 		mockMvc = standaloneSetup(controller).build();
 	}
 
