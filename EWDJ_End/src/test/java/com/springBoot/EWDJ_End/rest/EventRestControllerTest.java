@@ -11,6 +11,7 @@ import static init.InitEvent.OK_PRICE;
 import static init.InitEvent.OK_ROOM;
 import static init.InitEvent.OK_SPEAKERS;
 import static init.InitEvent.OK_TIME;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,7 +24,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,11 +31,17 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import domain.event.Event;
 import domain.event.EventManager;
+import domain.event.IEventRepository;
+import domain.room.IRoomRepository;
 import domain.room.Room;
+import domain.user.IUserRepository;
 
 @SpringBootTest
 class EventRestControllerTest {
-	@Mock
+	
+    private IEventRepository eventRepository;
+    private IRoomRepository roomRepository;
+    private IUserRepository userRepository; 
 	private EventManager eventManager;
 	private EventRestController controller;
 	private MockMvc mockMvc;
@@ -46,6 +52,13 @@ class EventRestControllerTest {
 	@BeforeEach
 	public void before() {
 		MockitoAnnotations.openMocks(this);
+		
+        eventRepository = mock(IEventRepository.class);
+        roomRepository = mock(IRoomRepository.class);
+        userRepository = mock(IUserRepository.class);
+
+        eventManager = new EventManager(eventRepository, roomRepository, userRepository);
+		
 		controller = new EventRestController(eventManager);
 		mockMvc = standaloneSetup(controller).build();
 	}
@@ -81,7 +94,7 @@ class EventRestControllerTest {
 
 	@Test
 	public void testGetEvents_isOk() throws Exception {
-		Mockito.when(eventManager.getEventsOnDate(OK_TIME.toLocalDate())).thenReturn(
+		Mockito.when(eventRepository.getAllEventsOnSpecificDate(OK_TIME.toLocalDate())).thenReturn(
 				anEvents(OK_ID, OK_NAME, OK_DESCRIPTION, OK_ROOM, OK_TIME, OK_B_CODE, OK_B_CHECK, OK_PRICE, OK_SPEAKERS)
 		);
 
@@ -94,12 +107,13 @@ class EventRestControllerTest {
 				.andExpect(jsonPath("$[0].dateTime").value(EXPECTED_TIME_FORMATED))
 				.andExpect(jsonPath("$[0].price").value(OK_PRICE))
 				.andExpect(jsonPath("$[0].speakers[0]").value(OK_SPEAKERS.getFirst()));
-		Mockito.verify(eventManager).getEventsOnDate(OK_TIME.toLocalDate());
+		
+		Mockito.verify(eventRepository).getAllEventsOnSpecificDate(OK_TIME.toLocalDate());
 	}
 
 	@Test
 	public void testGetEvents_emptyList() throws Exception {
-		Mockito.when(eventManager.getEventsOnDate(OK_TIME.toLocalDate()))
+		Mockito.when(eventRepository.getAllEventsOnSpecificDate(OK_TIME.toLocalDate()))
 				.thenReturn(new ArrayList<>());
 		
 		String uri = "%s?date=%s".formatted(EVENTS_URI, OK_TIME.toLocalDate());
@@ -107,7 +121,7 @@ class EventRestControllerTest {
 		mockMvc.perform(get(uri)).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
 				.andExpect(jsonPath("$").isEmpty());
 
-		Mockito.verify(eventManager).getEventsOnDate(OK_TIME.toLocalDate());
+		Mockito.verify(eventRepository).getAllEventsOnSpecificDate(OK_TIME.toLocalDate());
 	}
 
 }
