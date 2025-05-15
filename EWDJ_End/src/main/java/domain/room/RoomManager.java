@@ -28,6 +28,6 @@ public class RoomManager {
 			);
 		}
 
-		roomRepository.AddRoom(room);
+		roomRepository.addRoom(room);
 	}
 }

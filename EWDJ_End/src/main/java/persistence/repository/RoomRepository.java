@@ -42,7 +42,7 @@ public class RoomRepository extends GenericRepository<RoomEntity> implements IRo
 
 	@Override
 	@Transactional
-	public void AddRoom(Room room) {
+	public void addRoom(Room room) {
 		RoomEntity entity = RoomMapper.toEntity(room, em);
 		insert(entity);
 	}

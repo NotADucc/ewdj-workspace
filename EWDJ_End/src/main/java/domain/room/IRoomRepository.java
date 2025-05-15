@@ -6,7 +6,7 @@ import java.util.List;
 public interface IRoomRepository {
 	boolean isRoomBooked(Room room, LocalDateTime dateTime);
 	boolean existsByName(String name);
-	void AddRoom(Room room);
+	void addRoom(Room room);
 	List<Room> giveRooms();
 	Room giveRoom(String name);
 }

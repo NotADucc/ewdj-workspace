@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"name"})
 public class Room {
+	@NotNull
 	@Pattern(regexp = "^[a-zA-Z]\\d{3}$", message = "{room.name.message}")
 	private String name;
 	@NotNull
