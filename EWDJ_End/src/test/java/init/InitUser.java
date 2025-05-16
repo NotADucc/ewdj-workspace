@@ -6,7 +6,6 @@ import domain.user.UserRole;
 public interface InitUser {
 	final int OK_ID = 1;
 	final String OK_NAME = "user";
-	
 	final User OK_USER = new User(
 			OK_ID,
 			OK_NAME,
