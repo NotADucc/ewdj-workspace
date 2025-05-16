@@ -47,6 +47,7 @@
 		      <button class="form-btn-primary" id="submit_form" type="submit" th:text="#{login.form.primary.button}"></button>
 		    </div>
 		    <div th:if="${error}" class="error" th:text="${error}"></div>
+		    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 		  </form>
 		</div>
 	</main>

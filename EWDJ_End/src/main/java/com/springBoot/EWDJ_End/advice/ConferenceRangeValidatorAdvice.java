@@ -6,9 +6,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.springBoot.EWDJ_End.controller.EventController;
+import com.springBoot.EWDJ_End.controller.AdminEventController;
 
-@ControllerAdvice(assignableTypes = EventController.class)
+@ControllerAdvice(assignableTypes = AdminEventController.class)
 public class ConferenceRangeValidatorAdvice {
 	
 	@Autowired

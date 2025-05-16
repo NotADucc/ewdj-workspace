@@ -18,6 +18,7 @@
 					<input class="button" type="submit"
 						th:value="${!isFavorited} ? #{event-details.favorite} : #{event-details.unfavorite}"
 						th:disabled="${!isFavorited and favoriteCountExceeded}" />
+						<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 				</form>
 				<form th:if="${isADMIN}"
 					th:action="@{/admin/events/{id}/edit(id=${event.id})}" method="get">
