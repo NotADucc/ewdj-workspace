@@ -22,7 +22,7 @@ public class ConferenceConfig {
 	}
 	
 	@Bean
-	Validator conferenceRangeValidator() {
-		return new ConferenceRangeValidator();
+	Validator conferenceRangeValidator(LocalDateTime conferenceRangeStart, LocalDateTime conferenceRangeEnd) {
+		return new ConferenceRangeValidator(conferenceRangeStart, conferenceRangeEnd);
 	}
 }
