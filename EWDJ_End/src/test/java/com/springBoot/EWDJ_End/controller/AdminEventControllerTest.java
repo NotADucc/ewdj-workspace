@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -77,7 +78,8 @@ public class AdminEventControllerTest {
 	@WithAnonymousUser
 	void testGetCreateEvent_anonymous_noAccess() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create"))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 
 	@Test
@@ -463,9 +465,8 @@ public class AdminEventControllerTest {
 	@WithMockUser(username = "user", roles = { "USER" })
 	void testPostCreateEvent_user_noAccess() throws Exception {
 		mockMvc.perform(
-				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create").flashAttr(
-						"event",
-						new Event()
+				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create")
+					.flashAttr("event", new Event()
 				).with(csrf())
 		).andExpect(status().isForbidden());
 	}
@@ -474,11 +475,11 @@ public class AdminEventControllerTest {
 	@WithAnonymousUser
 	void testPostCreateEvent_anonymous_noAccess() throws Exception {
 		mockMvc.perform(
-				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create").flashAttr(
-						"event",
-						new Event()
+				post(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/create")
+					.flashAttr("event", new Event()
 				).with(csrf())
-		).andExpect(status().is3xxRedirection());
+			).andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrlPattern("**/login"));
 	}
 	
 	@Test
@@ -514,7 +515,8 @@ public class AdminEventControllerTest {
 	@WithAnonymousUser
 	void testGetEditEvent_anonymous_noAccess() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.ADMIN_URI + BASE_PATHS.EVENTS_URI + "/1/edit"))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 	@ParameterizedTest
 	@WithMockUser(username = "admin", roles = { "ADMIN" })
@@ -891,7 +893,8 @@ public class AdminEventControllerTest {
 					.flashAttr("event", OK_EVENT)
 					.flashAttr("roomList", List.of(InitRoom.OK_ROOM))
 					.with(csrf())
-				).andExpect(status().is3xxRedirection());
+				).andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/events/" + OK_ID));
 		
 		verify(eventRepository).doesEventExist(OK_ID);
 		verify(eventRepository).getAllEventsOnSpecificDate(OK_EVENT.getDateTime().toLocalDate());
@@ -913,6 +916,7 @@ public class AdminEventControllerTest {
 					.flashAttr("event", OK_EVENT)
 					.flashAttr("roomList", List.of(InitRoom.OK_ROOM))
 					.with(csrf())
-				).andExpect(status().is3xxRedirection());
+				).andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 }

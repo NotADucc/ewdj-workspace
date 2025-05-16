@@ -11,6 +11,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -87,7 +89,8 @@ public class EventControllerTest {
 	@WithAnonymousUser
 	void testGetEvent_anonymous_noAcces() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.EVENTS_URI + "/%s".formatted(OK_ID)))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 	
 	@Test
@@ -101,7 +104,8 @@ public class EventControllerTest {
 		
 		mockMvc.perform(post(BASE_PATHS.EVENTS_URI + "/%s/favorite".formatted(OK_ID))
 					.with(csrf())
-				).andExpect(status().is3xxRedirection());
+				).andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/events/%s".formatted(OK_ID)));
 		
 		verify(eventRepository, times(1)).doesEventExist(OK_ID);
 		verify(eventRepository, times(1)).getEvent(OK_ID);
@@ -114,7 +118,15 @@ public class EventControllerTest {
 	@Test
 	@WithMockUser(username = "admin", roles = {"ADMIN"})
 	void testPostToggleFavorite_admin_noAccess() throws Exception {
-		mockMvc.perform(post(BASE_PATHS.EVENTS_URI + "/%s/favorite".formatted(OK_ID)))
+		mockMvc.perform(post(BASE_PATHS.EVENTS_URI + "/%s/favorite".formatted(OK_ID)).with(csrf()))
 				.andExpect(status().isForbidden());
+	}
+	
+	@Test
+	@WithAnonymousUser
+	void testPostToggleFavorite_anonymous_noAccess() throws Exception {
+		mockMvc.perform(post(BASE_PATHS.EVENTS_URI + "/%s/favorite".formatted(OK_ID)).with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 }

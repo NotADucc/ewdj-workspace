@@ -10,6 +10,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -63,7 +64,8 @@ public class AdminRoomControllerTest {
 	@WithAnonymousUser
 	void testGetCreateEvent_anonymous_noAccess() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.ADMIN_URI + BASE_PATHS.ROOMS_URI))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 	
 	@Test
@@ -86,7 +88,8 @@ public class AdminRoomControllerTest {
 	@WithAnonymousUser
 	void testGetCreateRoom_anonymous_noAccess() throws Exception {
 		mockMvc.perform(get(BASE_PATHS.ADMIN_URI + BASE_PATHS.ROOMS_URI + "/create"))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrlPattern("**/login"));
 	}
 	
 	@Test
@@ -201,6 +204,7 @@ public class AdminRoomControllerTest {
 						"room",
 						new Room()
 				).with(csrf())
-		).andExpect(status().is3xxRedirection());
+			).andExpect(status().is3xxRedirection())
+			.andExpect(redirectedUrlPattern("**/login"));
 	}
 }
