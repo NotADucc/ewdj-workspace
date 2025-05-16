@@ -1,19 +1,21 @@
 package validator;
 
-import domain.event.Event;
+import domain.IHasBeamer;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class BeamerCheckValidator implements ConstraintValidator<BeamerChecksum, Event> {
+public class BeamerCheckValidator implements ConstraintValidator<BeamerChecksum, IHasBeamer> {
 	private int divisor;
 
 	@Override
 	public void initialize(BeamerChecksum constraintAnnotation) {
 		divisor = constraintAnnotation.divisor();
+		if (divisor == 0)
+			throw new IllegalArgumentException("Divisor: %s".formatted(divisor));
 	}
 
 	@Override
-	public boolean isValid(Event event, ConstraintValidatorContext context) {
+	public boolean isValid(IHasBeamer event, ConstraintValidatorContext context) {
 		String code = event.getBeamercode();
 		Integer check = event.getBeamercheck();
 

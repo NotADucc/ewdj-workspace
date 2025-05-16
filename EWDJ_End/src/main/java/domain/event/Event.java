@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import domain.IHasBeamer;
 import domain.IHasRoom;
 import domain.IHasSpeakers;
 import domain.room.Room;
@@ -31,7 +32,7 @@ import validator.HasDuplicateSpeakers;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-public class Event implements IHasSpeakers, IHasRoom {
+public class Event implements IHasSpeakers, IHasRoom, IHasBeamer {
 	private int id;
 	@NotEmpty
 	@Pattern(regexp = "^[a-zA-Z](\\w|\\W)*$", message = "{event.name.message}")
