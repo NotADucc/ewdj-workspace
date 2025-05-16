@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import domain.LocaleException;
+import com.springBoot.EWDJ_End.rest.RoomRestController;
 
-@RestControllerAdvice
+import domain.LocaleException;
+import dto.model.ErrorOutputDTO;
+
+@RestControllerAdvice(assignableTypes = {RoomRestController.class})
 class RoomRestErrorAdvice {
 
   @ResponseBody
   @ExceptionHandler(LocaleException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  String roomNotFoundHandler(LocaleException ex) {
-    return ex.getMessage();
+  ErrorOutputDTO roomNotFoundHandler(LocaleException ex) {
+    return new ErrorOutputDTO(ex.getMessage(), HttpStatus.NOT_FOUND.value());
   }
 }
