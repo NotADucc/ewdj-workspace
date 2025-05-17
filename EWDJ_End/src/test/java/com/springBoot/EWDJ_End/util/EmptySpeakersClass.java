@@ -5,10 +5,10 @@ import java.util.List;
 import domain.IHasSpeakers;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import validator.HasDuplicateSpeakers;
+import validator.HasEmptySpeakers;
 
 @AllArgsConstructor @Getter
-@HasDuplicateSpeakers
-public class SpeakersClass implements IHasSpeakers {
+@HasEmptySpeakers
+public class EmptySpeakersClass implements IHasSpeakers {
 	private List<String> speakers;
 }

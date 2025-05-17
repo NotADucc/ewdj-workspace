@@ -24,10 +24,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import validator.BeamerChecksum;
 import validator.HasDuplicateSpeakers;
+import validator.HasEmptySpeakers;
 
 @Getter
 @Setter
 @BeamerChecksum(divisor = 97)
+@HasEmptySpeakers
 @HasDuplicateSpeakers
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,7 +45,7 @@ public class Event implements IHasSpeakers, IHasRoom, IHasBeamer {
 	@NotNull
 	private LocalDateTime dateTime;
 	@NotEmpty
-	@Pattern(regexp = "^\\d{4}$")
+	@Pattern(regexp = "^\\d{4}$", message="{event.beamercode.message}")
 	private String beamercode;
 	@NotNull
 	private Integer beamercheck;
