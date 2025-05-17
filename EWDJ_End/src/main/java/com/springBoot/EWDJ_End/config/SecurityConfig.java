@@ -1,5 +1,6 @@
 package com.springBoot.EWDJ_End.config;
 
+import static com.springBoot.EWDJ_End.controller.BASE_PATHS.ADMIN_URI;
 import static com.springBoot.EWDJ_End.controller.BASE_PATHS.EVENTS_URI;
 import static com.springBoot.EWDJ_End.controller.BASE_PATHS.LOGIN_URI;
 import static com.springBoot.EWDJ_End.controller.BASE_PATHS.USERS_URI;
@@ -53,9 +54,11 @@ public class SecurityConfig {
 										USERS_URI + "/**"
 								).hasAnyRole("USER")
 								.requestMatchers(
-										"/admin**",
-										"/admin/**"
+										ADMIN_URI + "**",
+										ADMIN_URI +"/**"
 								).hasAnyRole("ADMIN")
+								.requestMatchers("/**")
+								.permitAll()
 				)
 				.formLogin(
 						form -> form.defaultSuccessUrl("/events", true).loginPage("/login")
